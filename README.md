@@ -35,3 +35,13 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 - [@jiotajoia](https://github.com/jiotajoia)
 - [@MaxSunshineMalta](https://github.com/MaxSunshineMalta)
 - [@Italloprog](https://github.com/Italloprog)
+
+- ## Feedback para Aqui-oh(grupo germano)
+- Quais aspectos do trabalho mais se destacaram? Coesão, o trabalho em todo está bem coeso e simples, não achei que faltaram informações sobre o projeto em si, mas que dava pra ser um pouco mais detalhado em algumas partes.
+- Houve algum artefato especialmente bem elaborado ou criativo? Personas e mapas de empatia, muitos exemplos diversos.
+- O que poderia ser ajustado para melhorar a clareza, organização ou qualidade dos artefatos? Detalhar melhor cada um e adicionar elementos gráficos.
+- Algum ponto ficou confuso ou faltando informações relevantes? Documento de briefing: acredito que dava pra explicitar ainda mais as funcionalidades, o texto longo acaba ficando cansativo e um pouco confuso de ler, e algumas informações ficaram faltantes;
+- Os artefatos estão consistentes entre si? Sim.
+- Refletem bem o objetivo do projeto e o público-alvo? Sim.
+- O que pode ser feito para tornar o trabalho ainda melhor? Adicionar mais elementos gráficos.
+- Alguma ideia ou recurso adicional para explorar? Seria interessante se existisse a possibilidade de ver o historico das denuncias feitas por um usuário.
