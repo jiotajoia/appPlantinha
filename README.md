@@ -16,6 +16,8 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 
 ## Documentação
 
+[Apresentação do Projeto](https://www.canva.com/design/DAGXgrSO_0o/wrGx0KFzTWS3zleUgeod4w/edit?utm_content=DAGXgrSO_0o&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 [Reunião Briefing 1](https://docs.google.com/document/d/19c-x3AF_tO6xtqHLBqVJXcHQqigFtYhB/edit?usp=sharing&ouid=107283692590997326236&rtpof=true&sd=true)
 
 [Pesquisa de Mercado 1](https://docs.google.com/document/d/1lA9FP3LFecWEbFGgJOPgBvmhHP4UIFRc1LZKi1tzNnY/edit?usp=sharing)
@@ -29,6 +31,10 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 [Personas](https://www.canva.com/design/DAGVjGoPh6w/K7UQ9ZtulSMO-n_tEU57NQ/edit?utm_content=DAGVjGoPh6w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 [Mapa de Empatia](https://miro.com/app/board/uXjVLJtYUK4=/?share_link_id=314274249562)
+
+[FlatBacklog]()
+
+[Diagrama de Navegação]()
 
 ## Autores
 
