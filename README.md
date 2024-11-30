@@ -34,7 +34,7 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 
 [FlatBacklog](https://docs.google.com/spreadsheets/d/1jsSUVS6-3vh7oZx_Om3g7F_Ri3s8bOo7ubYbXhb3Y5c/edit?usp=sharing)
 
-[Diagrama de Navegação]()
+[Diagrama de Navegação](https://www.canva.com/design/DAGX5p9xZEA/LrZ1OJawcRi2Xq-NGh84xg/edit?referrer=whiteboards-landing-page)
 
 ## Autores
 
