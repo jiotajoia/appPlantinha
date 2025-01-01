@@ -1,8 +1,8 @@
-import 'package:app_plantinha/widgets/containerwithbutton.widget.dart';
-import 'package:app_plantinha/widgets/scaffoldBase.widget.dart';
+import 'package:app_plantinha/widgets/container_with_button.widget.dart';
+import 'package:app_plantinha/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
   final String title;
 
@@ -11,6 +11,11 @@ class HomePage extends StatelessWidget {
     {'icon': Icons.image, 'label': 'Imagem', 'herotag': 'unique_tag2'},
   ];
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return ScaffoldBase(
@@ -28,8 +33,11 @@ class HomePage extends StatelessWidget {
               'Buscar Planta',
               style: TextStyle(fontSize: 16),
             ),
-            ...valuesContainers.map((data) {
+            ...HomePage.valuesContainers.map((data) {
               return ContainerWithButton(
+                containerDecoration: false,
+                marginBottom: 15,
+                marginTop: 15,
                 heroTag: data['herotag'],
                 icon: Icon(data['icon']),
                 labelText: data['label'],

@@ -1,3 +1,4 @@
+import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -5,18 +6,15 @@ import 'package:go_router/go_router.dart';
 class DrawerBase extends StatelessWidget {
   const DrawerBase({super.key});
 
-  void retornaNada() {}
-
   static final List<Map<String, dynamic>> valuesListTiles = [
+    {'icon': Icons.home_outlined, 'label': 'Home', 'route': '/homePage'},
     {'icon': Icons.history, 'label': 'Histórico', 'route': '/historyPage'},
-    {
-      'icon': Icons.settings_outlined,
-      'label': 'Configurações',
-      'route': '/settingsPage'
-    },
+    {'icon': Icons.settings_outlined, 'label': 'Configurações', 'route': '/settingsPage'},
     {'icon': Icons.help_outline, 'label': 'Ajuda', 'route': '/helpPage'},
-    {'icon': Icons.logout, 'label': 'Sair', 'route': '/logoutPage'},
+    {'icon': Icons.logout, 'label': 'Sair', 'route': '/'},
   ];
+
+  void retornaNada() {}
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +23,7 @@ class DrawerBase extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           Container(
+            width: 60,
             height: 230,
             decoration: const BoxDecoration(color: Color(0xFF8EB486)),
             child: Column(
@@ -101,7 +100,8 @@ class DrawerBase extends StatelessWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     onTap: () {
-                      context.go(data['route']);
+                      AppConfigs.saveLastRoute(data['route']);
+                      context.push(data['route']);
                     },
                   );
                 }),
