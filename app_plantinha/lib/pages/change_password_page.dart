@@ -56,11 +56,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 keyForm: _form1
               ),
               ContainerWithButton(
-                containerDecoration: false,
                 marginTop: 4,
                 width: 110,
                 height: 37,
                 labelText: 'Alterar',
+                onPressed: (){
+                  
+                },
               ),
             ],
           ),

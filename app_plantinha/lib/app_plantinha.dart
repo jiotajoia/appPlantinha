@@ -1,8 +1,11 @@
 import 'package:app_plantinha/pages/account_settings_page.dart';
 import 'package:app_plantinha/pages/change_password_page.dart';
+import 'package:app_plantinha/pages/forgot_password_page.dart';
 import 'package:app_plantinha/pages/help_page.dart';
 import 'package:app_plantinha/pages/history_page.dart';
 import 'package:app_plantinha/pages/home_page.dart';
+import 'package:app_plantinha/pages/search_by_image_page.dart';
+import 'package:app_plantinha/pages/search_by_quiz_page.dart';
 import 'package:app_plantinha/pages/signup_page.dart';
 import 'package:app_plantinha/pages/settings_page.dart';
 import 'package:app_plantinha/pages/login_page.dart';
@@ -32,6 +35,26 @@ class AppPlantinha extends StatelessWidget {
                 path: 'homePage',
                 builder: (BuildContext context, GoRouterState state){
                   return const HomePage(title: 'Home Page');
+                },
+                routes: <RouteBase> [
+                  GoRoute(
+                    path: 'searchByQuizPage',
+                    builder: (BuildContext context, GoRouterState state){
+                      return const SearchByQuizPage(title: 'Search By Quiz Page');
+                    }
+                  ),
+                  GoRoute(
+                    path: 'searchByImagePage',
+                    builder: (BuildContext context, GoRouterState state){
+                      return const SearchByImagePage(title: 'Search By Image Page');
+                    }
+                  )
+                ]
+              ),
+              GoRoute(
+                path: 'forgotPasswordPage',
+                builder: (BuildContext context, GoRouterState state){
+                  return const ForgotPasswordPage(title: 'Forgot Password Page');
                 },
               ),
               GoRoute(
@@ -101,6 +124,7 @@ class AppPlantinha extends StatelessWidget {
         textTheme: const TextTheme(
           bodyMedium: TextStyle(fontSize: 15, color: Colors.black),
         ),
+        
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFF685752),

@@ -18,9 +18,9 @@ class _LoginPageState extends State<LoginPage> {
   final _valor = TextEditingController();
   final _valor1 = TextEditingController();
 
-  void navigateToHomePage(){
-    AppConfigs.saveLastRoute('/homePage');
-    context.go('/homePage');
+  void navigateToPage(String lastRoute){
+    AppConfigs.saveLastRoute(lastRoute);
+    context.go(lastRoute);
   }
 
   @override
@@ -77,7 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                     flex: 5,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      navigateToPage('/forgotPasswordPage');
+                    },
                     child: Text(
                       'Esqueceu a senha?',
                       style: TextStyle(
@@ -88,14 +90,14 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               ContainerWithButton(
-                containerDecoration: false,
-                fabRounded: true,
                 marginTop: 20,
                 width: 169,
                 height: 71,
                 labelText: 'Login',
                 marginBottom: 35,
-                onPressed: navigateToHomePage,
+                onPressed: (){
+                  navigateToPage('/homePage');
+                }
               ),
               InkWell(
                 onTap: () {

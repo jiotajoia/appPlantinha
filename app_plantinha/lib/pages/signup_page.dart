@@ -16,10 +16,10 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
 
   static final List<Map<String, dynamic>> valuesItems = [
-    {'icon': Icons.home_outlined, 'label': 'Nome', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
-    {'icon': Icons.history, 'label': 'E-mail', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
-    {'icon': Icons.settings_outlined, 'label': 'Senha', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
-    {'icon': Icons.help_outline, 'label': 'Confirmar senha', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
+    {'label': 'Nome', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
+    {'label': 'E-mail', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
+    {'label': 'Senha', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
+    {'label': 'Confirmar senha', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
   ];
 
   void navigateToHomePage(){
@@ -39,7 +39,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(left: 9),
                     child: IconButton(
                       onPressed: () {
                         AppConfigs.saveLastRoute('/');
@@ -92,17 +91,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 );
               }),
-              
               Row(
                 children: [
                   Spacer(),
                   ContainerWithButton(
-                    containerDecoration: false,
-                    fabRounded: true,
                     width: 139, 
                     height: 58, 
                     labelText: 'Criar conta',
-                    marginRight: 20,
+                    marginRight: 10,
                     marginTop: 28,
                     onPressed: navigateToHomePage,
                   ),

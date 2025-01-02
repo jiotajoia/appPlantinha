@@ -49,7 +49,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 keyForm: _form
               ),
               ContainerWithButton(
-                containerDecoration: false,
+                onPressed: (){},
                 marginTop: 4,
                 width: 80, 
                 height: 23, 
@@ -80,12 +80,11 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ),
               ),
               ContainerWithButton(
-                containerDecoration: false,
                 marginTop: 10,
                 width: 80,
                 height: 23,
                 labelText: 'Excluir',
-
+                onPressed: (){},
               ),
             ],
           ),
