@@ -1,4 +1,5 @@
 import 'package:app_plantinha/pages/account_settings_page.dart';
+import 'package:app_plantinha/pages/app_settings_page.dart';
 import 'package:app_plantinha/pages/change_password_page.dart';
 import 'package:app_plantinha/pages/forgot_password_page.dart';
 import 'package:app_plantinha/pages/help_page.dart';
@@ -9,8 +10,10 @@ import 'package:app_plantinha/pages/search_by_quiz_page.dart';
 import 'package:app_plantinha/pages/signup_page.dart';
 import 'package:app_plantinha/pages/settings_page.dart';
 import 'package:app_plantinha/pages/login_page.dart';
+import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AppPlantinha extends StatelessWidget {
   const AppPlantinha({super.key, required this.initialRoute});
@@ -95,7 +98,7 @@ class AppPlantinha extends StatelessWidget {
             GoRoute(
                 path: 'appSettingsPage',
                 builder: (BuildContext context, GoRouterState state) {
-                  return const AccountSettingsPage(
+                  return const AppSettingsPage(
                     title: 'App Settings Page',
                   );
                 }
@@ -121,8 +124,9 @@ class AppPlantinha extends StatelessWidget {
           brightness: Brightness.light,
           contrastLevel: 0,
         ),
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 15, color: Colors.black),
+
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize, color: Colors.black),
         ),
         
         elevatedButtonTheme: ElevatedButtonThemeData(

@@ -90,6 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               ContainerWithButton(
+                heightAdjusted: 90,
+                widthAdjusted: 190,
                 marginTop: 20,
                 width: 169,
                 height: 71,

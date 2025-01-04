@@ -12,6 +12,9 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return ScaffoldBase(
       title: "Histórico",
       iconAppBar1: PopupMenuButton(
@@ -39,6 +42,8 @@ class _HistoryPageState extends State<HistoryPage> {
           )
         ],
       ),
+      body: Text('Largura: ${screenWidth.toStringAsFixed(2)}\nAltura: ${screenHeight.toStringAsFixed(2)}',),
+
     );
   }
 }

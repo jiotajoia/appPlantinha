@@ -1,28 +1,43 @@
+import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ContainerWithButton extends StatefulWidget {
-  const ContainerWithButton(
-      {super.key,
-      this.height,
-      this.width,
-      this.icon,
-      this.labelText,
-      this.marginBottom,
-      this.marginLeft,
-      this.marginRight,
-      this.marginTop,
-      this.heroTag,
-      this.decoration,
-      this.fontSize,
-      required this.onPressed,
-      this.fontWeight,
-      this.rectangleRoundedBorder,
-      this.paddingLeft,
-      this.paddingRight,
-      this.paddingTop,
-      this.paddingBottom});
-  final double? width,
+  const ContainerWithButton({
+    super.key,
+    this.heightBase = 0,
+    this.widthBase = 0,
+    this.icon,
+    this.labelText,
+    this.marginBottom,
+    this.marginLeft,
+    this.marginRight,
+    this.marginTop,
+    this.heroTag,
+    this.decoration,
+    this.fontSize,
+    required this.onPressed,
+    this.fontWeight,
+    this.rectangleRoundedBorder,
+    this.paddingLeft,
+    this.paddingRight,
+    this.paddingTop,
+    this.paddingBottom,
+    this.color,
+    required this.widthAdjusted,
+    required this.width,
+    required this.height,
+    required this.heightAdjusted,
+  });
+
+  final double
+      widthBase, // Já inicializados no construtor
+      heightBase;
+  final double?
+      width,
+      widthAdjusted,
       height,
+      heightAdjusted,
       paddingTop,
       paddingBottom,
       paddingLeft,
@@ -38,6 +53,7 @@ class ContainerWithButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final FontWeight? fontWeight;
   final bool? rectangleRoundedBorder;
+  final Color? color;
 
   @override
   State<ContainerWithButton> createState() => _ContainerWithButtonState();
@@ -47,50 +63,76 @@ class _ContainerWithButtonState extends State<ContainerWithButton> {
   Decoration? useRectangleRoundedBorder() {
     if (widget.rectangleRoundedBorder == true) {
       return BoxDecoration(
-          color: Color(0xFF685752), borderRadius: BorderRadius.circular(20));
+        color: const Color(0xFF685752),
+        borderRadius: BorderRadius.circular(15),
+      );
     }
 
     return null;
   }
 
+  dynamic getPropertyAdjusted(
+      BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted) {
+    setState(() {
+      if (Provider.of<FontSizeState>(context).fontSize >= 30) {
+        property = valueAdjusted;
+      } else {
+        property = valueBase;
+      }
+    });
+    return property;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width ?? 159,
-      height: widget.height ?? 66,
+      width: getPropertyAdjusted(context, widget.widthBase, widget.width!, widget.widthAdjusted!),
+      height: getPropertyAdjusted(context, widget.heightBase, widget.height!, widget.heightAdjusted!),
       decoration: widget.decoration ?? useRectangleRoundedBorder(),
       padding: EdgeInsets.only(
-          bottom: widget.paddingBottom ?? 0,
-          left: widget.paddingLeft ?? 0,
-          top: widget.paddingTop ?? 0,
-          right: widget.paddingRight ?? 0),
+        bottom: widget.paddingBottom ?? 0,
+        left: widget.paddingLeft ?? 0,
+        top: widget.paddingTop ?? 0,
+        right: widget.paddingRight ?? 0,
+      ),
       margin: EdgeInsets.only(
-          top: widget.marginTop ?? 0,
-          bottom: widget.marginBottom ?? 0,
-          left: widget.marginLeft ?? 0,
-          right: widget.marginRight ?? 0),
+        top: widget.marginTop ?? 0,
+        bottom: widget.marginBottom ?? 0,
+        left: widget.marginLeft ?? 0,
+        right: widget.marginRight ?? 0,
+      ),
       child: ElevatedButton.icon(
         onPressed: widget.onPressed,
-        label: Text(
-          widget.labelText ?? '',
-          style: TextStyle(
-            fontSize: widget.fontSize,
-            fontWeight: widget.fontWeight,
+        label: Flexible(
+          child: Text(
+            widget.labelText ?? '',
+            style: TextStyle(
+              fontSize: widget.fontSize,
+              fontWeight: widget.fontWeight,
+            ),
           ),
         ),
         style: ButtonStyle(
           iconColor: WidgetStateProperty.all(Colors.white),
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           elevation: WidgetStateProperty.all(0),
-          backgroundColor: WidgetStateProperty.all(Color(0xFF685752)),
+          backgroundColor:
+              WidgetStateProperty.all(widget.color ?? const Color(0xFF685752)),
           foregroundColor: WidgetStateProperty.all(Colors.white),
-          textStyle: WidgetStateProperty.all(TextStyle(
-            fontSize: 15,
-          )),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 15),
+          ),
           minimumSize: WidgetStateProperty.all(
-              Size(widget.width ?? 159, widget.height ?? 66)),
+            Size(
+              getPropertyAdjusted(context, widget.widthBase, widget.width!, widget.widthAdjusted!),
+              getPropertyAdjusted(context, widget.heightBase, widget.height!, widget.heightAdjusted!),
+            ),
+          ),
           shape: WidgetStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+            ),
+          ),
           padding: WidgetStateProperty.all(
             const EdgeInsets.symmetric(horizontal: 0), // Reduz padding horizontal
           ),

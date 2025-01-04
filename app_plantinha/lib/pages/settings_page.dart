@@ -1,4 +1,5 @@
 import 'package:app_plantinha/configs/app.configs.dart';
+import 'package:app_plantinha/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,84 +18,59 @@ class SettingsPage extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                // Adiciona espaço antes do botão
-                Spacer(flex: 1),
-                IconButton(
-                  onPressed: () {
-                    AppConfigs.saveLastRoute('/');
-                    context.pop();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    size: 24,
-                  ),
-                ),
-                Spacer(flex: 40), // Espaço maior após o botão, opcional
+                RowButtonBack(lastRoute: '/homePage'),
               ],
             ),
-            Spacer(flex: 1),
             Row(
               children: [
-                Spacer(
-                  flex: 2,
-                ),
-                InkWell(
-                  onTap: () {
-                    AppConfigs.saveLastRoute('/settingsPage/accountSettingsPage');
-                    context.push('/settingsPage/accountSettingsPage');
-                  },
-                  child: Text(
-                    'Conta',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                Container(
+                  margin: EdgeInsets.only(left: 23, bottom: 10),
+                  child: InkWell(
+                    onTap: () {
+                      AppConfigs.saveLastRoute('/settingsPage/accountSettingsPage');
+                      context.push('/settingsPage/accountSettingsPage');
+                    },
+                    child: Text(
+                      'Conta',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
-                Spacer(
-                  flex: 30,
-                ),
               ],
-            ),
-            Spacer(
-              flex: 1,
             ),
             Divider(
               color: Colors.black,
-              endIndent: 30,
-              indent: 23,
+              endIndent: 25,
+              indent: 25,
             ),
-            Spacer(flex: 1,),
             Row(
               children: [
-                Spacer(
-                  flex: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
-                    context.push('/settingsPage/appSettingsPage');
-                  },
-                  child: Text(
-                    'Configurações do Aplicativo',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                Container(
+                  margin: EdgeInsets.only(left: 23, bottom: 10),
+                  child: InkWell(
+                    onTap: () {
+                      AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
+                      context.push('/settingsPage/appSettingsPage');
+                    },
+                    child: Text(
+                      'Configurações do Aplicativo',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
-                Spacer(
-                  flex: 20,
-                ),
               ],
             ),
-            Spacer(flex: 1,),
             Divider(
               color: Colors.black,
-              endIndent: 30,
-              indent: 23,
+              endIndent: 25,
+              indent: 25,
             ),
-            Spacer(flex: 40),
           ],
         ),
       ),

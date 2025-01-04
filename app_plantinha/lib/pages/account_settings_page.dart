@@ -26,14 +26,13 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
         padding: const EdgeInsets.only(top: 3),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               RowButtonBack(lastRoute: '/settingsPage'),
               RowWithText(
                 textLabel: 'Conta',
                 fontWeight: FontWeight.bold,
-                fontSize: 20, 
-                marginTop: 40, 
+                fontSize: 20,
+                marginTop: 40,
                 marginLeft: 30,
               ),
               RowWithText(
@@ -42,49 +41,57 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 marginBottom: 10,
               ),
               ContainerWithForm(
-                paddingFormBottom: 20,
-                paddingFormLeft: 15,
-                textHintForm: 'Digite o novo nome...',
-                valor: _valor, 
-                keyForm: _form
-              ),
+                  paddingFormBottom: 20,
+                  paddingFormLeft: 15,
+                  textHintForm: 'Digite o novo nome...',
+                  valor: _valor,
+                  keyForm: _form),
               ContainerWithButton(
-                onPressed: (){},
+                widthAdjusted: 170, 
+                heightAdjusted: 70,
+                onPressed: () {},
                 marginTop: 4,
-                width: 80, 
-                height: 23, 
+                width: 85,
+                height: 35,
                 labelText: 'Alterar',
                 fontSize: 13,
               ),
               Container(
-                height: 65,
-                margin: EdgeInsets.only(top: 30, left: 35),
+                margin: EdgeInsets.only(
+                  top: 30,
+                  left: 35,
+                ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            AppConfigs.saveLastRoute(
-                                '/settingsPage/accountSettingsPage/changePasswordPage');
-                            context.push('/settingsPage/accountSettingsPage/changePasswordPage');
-                          },
-                          child: Text('Alterar senha',),
-                        ),
-                        Text('Excluir conta',),
-                      ],
-                    ),
+                    InkWell(
+                      onTap: () {
+                        AppConfigs.saveLastRoute(
+                            '/settingsPage/accountSettingsPage/changePasswordPage');
+                        context.push(
+                            '/settingsPage/accountSettingsPage/changePasswordPage');
+                      },
+                      child: Flexible(
+                          child: Text(
+                        'Alterar senha',
+                      )),
+                    )
                   ],
                 ),
               ),
+              RowWithText(
+                textLabel: 'Excluir conta',
+                marginTop: 30,
+                marginLeft: 35,
+              ),
               ContainerWithButton(
+                widthAdjusted: 170, 
+                heightAdjusted: 70, 
                 marginTop: 10,
-                width: 80,
-                height: 23,
+                width: 85,
+                height: 35,
                 labelText: 'Excluir',
-                onPressed: (){},
+                onPressed: () {},
+                fontSize: 13,
               ),
             ],
           ),
