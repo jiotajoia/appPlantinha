@@ -28,18 +28,16 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugDumpRenderTree(); // Útil para verificar problemas de layout durante a execução.
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 40),
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min, // Ocupa apenas o espaço necessário.
+            mainAxisSize: MainAxisSize.min, 
             children: [
               // Cabeçalho
               Row(
-                mainAxisSize: MainAxisSize.max, // Expande para preencher o espaço disponível.
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min, 
                 children: [
                   IconButton(
                     onPressed: () {
@@ -79,14 +77,17 @@ class _SignUpPageState extends State<SignUpPage> {
                       marginBottom: 10,
                     ),
                     ContainerWithForm(
-                      valor: data['valor'],
+                      widthAdjusted: 341,
+                      heightAdjusted: 47,
+                      controllerForm: data['valor'],
                       keyForm: data['form'],
                       width: 341,
                       height: 47,
-                      paddingFormBottom: 10,
-                      paddingFormLeft: 15,
+                      paddingLeft: 15,
                       marginLeft: 37,
                       marginBottom: 14,
+                      fontSizeForm: 16,
+                      fontSizeHint: 12,
                     ),
                   ],
                 );

@@ -16,15 +16,18 @@ class DrawerBase extends StatelessWidget {
 
   void retornaNada() {}
 
+ 
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 320,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           Container(
             width: 60,
-            height: 230,
+            height: 235,
             decoration: const BoxDecoration(color: Color(0xFF8EB486)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -35,12 +38,12 @@ class DrawerBase extends StatelessWidget {
                     IconButton(
                         onPressed: retornaNada,
                         icon: SvgPicture.asset(
-                          'lib/icons/fonte.svg',
+                          'lib/icons/fonte.svg', 
                         )),
                     IconButton(
                         onPressed: retornaNada,
                         icon: SvgPicture.asset(
-                          'lib/icons/tema.svg',
+                          'lib/icons/tema.svg'
                         )),
                   ],
                 ),
@@ -84,7 +87,7 @@ class DrawerBase extends StatelessWidget {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 230,
+            height: MediaQuery.of(context).size.height - 235,
             decoration: const BoxDecoration(color: Color(0xFF997C70)),
             child: Column(
               children: [

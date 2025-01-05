@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FontSizeState extends ChangeNotifier {
-  double _fontSize = 30; // Tamanho inicial da fonte.
+  double _fontSize = 30; 
 
   double get fontSize => _fontSize;
 
   void setFontSize(double newSize) {
     _fontSize = newSize;
-    notifyListeners(); // Notifica os widgets consumidores.
+    notifyListeners(); 
   }
 
   void resetFontSize(){

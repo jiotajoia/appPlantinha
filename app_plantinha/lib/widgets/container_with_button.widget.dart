@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 class ContainerWithButton extends StatefulWidget {
   const ContainerWithButton({
     super.key,
-    this.heightBase = 0,
-    this.widthBase = 0,
     this.icon,
     this.labelText,
     this.marginBottom,
@@ -30,9 +28,6 @@ class ContainerWithButton extends StatefulWidget {
     required this.heightAdjusted,
   });
 
-  final double
-      widthBase, // Já inicializados no construtor
-      heightBase;
   final double?
       width,
       widthAdjusted,
@@ -60,6 +55,8 @@ class ContainerWithButton extends StatefulWidget {
 }
 
 class _ContainerWithButtonState extends State<ContainerWithButton> {
+  final double widthBase = 0, heightBase = 0;
+
   Decoration? useRectangleRoundedBorder() {
     if (widget.rectangleRoundedBorder == true) {
       return BoxDecoration(
@@ -74,7 +71,7 @@ class _ContainerWithButtonState extends State<ContainerWithButton> {
   dynamic getPropertyAdjusted(
       BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted) {
     setState(() {
-      if (Provider.of<FontSizeState>(context).fontSize >= 30) {
+      if (Provider.of<FontSizeState>(context).fontSize >= 20) {
         property = valueAdjusted;
       } else {
         property = valueBase;
@@ -86,8 +83,8 @@ class _ContainerWithButtonState extends State<ContainerWithButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: getPropertyAdjusted(context, widget.widthBase, widget.width!, widget.widthAdjusted!),
-      height: getPropertyAdjusted(context, widget.heightBase, widget.height!, widget.heightAdjusted!),
+      width: getPropertyAdjusted(context, widthBase, widget.width!, widget.widthAdjusted!),
+      height: getPropertyAdjusted(context, heightBase, widget.height!, widget.heightAdjusted!),
       decoration: widget.decoration ?? useRectangleRoundedBorder(),
       padding: EdgeInsets.only(
         bottom: widget.paddingBottom ?? 0,
@@ -124,8 +121,8 @@ class _ContainerWithButtonState extends State<ContainerWithButton> {
           ),
           minimumSize: WidgetStateProperty.all(
             Size(
-              getPropertyAdjusted(context, widget.widthBase, widget.width!, widget.widthAdjusted!),
-              getPropertyAdjusted(context, widget.heightBase, widget.height!, widget.heightAdjusted!),
+              getPropertyAdjusted(context, widthBase, widget.width!, widget.widthAdjusted!),
+              getPropertyAdjusted(context, heightBase, widget.height!, widget.heightAdjusted!),
             ),
           ),
           shape: WidgetStateProperty.all(

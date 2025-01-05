@@ -44,11 +44,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               ContainerWithForm(
-                paddingFormTop: 8,
-                paddingFormLeft: 30,
+                widthAdjusted: 315,
+                heightAdjusted: 56,
+                paddingTop: 8,
+                paddingLeft: 30,
                 width: 315,
                 height: 56,
-                valor: _valor,
+                controllerForm: _valor,
                 keyForm: _form,
                 textHintForm: '',
                 marginTop: 10,
@@ -61,11 +63,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               ContainerWithForm(
-                paddingFormTop: 8,
-                paddingFormLeft: 30,
+                widthAdjusted: 315,
+                heightAdjusted: 56,
+                paddingTop: 8,
+                paddingLeft: 30,
                 width: 315,
                 height: 56,
-                valor: _valor1,
+                controllerForm: _valor1,
                 keyForm: _form1,
                 textHintForm: '',
                 marginTop: 10,
@@ -90,8 +94,8 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               ContainerWithButton(
-                heightAdjusted: 90,
-                widthAdjusted: 190,
+                heightAdjusted: 71,
+                widthAdjusted: 169,
                 marginTop: 20,
                 width: 169,
                 height: 71,
@@ -112,13 +116,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 80, bottom: 10),
+                margin: EdgeInsets.only(top: 68, bottom: 10),
                 child: InkWell(
                   onTap: (){
                     AppConfigs.saveLastRoute('/signUpPage');
                     context.push('/signUpPage');
                   },
-                  child: Text('Cadastre-se'),
+                  child: Text('Cadastre-se', style: TextStyle(fontSize: 15),),
                 ),
               )
             ],

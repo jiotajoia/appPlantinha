@@ -54,12 +54,15 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
                       marginBottom: 10,
                     ),
                     ContainerWithForm(
-                      valor: data['valor'],
+                      fontSizeForm: 16,
+                      fontSizeHint: 12,
+                      widthAdjusted: 341,
+                      heightAdjusted: 47,
+                      controllerForm: data['valor'],
                       keyForm: data['form'],
-                      width: double.infinity, // Usa todo o espaço disponível.
+                      width: 341, // Usa todo o espaço disponível.
                       height: 47,
-                      paddingFormBottom: 10,
-                      paddingFormLeft: 15,
+                      paddingLeft: 15,
                       marginLeft: 0,
                       marginBottom: 25,
                     ),
@@ -75,8 +78,8 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
                   stepForgotPasswordState.resetCurrentStep();
                   context.go('/');
                 },
-                widthAdjusted: 160,
-                heightAdjusted: 70,
+                widthAdjusted: 139,
+                heightAdjusted: 58,
                 labelText: 'Alterar',
                 width: 139,
                 height: 58,

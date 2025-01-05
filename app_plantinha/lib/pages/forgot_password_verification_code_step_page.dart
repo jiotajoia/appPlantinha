@@ -65,14 +65,18 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
           ),
         ),
         ContainerWithForm(
+          widthAdjusted: 315,
+          heightAdjusted: 56,
           textHintForm: 'Digite o código de verificação',
-          valor: verificationCodeController,
+          controllerForm: verificationCodeController,
           keyForm: _form,
           width: 315,
           height: 56,
           marginTop: 18,
-          paddingFormLeft: 15,
+          paddingLeft: 15,
           marginBottom: 23,
+          fontSizeForm: 16,
+          fontSizeHint: 12,
         ),
         Row(
           children: [
@@ -83,8 +87,8 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
               onPressed: () {
                 Provider.of<StepForgotPasswordState>(context, listen: false).incrementCurrentStep();
               },
-              widthAdjusted: 160, 
-              heightAdjusted: 70,
+              widthAdjusted: 139, 
+              heightAdjusted: 58,
               labelText: 'Enviar',
               width: 139,
               height: 58,

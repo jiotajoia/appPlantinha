@@ -55,11 +55,14 @@ class SettingsPage extends StatelessWidget {
                       AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
                       context.push('/settingsPage/appSettingsPage');
                     },
-                    child: Text(
-                      'Configurações do Aplicativo',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width - 23,
+                      child: Text(
+                        'Configurações do Aplicativo ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ),

@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage>{
             ...HomePage.valuesContainers.map((data) {
               return ContainerWithButton(
                 width: 159,
-                widthAdjusted: 250,
+                widthAdjusted: 220,
                 height: 66, 
                 heightAdjusted: 80,
                 fontSize: Provider.of<FontSizeState>(context).fontSize,

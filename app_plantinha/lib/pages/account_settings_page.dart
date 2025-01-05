@@ -1,4 +1,5 @@
 import 'package:app_plantinha/configs/app.configs.dart';
+import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:app_plantinha/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/widgets/row_button_back.widget.dart';
@@ -6,6 +7,7 @@ import 'package:app_plantinha/widgets/row_with_text.dart';
 import 'package:app_plantinha/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({super.key, required this.title});
@@ -41,20 +43,23 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 marginBottom: 10,
               ),
               ContainerWithForm(
-                  paddingFormBottom: 20,
-                  paddingFormLeft: 15,
+                  height: 33, 
+                  width: 165,
+                  widthAdjusted: 300, 
+                  heightAdjusted: 56,
+                  paddingLeft: 15,
                   textHintForm: 'Digite o novo nome...',
-                  valor: _valor,
+                  controllerForm: _valor,
                   keyForm: _form),
               ContainerWithButton(
-                widthAdjusted: 170, 
-                heightAdjusted: 70,
+                widthAdjusted: 120, 
+                heightAdjusted: 45,
                 onPressed: () {},
                 marginTop: 4,
                 width: 85,
                 height: 35,
                 labelText: 'Alterar',
-                fontSize: 13,
+                fontSize: Provider.of<FontSizeState>(context).fontSize,
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -84,14 +89,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 marginLeft: 35,
               ),
               ContainerWithButton(
-                widthAdjusted: 170, 
-                heightAdjusted: 70, 
+                widthAdjusted: 120, 
+                heightAdjusted: 45, 
                 marginTop: 10,
                 width: 85,
                 height: 35,
                 labelText: 'Excluir',
                 onPressed: () {},
-                fontSize: 13,
+                fontSize: Provider.of<FontSizeState>(context).fontSize,
               ),
             ],
           ),

@@ -46,14 +46,18 @@ class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepP
                 ),
               ),
               ContainerWithForm(
+                widthAdjusted: 315,
+                heightAdjusted: 56,
                 textHintForm: 'Digite o e-mail cadastrado...',
-                valor: emailController,
+                controllerForm: emailController,
                 keyForm: _form,
                 width: 315,
                 height: 56,
                 marginTop: 18,
-                paddingFormLeft: 15,
+                paddingLeft: 15,
                 marginBottom: 23,
+                fontSizeForm: 16,
+                fontSizeHint: 12,
               ),
               Row(
                 children: [
@@ -61,8 +65,8 @@ class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepP
                     flex: 3,
                   ),
                   ContainerWithButton(
-                    widthAdjusted: 160, 
-                    heightAdjusted: 70,
+                    widthAdjusted: 139, 
+                    heightAdjusted: 58,
                     onPressed: () {
                       forgotPasswordState.updateEmail(emailController.text);
                       stepForgotPasswordState.incrementCurrentStep();

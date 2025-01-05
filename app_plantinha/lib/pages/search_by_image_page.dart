@@ -34,8 +34,8 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                     ContainerWithButton(
                       onPressed: (){},
                       rectangleRoundedBorder: true,
-                      widthAdjusted: 310,
-                      heightAdjusted: 140,
+                      widthAdjusted: 295,
+                      heightAdjusted: 126,
                       width: 220,
                       height: 126,
                       labelText: 'Tirar Foto',
@@ -48,8 +48,8 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                       rectangleRoundedBorder: true,
                       width: 220,
                       height: 126,
-                      widthAdjusted: 310, 
-                      heightAdjusted: 140,
+                      widthAdjusted: 295, 
+                      heightAdjusted: 126,
                       labelText: 'Escolher Imagem',
                       icon: SvgPicture.asset(
                         'lib/icons/GalleryImport.svg',
