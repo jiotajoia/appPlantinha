@@ -38,6 +38,8 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 
 [Sprint Backlog](https://www.notion.so/Sprint-Backlog-165a37ab4dd38044ba7dc37c982fe711?pvs=4)
 
+[Modelo Entidade Relacionamento](https://drive.google.com/file/d/1HflQEDRp3r4-TdPzt6W4EMZKTCNJ81Bw/view?usp=sharing)
+
 ## Autores
 
 - [@jiotajoia](https://github.com/jiotajoia)
