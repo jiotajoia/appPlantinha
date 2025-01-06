@@ -12,6 +12,7 @@ import 'package:app_plantinha/pages/settings_page.dart';
 import 'package:app_plantinha/pages/login_page.dart';
 import 'package:app_plantinha/pages/splash_screen_page.dart';
 import 'package:app_plantinha/provider/font_size.provider.dart';
+import 'package:app_plantinha/provider/light_dark.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -127,12 +128,12 @@ class AppPlantinha extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color(0xFF8EB486),
-          brightness: Brightness.light,
+          brightness: Provider.of<LightDarkState>(context).tema == 'light' ? Brightness.light : Brightness.dark,
           contrastLevel: 0,
         ),
 
         textTheme: TextTheme(
-          bodyMedium: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize, color: Colors.black),
+          bodyMedium: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize, color: Provider.of<LightDarkState>(context).tema == 'light' ? Colors.black : Colors.white),
         ),
         
         elevatedButtonTheme: ElevatedButtonThemeData(

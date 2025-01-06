@@ -1,4 +1,5 @@
 import 'package:app_plantinha/provider/font_size.provider.dart';
+import 'package:app_plantinha/provider/light_dark.provider.dart';
 import 'package:app_plantinha/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/widgets/row_with_text.dart';
@@ -34,6 +35,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   @override
   Widget build(BuildContext context) {
     final fontSizeState = Provider.of<FontSizeState>(context);
+    final lightDarkState = Provider.of<LightDarkState>(context);
     return ScaffoldBase(
       body: SingleChildScrollView(
         child: Padding(
@@ -114,7 +116,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
                       widthAdjusted: 150, 
                       heightAdjusted: 60,
-                      onPressed: () {},
+                      onPressed: () {
+                        lightDarkState.setTema('dark');
+                      },
                       width: 110,
                       height: 40,
                       labelText: 'escuro',
@@ -123,7 +127,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     ),
                     ContainerWithButton(
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
-                      onPressed: () {},
+                      onPressed: () {
+                        lightDarkState.setTema('light');
+                      },
                       widthAdjusted: 150,
                       heightAdjusted: 60,
                       width: 110,
