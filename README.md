@@ -40,6 +40,12 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 
 [Modelo Entidade Relacionamento](https://drive.google.com/file/d/1HflQEDRp3r4-TdPzt6W4EMZKTCNJ81Bw/view?usp=sharing)
 
+## Telas
+
+![image](https://github.com/user-attachments/assets/d5b5a6f4-208d-436c-82ca-1390f5fd8e17)
+![image](https://github.com/user-attachments/assets/4fb21b5b-c36e-44da-90bd-f5c2af1f9892)
+![image](https://github.com/user-attachments/assets/fa838bb8-575f-4248-9fbe-9891f3a5ba62)
+
 ## Autores
 
 - [@jiotajoia](https://github.com/jiotajoia)
