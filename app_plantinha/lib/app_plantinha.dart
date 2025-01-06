@@ -10,6 +10,7 @@ import 'package:app_plantinha/pages/search_by_quiz_page.dart';
 import 'package:app_plantinha/pages/signup_page.dart';
 import 'package:app_plantinha/pages/settings_page.dart';
 import 'package:app_plantinha/pages/login_page.dart';
+import 'package:app_plantinha/pages/splash_screen_page.dart';
 import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -115,6 +116,11 @@ class AppPlantinha extends StatelessWidget {
             builder: (BuildContext context, GoRouterState state) {
               return const HistoryPage(title: 'History Page');
             }),
+        GoRoute(
+            path: '/splashScreenPage',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SplashScreenPage(title: 'Splash Screen Page');
+            })
       ]),
       title: 'Material App',
       debugShowCheckedModeBanner: false,

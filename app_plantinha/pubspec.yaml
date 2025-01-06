@@ -34,10 +34,13 @@ dependencies:
   go_router: ^14.6.2
   shared_preferences: ^2.3.5
   provider: ^6.1.2
+  lottie: ^3.3.0
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_launcher_icons: ^0.14.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +52,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+
+flutter_icons:
+    image_path: "lib/icons/icon.jpg"
+    ios: true
+    remove_alpha_ios: true
+    android: "launcher_icon"
+    adaptive_icon_background: "#FFFFFF"
+    adaptive_icon_foreground: "lib/icons/icon_android.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,6 +76,7 @@ flutter:
   assets:
     - lib/images/
     - lib/icons/
+    - lib/lottie/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

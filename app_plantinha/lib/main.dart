@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  final initialRoute = await AppConfigs.getLastRoute() ?? '/';
+  final initialRoute = await AppConfigs.getLastRoute() ?? '/splashScreenPage';
 
   runApp(
     MultiProvider(

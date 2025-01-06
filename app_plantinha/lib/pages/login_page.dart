@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
-                  context.go('/homePage');
+                  context.go('/splashScreenPage');
                 },
                 child: Text(
                   'Permanecer desconectado',
