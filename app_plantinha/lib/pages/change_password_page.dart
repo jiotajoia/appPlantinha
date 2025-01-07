@@ -36,12 +36,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               RowButtonBack(lastRoute: '/settingsPage/accountSettingsPage'),
               RowWithText(
                 textLabel: 'Alterar Senha',
-                fontSize: 20,
+                fontSize: Provider.of<FontSizeState>(context).fontSize + 5,
                 fontWeight: FontWeight.bold,
                 marginTop: 40,
                 marginLeft: 30,
               ),
               ContainerWithForm(
+                fontSizeForm: Provider.of<FontSizeState>(context).fontSize,
+                fontSizeHint: Provider.of<FontSizeState>(context).fontSize - 3,
                 height: heightScreen * 0.044,
                 widthAdjusted: widthScreen * 0.873,
                 heightAdjusted: heightScreen * 0.076,
@@ -54,6 +56,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 keyForm: _form
               ),
               ContainerWithForm(
+                fontSizeForm: Provider.of<FontSizeState>(context).fontSize,
+                fontSizeHint: Provider.of<FontSizeState>(context).fontSize - 3,
                 height: heightScreen * 0.044,
                 widthAdjusted: widthScreen * 0.873,
                 heightAdjusted: heightScreen * 0.076,

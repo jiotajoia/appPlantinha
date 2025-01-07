@@ -62,6 +62,7 @@ class DrawerBase extends StatelessWidget {
                             width: widthScreen * 0.186,
                             height: heightScreen * 0.104,
                             child: CircleAvatar(
+                              radius: 20,
                               backgroundImage:
                                   AssetImage('lib/images/imageUser.webp'),
                             ),
@@ -73,12 +74,12 @@ class DrawerBase extends StatelessWidget {
                             'jiotajoia',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: Provider.of<FontSizeState>(context).fontSize - 1,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
                             'jiotajoia@joia.com',
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                            style: TextStyle(color: Colors.white, fontSize: Provider.of<FontSizeState>(context).fontSize - 3),
                           )
                         ],
                       ),
@@ -102,7 +103,7 @@ class DrawerBase extends StatelessWidget {
                     ),
                     title: Text(
                       data['label'],
-                      style: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize),
+                      style: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize + 3),
                     ),
                     onTap: () {
                       AppConfigs.saveLastRoute(data['route']);
@@ -114,7 +115,7 @@ class DrawerBase extends StatelessWidget {
                 Spacer(),
                 Text(
                   '• Version 8.88.8',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: Provider.of<FontSizeState>(context).fontSize + 1),
                 ),
               ],
             ),

@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage>{
               child: ClipOval(child: Image.asset('lib/images/logo.png')),
             ),
             RowWithText(
+              fontSize: Provider.of<FontSizeState>(context).fontSize + 1,
               mainAxisAlignment: MainAxisAlignment.center,
               textLabel: 'Buscar Planta',
             ),
@@ -64,11 +65,11 @@ class _HomePageState extends State<HomePage>{
                 widthAdjusted: widthScreen * 0.53,
                 height: heightScreen * 0.09, 
                 heightAdjusted: heightScreen * 0.108,
-                fontSize: Provider.of<FontSizeState>(context).fontSize,
+                fontSize: Provider.of<FontSizeState>(context).fontSize + 1,
                 rectangleRoundedBorder: true,
                 marginBottom: heightScreen * 0.02,
                 marginTop: heightScreen * 0.02,
-                icon: Icon(data['icon'], size: Provider.of<FontSizeState>(context).fontSize,),
+                icon: Icon(data['icon'], size: Provider.of<FontSizeState>(context).fontSize + 1,),
                 labelText: data['label'],
                 onPressed: (){
                   navigateToSearchPage(data['lastRoute']);

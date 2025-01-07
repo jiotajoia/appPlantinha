@@ -1,4 +1,5 @@
 import 'package:app_plantinha/configs/app.configs.dart';
+import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:app_plantinha/provider/light_dark.provider.dart';
 import 'package:app_plantinha/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/widgets/scaffold_base.widget.dart';
@@ -39,7 +40,7 @@ class SettingsPage extends StatelessWidget {
                       'Conta',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: Provider.of<FontSizeState>(context).fontSize + 5,
                       ),
                     ),
                   ),
@@ -65,7 +66,7 @@ class SettingsPage extends StatelessWidget {
                         'Configurações do Aplicativo ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: Provider.of<FontSizeState>(context).fontSize + 5,
                         ),
                       ),
                     ),

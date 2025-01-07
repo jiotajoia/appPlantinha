@@ -133,6 +133,7 @@ class AppPlantinha extends StatelessWidget {
         ),
 
         textTheme: TextTheme(
+          
           bodyMedium: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize, color: Provider.of<LightDarkState>(context).tema == 'light' ? Colors.black : Colors.white),
         ),
         

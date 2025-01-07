@@ -36,16 +36,19 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               RowWithText(
                 textLabel: 'Conta',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: Provider.of<FontSizeState>(context).fontSize + 5,
                 marginTop: heightScreen * 0.054,
                 marginLeft: widthScreen * 0.072,
               ),
               RowWithText(
                 textLabel: 'Alterar nome',
+                fontSize: Provider.of<FontSizeState>(context).fontSize,
                 marginLeft: widthScreen * 0.084,
                 marginBottom: heightScreen * 0.013,
               ),
               ContainerWithForm(
+                  fontSizeHint: Provider.of<FontSizeState>(context).fontSize - 3,
+                  fontSizeForm: Provider.of<FontSizeState>(context).fontSize,
                   height: heightScreen * 0.044, 
                   width: widthScreen * 0.4,
                   widthAdjusted: widthScreen * 0.72, 
@@ -62,7 +65,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 width: widthScreen * 0.206,
                 height: heightScreen * 0.047,
                 labelText: 'Alterar',
-                fontSize: Provider.of<FontSizeState>(context).fontSize,
+                fontSize: Provider.of<FontSizeState>(context).fontSize - 2,
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -81,12 +84,16 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       child: Flexible(
                           child: Text(
                         'Alterar senha',
+                        style: TextStyle(
+                          fontSize: Provider.of<FontSizeState>(context).fontSize,
+                        ),
                       )),
                     )
                   ],
                 ),
               ),
               RowWithText(
+                fontSize: Provider.of<FontSizeState>(context).fontSize,
                 textLabel: 'Excluir conta',
                 marginTop: heightScreen * 0.04,
                 marginLeft: widthScreen * 0.084,
@@ -99,7 +106,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 height: heightScreen * 0.047,
                 labelText: 'Excluir',
                 onPressed: () {},
-                fontSize: Provider.of<FontSizeState>(context).fontSize,
+                fontSize: Provider.of<FontSizeState>(context).fontSize - 2,
               ),
             ],
           ),

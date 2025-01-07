@@ -38,7 +38,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 
   dynamic getPropertyAdjested(BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted){
     setState(() {
-      if(Provider.of<FontSizeState>(context).fontSize >= 30){
+      if(Provider.of<FontSizeState>(context).fontSize >= 20){
         property = valueAdjusted;
       }else{
         property = valueBase;
@@ -63,12 +63,13 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                 RowWithText(
                   textLabel: 'Configurações do Aplicativo',
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: Provider.of<FontSizeState>(context).fontSize + 5,
                   marginTop: heightScreen * 0.038,
                   marginLeft: widthScreen * 0.065,
                   marginBottom: heightScreen * 0.05,
                 ),
                 RowWithText(
+                  fontSize: Provider.of<FontSizeState>(context).fontSize,
                   textLabel: 'Alterar tamanho da fonte',
                   marginLeft: widthScreen * 0.072,
                   marginBottom: heightScreen * 0.054,
@@ -148,6 +149,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   marginLeft: widthScreen * 0.072,
                   marginTop: heightScreen * 0.073,
                   marginBottom: heightScreen * 0.038,
+                  fontSize: Provider.of<FontSizeState>(context).fontSize,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +159,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       widthAdjusted: widthScreen * 0.364, 
                       heightAdjusted: heightScreen * 0.081,
                       onPressed: () {
-                        tema_selecionado = 'dark';
+                        setState(() {
+                          tema_selecionado = 'dark';
+                        });
                       },
                       width: widthScreen * 0.266,
                       height: heightScreen * 0.054,
@@ -168,7 +172,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     ContainerWithButton(
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
                       onPressed: () {
-                        tema_selecionado = 'light';
+                        setState(() {
+                          tema_selecionado = 'light';
+                        });
                       },
                       widthAdjusted: widthScreen * 0.364, 
                       heightAdjusted: heightScreen * 0.081,
