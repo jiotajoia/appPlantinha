@@ -23,18 +23,23 @@ class _LoginPageState extends State<LoginPage> {
     context.go(lastRoute);
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 72),
+        padding: EdgeInsets.only(top: heightScreen * 0.098),
         child: Center(
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 10),
-                width: 186,
-                height: 186,
+                margin: EdgeInsets.only(bottom: heightScreen * 0.013),
+                width: widthScreen * 0.45,
+                height: heightScreen * 0.25,
                 child: ClipOval(child: Image.asset('lib/images/logo.png')),
               ),
               Text(
@@ -44,17 +49,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               ContainerWithForm(
-                widthAdjusted: 315,
-                heightAdjusted: 56,
-                paddingTop: 8,
-                paddingLeft: 30,
-                width: 315,
-                height: 56,
+                widthAdjusted: widthScreen * 0.76,
+                heightAdjusted: heightScreen * 0.07,
+                paddingTop: heightScreen * 0.01,
+                paddingLeft: widthScreen * 0.07,
+                width: widthScreen * 0.76,
+                height: heightScreen * 0.07,
                 controllerForm: _valor,
                 keyForm: _form,
                 textHintForm: '',
-                marginTop: 10,
-                marginBottom: 10,
+                marginTop: heightScreen * 0.01,
+                marginBottom: heightScreen * 0.01,
               ),
               Text(
                 'Senha',
@@ -63,17 +68,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               ContainerWithForm(
-                widthAdjusted: 315,
-                heightAdjusted: 56,
-                paddingTop: 8,
-                paddingLeft: 30,
-                width: 315,
-                height: 56,
+                widthAdjusted: widthScreen * 0.76,
+                heightAdjusted: heightScreen * 0.07,
+                paddingTop: heightScreen * 0.01,
+                paddingLeft: widthScreen * 0.07,
+                width: widthScreen * 0.76,
+                height: heightScreen * 0.07,
                 controllerForm: _valor1,
                 keyForm: _form1,
                 textHintForm: '',
-                marginTop: 10,
-                marginBottom: 10,
+                marginTop: heightScreen * 0.01,
+                marginBottom: heightScreen * 0.01,
               ),
               Row(
                 children: [
@@ -94,13 +99,13 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               ContainerWithButton(
-                heightAdjusted: 71,
-                widthAdjusted: 169,
-                marginTop: 20,
-                width: 169,
-                height: 71,
+                heightAdjusted: heightScreen * 0.09,
+                widthAdjusted: widthScreen * 0.41,
+                marginTop: heightScreen * 0.02,
+                width: widthScreen * 0.41,
+                height: heightScreen * 0.09,
                 labelText: 'Login',
-                marginBottom: 35,
+                marginBottom: heightScreen * 0.04,
                 onPressed: (){
                   navigateToPage('/homePage');
                 }
@@ -116,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 68, bottom: 10),
+                margin: EdgeInsets.only(top: heightScreen * 0.09, bottom: heightScreen * 0.01),
                 child: InkWell(
                   onTap: (){
                     AppConfigs.saveLastRoute('/signUpPage');

@@ -23,6 +23,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return ScaffoldBase(
       body: Padding(
         padding: const EdgeInsets.only(top: 3),
@@ -39,36 +42,36 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 marginLeft: 30,
               ),
               ContainerWithForm(
-                height: 33,
-                widthAdjusted: 360,
-                heightAdjusted: 56,
-                paddingBottom: 20,
-                paddingLeft: 15,
-                width: 314,
-                marginTop: 15,
+                height: heightScreen * 0.044,
+                widthAdjusted: widthScreen * 0.873,
+                heightAdjusted: heightScreen * 0.076,
+                paddingBottom: heightScreen * 0.026,
+                paddingLeft: widthScreen * 0.036,
+                width: widthScreen * 0.762,
+                marginTop: heightScreen * 0.02,
                 textHintForm: 'Digite nova senha...',
                 controllerForm: _valor, 
                 keyForm: _form
               ),
               ContainerWithForm(
-                height: 33,
-                widthAdjusted: 360,
-                heightAdjusted: 56,
-                paddingBottom: 20,
-                paddingLeft: 15,
-                marginBottom: 10, 
-                width: 314,
-                marginTop: 3,
+                height: heightScreen * 0.044,
+                widthAdjusted: widthScreen * 0.873,
+                heightAdjusted: heightScreen * 0.076,
+                paddingBottom: heightScreen * 0.027,
+                paddingLeft: widthScreen * 0.036,
+                marginBottom: heightScreen * 0.013, 
+                width: widthScreen * 0.762,
+                marginTop: heightScreen * 0.004,
                 textHintForm: 'Confirme nova senha...',
                 controllerForm: _valor1, 
                 keyForm: _form1
               ),
               ContainerWithButton(
-                widthAdjusted: 130,
-                heightAdjusted: 45,
-                marginTop: 4,
-                width: 95,
-                height: 37,
+                widthAdjusted: widthScreen * 0.315,
+                heightAdjusted: heightScreen * 0.061,
+                marginTop: heightScreen * 0.005,
+                width: widthScreen * 0.230,
+                height: heightScreen * 0.05,
                 labelText: 'Alterar',
                 onPressed: (){
                 

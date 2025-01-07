@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage>{
 
   double getPropertyAdjested(BuildContext context, double property, double valueBase, double valueAdjusted){
     setState(() {
-      if(Provider.of<FontSizeState>(context).fontSize >= 30){
+      if(Provider.of<FontSizeState>(context).fontSize >= 20){
         property = valueAdjusted;
       }else{
         property = valueBase;
@@ -40,15 +40,18 @@ class _HomePageState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return ScaffoldBase(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 30, bottom: 60),
-              width: getPropertyAdjested(context, sizeImage, 126, 150),
-              height: getPropertyAdjested(context, sizeImage, 126, 150),
+              margin: EdgeInsets.only(top: heightScreen * 0.04, bottom: heightScreen * 0.081),
+              width: getPropertyAdjested(context, sizeImage, widthScreen * 0.31, widthScreen * 0.36),
+              height: getPropertyAdjested(context, sizeImage, heightScreen * 0.17, heightScreen * 0.2),
               child: ClipOval(child: Image.asset('lib/images/logo.png')),
             ),
             RowWithText(
@@ -57,14 +60,14 @@ class _HomePageState extends State<HomePage>{
             ),
             ...HomePage.valuesContainers.map((data) {
               return ContainerWithButton(
-                width: 159,
-                widthAdjusted: 220,
-                height: 66, 
-                heightAdjusted: 80,
+                width: widthScreen * 0.38,
+                widthAdjusted: widthScreen * 0.53,
+                height: heightScreen * 0.09, 
+                heightAdjusted: heightScreen * 0.108,
                 fontSize: Provider.of<FontSizeState>(context).fontSize,
                 rectangleRoundedBorder: true,
-                marginBottom: 15,
-                marginTop: 15,
+                marginBottom: heightScreen * 0.02,
+                marginTop: heightScreen * 0.02,
                 icon: Icon(data['icon'], size: Provider.of<FontSizeState>(context).fontSize,),
                 labelText: data['label'],
                 onPressed: (){

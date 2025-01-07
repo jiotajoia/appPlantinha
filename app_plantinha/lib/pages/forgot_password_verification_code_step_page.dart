@@ -27,14 +27,16 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Row(
           children: [
             Container(
-                width: 334,
-                height: 45,
-                margin: EdgeInsets.only(top: 50, bottom: 48, left: 34),
+                width: widthScreen * 0.81,
+                height: heightScreen * 0.06,
+                margin: EdgeInsets.only(top: heightScreen * 0.07, bottom: heightScreen * 0.06, left: widthScreen * 0.08),
                 child: RichText(
                   text: TextSpan(
                     style: TextStyle(fontSize: 16),
@@ -58,23 +60,23 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 18),
+          padding: EdgeInsets.only(right: widthScreen * 0.04),
           child: Text(
             'Código de verificação',
             style: TextStyle(fontSize: 16),
           ),
         ),
         ContainerWithForm(
-          widthAdjusted: 315,
-          heightAdjusted: 56,
+          widthAdjusted: widthScreen * 0.77,
+          heightAdjusted: heightScreen * 0.08,
           textHintForm: 'Digite o código de verificação',
           controllerForm: verificationCodeController,
           keyForm: _form,
-          width: 315,
-          height: 56,
-          marginTop: 18,
-          paddingLeft: 15,
-          marginBottom: 23,
+          width: widthScreen * 0.77,
+          height: heightScreen * 0.08,
+          marginTop:heightScreen * 0.02,
+          paddingLeft: widthScreen * 0.04,
+          marginBottom: heightScreen * 0.03,
           fontSizeForm: 16,
           fontSizeHint: 12,
         ),
@@ -87,11 +89,11 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
               onPressed: () {
                 Provider.of<StepForgotPasswordState>(context, listen: false).incrementCurrentStep();
               },
-              widthAdjusted: 139, 
-              heightAdjusted: 58,
+              widthAdjusted: widthScreen * 0.34,
+              heightAdjusted: heightScreen * 0.08,
               labelText: 'Enviar',
-              width: 139,
-              height: 58,
+              width: widthScreen * 0.34,
+              height: heightScreen * 0.08,
             ),
             Spacer(),
           ],

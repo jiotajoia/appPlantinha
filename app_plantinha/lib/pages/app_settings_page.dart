@@ -36,10 +36,13 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   Widget build(BuildContext context) {
     final fontSizeState = Provider.of<FontSizeState>(context);
     final lightDarkState = Provider.of<LightDarkState>(context);
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return ScaffoldBase(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 13),
+          padding: EdgeInsets.only(top: heightScreen * 0.017),
           child: Center(
             child: Column(
               children: [
@@ -48,27 +51,43 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   textLabel: 'Configurações do Aplicativo',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  marginTop: 204 - (98 + 24 + 18 + 20 + 11 + 5),
-                  marginLeft: 27,
-                  marginBottom: 265 - 228,
+                  marginTop: heightScreen * 0.038,
+                  marginLeft: widthScreen * 0.065,
+                  marginBottom: heightScreen * 0.05,
                 ),
                 RowWithText(
                   textLabel: 'Alterar tamanho da fonte',
-                  marginLeft: 30,
-                  marginBottom: 323 - 283,
+                  marginLeft: widthScreen * 0.072,
+                  marginBottom: heightScreen * 0.054,
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 5),
+                  margin: EdgeInsets.only(bottom: heightScreen * 0.006),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 39,),
-                        child: SvgPicture.asset('lib/icons/small_a.svg', width: Provider.of<FontSizeState>(context).fontSize, height: Provider.of<FontSizeState>(context).fontSize,),
+                        margin: EdgeInsets.only(left: widthScreen * 0.094,),
+                        child: lightDarkState.tema == 'light' ? 
+                        SvgPicture.asset('lib/icons/small_a.svg',
+                          width: fontSizeState.fontSize, 
+                          height: fontSizeState.fontSize,
+                        ) : 
+                        SvgPicture.asset('lib/icons/small_a_white.svg',
+                          width: fontSizeState.fontSize, 
+                          height: fontSizeState.fontSize,
+                        )
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 29),
-                        child: SvgPicture.asset('lib/icons/big_a.svg', width: Provider.of<FontSizeState>(context).fontSize + 6, height: Provider.of<FontSizeState>(context).fontSize + 7,),
+                        margin: EdgeInsets.only(right: widthScreen * 0.07),
+                        child: Provider.of<LightDarkState>(context).tema == 'light' ? 
+                        SvgPicture.asset('lib/icons/big_a.svg',
+                          width: fontSizeState.fontSize + 7, 
+                          height: fontSizeState.fontSize + 7,
+                        ) : 
+                        SvgPicture.asset('lib/icons/big_a_white.svg',
+                          width: fontSizeState.fontSize + 7, 
+                          height: fontSizeState.fontSize + 7,
+                        ),
                       )
                     ],
                   ),
@@ -78,10 +97,10 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     SliderTheme(
                       data: SliderTheme.of(context).copyWith(
                         thumbShape:
-                            CustomSliderThumbIcon(), // Define o formato do thumb.
+                            CustomSliderThumbIcon(lightDarkState.tema == 'light' ? Colors.black : Colors.white), // Define o formato do thumb.
                       ),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 25,
+                        width: widthScreen - widthScreen * 0.06068,
                         child: Slider(
                           value: fontSizeState.fontSize,
                           min: 15,
@@ -97,32 +116,38 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     Positioned(
                         bottom: 16,
                         right: 25, // Coloca o ícone no final
-                        child: SvgPicture.asset(
+                        child: lightDarkState.tema == 'light' ? 
+                        SvgPicture.asset(
                           'lib/icons/end.svg',
                           height: 16,
-                        )),
+                        ) :
+                        SvgPicture.asset(
+                          'lib/icons/white_end.svg',
+                          height: 16,
+                        )
+                    ),
                   ],
                 ),
                 RowWithText(
                   textLabel: 'Alterar tema',
-                  marginLeft: 30,
-                  marginTop: 424 -370,
-                  marginBottom: 470 - 442,
+                  marginLeft: widthScreen * 0.072,
+                  marginTop: heightScreen * 0.073,
+                  marginBottom: heightScreen * 0.038,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ContainerWithButton(
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
-                      widthAdjusted: 150, 
-                      heightAdjusted: 60,
+                      widthAdjusted: widthScreen * 0.364, 
+                      heightAdjusted: heightScreen * 0.081,
                       onPressed: () {
                         lightDarkState.setTema('dark');
                       },
-                      width: 110,
-                      height: 40,
+                      width: widthScreen * 0.266,
+                      height: heightScreen * 0.054,
                       labelText: 'escuro',
-                      marginRight: 19,
+                      marginRight: widthScreen * 0.046,
                       icon: Icon(Icons.dark_mode, size: Provider.of<FontSizeState>(context).fontSize,),
                     ),
                     ContainerWithButton(
@@ -130,10 +155,10 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       onPressed: () {
                         lightDarkState.setTema('light');
                       },
-                      widthAdjusted: 150,
-                      heightAdjusted: 60,
-                      width: 110,
-                      height: 40,
+                      widthAdjusted: widthScreen * 0.364, 
+                      heightAdjusted: heightScreen * 0.081,
+                      width: widthScreen * 0.266,
+                      height: heightScreen * 0.054,
                       labelText: 'claro',
                       color: Color(0xFF997C70),
                       icon: Icon(Icons.light_mode, size: Provider.of<FontSizeState>(context).fontSize),
@@ -149,25 +174,25 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         children: [
                           ContainerWithButton(
                             fontSize: Provider.of<FontSizeState>(context).fontSize,
-                            widthAdjusted: 300, 
-                            heightAdjusted: 90, 
+                            widthAdjusted: widthScreen * 0.728, 
+                            heightAdjusted: heightScreen * 0.122, 
                             onPressed: () {},
-                            width: 220,
-                            height: 70,
+                            width: widthScreen * 0.533,
+                            height: heightScreen * 0.095,
                             labelText: 'Salvar configurações',
                             rectangleRoundedBorder: true,
-                            marginBottom: 29,
+                            marginBottom: heightScreen * 0.039,
                           ),
                           ContainerWithButton(
                             fontSize: Provider.of<FontSizeState>(context).fontSize,
-                            widthAdjusted: 300, 
-                            heightAdjusted: 90, 
+                            widthAdjusted: widthScreen * 0.728, 
+                            heightAdjusted: heightScreen * 0.122, 
                             onPressed: () {},
-                            width: 220,
-                            height: 70,
+                            width: widthScreen * 0.533,
+                            height: heightScreen * 0.095,
                             labelText: 'Resetar configurações',
                             rectangleRoundedBorder: true,
-                            marginBottom: 40,
+                            marginBottom: heightScreen * 0.054,
                           )
                         ],
                       ),
@@ -184,6 +209,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
 }
 
 class CustomSliderThumbIcon extends SliderComponentShape {
+  const CustomSliderThumbIcon(this.color);
+  final Color color;
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
     return Size(24, 24); // Define o tamanho do "thumb".
@@ -214,7 +241,7 @@ class CustomSliderThumbIcon extends SliderComponentShape {
         style: TextStyle(
           fontSize: 24,
           fontFamily: icon.fontFamily,
-          color: Colors.black,
+              color: color,
         ),
       ),
       textDirection: textDirection,

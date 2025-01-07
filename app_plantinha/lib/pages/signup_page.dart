@@ -28,9 +28,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 40),
+        padding: EdgeInsets.only(top: heightScreen * 0.05),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min, 
@@ -55,9 +58,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   const Spacer(), // Cria um espaço flexível entre o texto e a imagem.
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10, right: 10),
-                    width: 59,
-                    height: 59,
+                    margin: EdgeInsets.only(bottom: heightScreen * 0.01, right: widthScreen * 0.02),
+                    width: widthScreen * 0.14,
+                    height: heightScreen * 0.08,
                     child: ClipOval(
                       child: Image.asset('lib/images/logo.png'),
                     ),
@@ -71,20 +74,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     RowWithText(
                       textLabel: data['label'],
-                      marginLeft: 63,
-                      marginTop: 28,
+                      marginLeft: widthScreen * 0.15,
+                      marginTop: heightScreen * 0.03,
                       fontSize: 14,
-                      marginBottom: 10,
+                      marginBottom: heightScreen * 0.01,
                     ),
                     ContainerWithForm(
-                      widthAdjusted: 341,
-                      heightAdjusted: 47,
+                      widthAdjusted: widthScreen * 0.82,
+                      heightAdjusted: heightScreen * 0.06,
                       controllerForm: data['valor'],
                       keyForm: data['form'],
-                      width: 341,
-                      height: 47,
-                      paddingLeft: 15,
-                      marginLeft: 37,
+                      width: widthScreen * 0.82,
+                      height: heightScreen * 0.06,
+                      paddingLeft: widthScreen * 0.03,
+                      marginLeft: widthScreen * 0.08,
                       marginBottom: 14,
                       fontSizeForm: 16,
                       fontSizeHint: 12,
@@ -96,13 +99,13 @@ class _SignUpPageState extends State<SignUpPage> {
               Align(
                 alignment: Alignment.centerRight, // Alinha o botão à direita.
                 child: ContainerWithButton(
-                  width: 139,
-                  height: 58,
-                  widthAdjusted: 160,
-                  heightAdjusted: 70,
+                  width: widthScreen * 0.33,
+                  height: heightScreen * 0.08,
+                  widthAdjusted: widthScreen * 0.39,
+                  heightAdjusted: heightScreen * 0.09,
                   labelText: 'Criar conta',
-                  marginRight: 10,
-                  marginTop: 28,
+                  marginRight: widthScreen * 0.02,
+                  marginTop: heightScreen * 0.04,
                   onPressed: navigateToHomePage,
                 ),
               ),

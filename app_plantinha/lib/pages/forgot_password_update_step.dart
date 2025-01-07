@@ -21,73 +21,70 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
     final stepForgotPasswordState = Provider.of<StepForgotPasswordState>(context);
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min, // Apenas o espaço necessário.
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Título
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(top: 50),
-              child: const Text(
-                'Insira a nova senha:',
-                style: TextStyle(fontSize: 16),
-              ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: widthScreen * 0.039),
+      child: Column(
+        mainAxisSize: MainAxisSize.min, // Apenas o espaço necessário.
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Título
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(top: heightScreen * 0.068),
+            child: const Text(
+              'Insira a nova senha:',
+              style: TextStyle(fontSize: 16),
             ),
-            // Campos do formulário
-            ...valuesItems.map((data) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RowWithText(
-                      textLabel: data['label'],
-                      marginLeft: 0, // Ajuste conforme necessário.
-                      marginTop: 0,
-                      fontSize: 14,
-                      marginBottom: 10,
-                    ),
-                    ContainerWithForm(
-                      fontSizeForm: 16,
-                      fontSizeHint: 12,
-                      widthAdjusted: 341,
-                      heightAdjusted: 47,
-                      controllerForm: data['valor'],
-                      keyForm: data['form'],
-                      width: 341, // Usa todo o espaço disponível.
-                      height: 47,
-                      paddingLeft: 15,
-                      marginLeft: 0,
-                      marginBottom: 25,
-                    ),
-                  ],
-                ),
-              );
-            }),
-            // Botão de Alteração
-            Align(
-              alignment: Alignment.centerRight,
-              child: ContainerWithButton(
-                onPressed: () {
-                  stepForgotPasswordState.resetCurrentStep();
-                  context.go('/');
-                },
-                widthAdjusted: 139,
-                heightAdjusted: 58,
-                labelText: 'Alterar',
-                width: 139,
-                height: 58,
-                marginTop: 31,
+          ),
+          // Campos do formulário
+          ...valuesItems.map((data) {
+            return Padding(
+              padding: EdgeInsets.only(top: heightScreen * 0.02),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RowWithText(
+                    textLabel: data['label'],
+                    fontSize: 14,
+                    marginBottom: heightScreen * 0.013,
+                  ),
+                  ContainerWithForm(
+                    fontSizeForm: 16,
+                    fontSizeHint: 12,
+                    widthAdjusted: widthScreen * 0.76,
+                    heightAdjusted: heightScreen * 0.064,
+                    controllerForm: data['valor'],
+                    keyForm: data['form'],
+                    width: widthScreen * 0.76, // Usa todo o espaço disponível.
+                    height: heightScreen * 0.064,
+                    paddingLeft: widthScreen * 0.036,
+                    marginBottom: heightScreen * 0.034,
+                  ),
+                ],
               ),
+            );
+          }),
+          // Botão de Alteração
+          Align(
+            alignment: Alignment.centerRight,
+            child: ContainerWithButton(
+              onPressed: () {
+                stepForgotPasswordState.resetCurrentStep();
+                context.go('/');
+              },
+              widthAdjusted: 139,
+              heightAdjusted: 58,
+              labelText: 'Alterar',
+              width: 139,
+              height: 58,
+              marginTop: 31,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -18,26 +18,29 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return ScaffoldBase(
       body: Padding(
-        padding: EdgeInsets.only(top: 3,),
+        padding: EdgeInsets.only(top: heightScreen * 0.004,),
         child: Center(
           child: Column(
             children: [
               RowButtonBack(lastRoute: '/homePage'),
               Container(
-                margin: EdgeInsets.only(top: 130),
-                height: 400,
+                margin: EdgeInsets.only(top: heightScreen * 0.176),
+                height: heightScreen * 0.543,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ContainerWithButton(
                       onPressed: (){},
                       rectangleRoundedBorder: true,
-                      widthAdjusted: 295,
-                      heightAdjusted: 126,
-                      width: 220,
-                      height: 126,
+                      widthAdjusted: widthScreen * 0.716,
+                      heightAdjusted: heightScreen * 0.171,
+                      width: widthScreen * 0.533,
+                      height: heightScreen * 0.171,
                       labelText: 'Tirar Foto',
                       icon: Icon(Icons.camera_alt_outlined, size: Provider.of<FontSizeState>(context).fontSize,),
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
@@ -46,10 +49,10 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                     ContainerWithButton(
                       onPressed: (){},
                       rectangleRoundedBorder: true,
-                      width: 220,
-                      height: 126,
-                      widthAdjusted: 295, 
-                      heightAdjusted: 126,
+                      width: widthScreen * 0.533,
+                      height: heightScreen * 0.171,
+                      widthAdjusted: widthScreen * 0.716, 
+                      heightAdjusted: heightScreen * 0.171,
                       labelText: 'Escolher Imagem',
                       icon: SvgPicture.asset(
                         'lib/icons/GalleryImport.svg',

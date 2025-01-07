@@ -23,9 +23,12 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return ScaffoldBase(
       body: Padding(
-        padding: const EdgeInsets.only(top: 3),
+        padding: EdgeInsets.only(top: heightScreen * 0.017),
         child: Center(
           child: Column(
             children: [
@@ -34,37 +37,37 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 textLabel: 'Conta',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
-                marginTop: 40,
-                marginLeft: 30,
+                marginTop: heightScreen * 0.054,
+                marginLeft: widthScreen * 0.072,
               ),
               RowWithText(
                 textLabel: 'Alterar nome',
-                marginLeft: 35,
-                marginBottom: 10,
+                marginLeft: widthScreen * 0.084,
+                marginBottom: heightScreen * 0.013,
               ),
               ContainerWithForm(
-                  height: 33, 
-                  width: 165,
-                  widthAdjusted: 300, 
-                  heightAdjusted: 56,
-                  paddingLeft: 15,
+                  height: heightScreen * 0.044, 
+                  width: widthScreen * 0.4,
+                  widthAdjusted: widthScreen * 0.72, 
+                  heightAdjusted: heightScreen * 0.076,
+                  paddingLeft: widthScreen * 0.036,
                   textHintForm: 'Digite o novo nome...',
                   controllerForm: _valor,
                   keyForm: _form),
               ContainerWithButton(
-                widthAdjusted: 120, 
-                heightAdjusted: 45,
+                widthAdjusted: widthScreen * 0.291, 
+                heightAdjusted: heightScreen * 0.061,
                 onPressed: () {},
-                marginTop: 4,
-                width: 85,
-                height: 35,
+                marginTop: heightScreen * 0.013,
+                width: widthScreen * 0.206,
+                height: heightScreen * 0.047,
                 labelText: 'Alterar',
                 fontSize: Provider.of<FontSizeState>(context).fontSize,
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: 30,
-                  left: 35,
+                  top: heightScreen * 0.04,
+                  left: widthScreen * 0.084,
                 ),
                 child: Row(
                   children: [
@@ -85,15 +88,15 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ),
               RowWithText(
                 textLabel: 'Excluir conta',
-                marginTop: 30,
-                marginLeft: 35,
+                marginTop: heightScreen * 0.04,
+                marginLeft: widthScreen * 0.084,
               ),
               ContainerWithButton(
-                widthAdjusted: 120, 
-                heightAdjusted: 45, 
-                marginTop: 10,
-                width: 85,
-                height: 35,
+                widthAdjusted: widthScreen * 0.291, 
+                heightAdjusted: heightScreen * 0.061, 
+                marginTop: heightScreen * 0.013,
+                width: widthScreen * 0.206,
+                height: heightScreen * 0.047,
                 labelText: 'Excluir',
                 onPressed: () {},
                 fontSize: Provider.of<FontSizeState>(context).fontSize,

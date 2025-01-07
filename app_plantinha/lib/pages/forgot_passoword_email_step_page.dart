@@ -9,75 +9,79 @@ class ForgotPassowordEmailStepPage extends StatefulWidget {
   const ForgotPassowordEmailStepPage({super.key});
 
   @override
-  State<ForgotPassowordEmailStepPage> createState() => _ForgotPassowordEmailStepPageState();
+  State<ForgotPassowordEmailStepPage> createState() =>
+      _ForgotPassowordEmailStepPageState();
 }
 
-class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepPage> {
+class _ForgotPassowordEmailStepPageState
+    extends State<ForgotPassowordEmailStepPage> {
   final emailController = TextEditingController();
   final _form = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     final forgotPasswordState = Provider.of<ForgotPasswordState>(context);
     final stepForgotPasswordState = Provider.of<StepForgotPasswordState>(context);
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
 
     return Column(
       children: [
         Row(
-                children: [
-                  Container(
-                    width: 286,
-                    height: 45,
-                    margin: EdgeInsets.only(top: 50, bottom: 48, left: 34),
-                    child: Text(
-                      'Por favor, informe seu email para recebimento do código de verificação',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 18),
-                child: Text(
-                  'E-mail cadastrado',
-                  style: TextStyle(fontSize: 16),
+          children: [
+            Container(
+              width: widthScreen * 0.69,
+              height: heightScreen * 0.06,
+              margin: EdgeInsets.only(top: heightScreen * 0.07, bottom: heightScreen * 0.06, left: widthScreen * 0.08),
+              child: Text(
+                'Por favor, informe seu email para recebimento do código de verificação',
+                style: TextStyle(
+                  fontSize: 16,
                 ),
               ),
-              ContainerWithForm(
-                widthAdjusted: 315,
-                heightAdjusted: 56,
-                textHintForm: 'Digite o e-mail cadastrado...',
-                controllerForm: emailController,
-                keyForm: _form,
-                width: 315,
-                height: 56,
-                marginTop: 18,
-                paddingLeft: 15,
-                marginBottom: 23,
-                fontSizeForm: 16,
-                fontSizeHint: 12,
-              ),
-              Row(
-                children: [
-                  Spacer(
-                    flex: 3,
-                  ),
-                  ContainerWithButton(
-                    widthAdjusted: 139, 
-                    heightAdjusted: 58,
-                    onPressed: () {
-                      forgotPasswordState.updateEmail(emailController.text);
-                      stepForgotPasswordState.incrementCurrentStep();
-                    },
-                    labelText: 'Enviar',
-                    width: 139,
-                    height: 58,
-                  ),
-                  Spacer(),
-                ],
-              )
+            ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: widthScreen * 0.04),
+          child: Text(
+            'E-mail cadastrado',
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+        ContainerWithForm(
+          widthAdjusted: widthScreen * 0.77,
+          heightAdjusted: heightScreen * 0.08,
+          textHintForm: 'Digite o e-mail cadastrado...',
+          controllerForm: emailController,
+          keyForm: _form,
+          width: widthScreen * 0.77,
+          height: heightScreen * 0.08,
+          marginTop:heightScreen * 0.02,
+          paddingLeft: widthScreen * 0.04,
+          marginBottom: heightScreen * 0.03,
+          fontSizeForm: 16,
+          fontSizeHint: 12,
+        ),
+        Row(
+          children: [
+            Spacer(
+              flex: 3,
+            ),
+            ContainerWithButton(
+              widthAdjusted: widthScreen * 0.34,
+              heightAdjusted: heightScreen * 0.08,
+              onPressed: () {
+                forgotPasswordState.updateEmail(emailController.text);
+                stepForgotPasswordState.incrementCurrentStep();
+              },
+              labelText: 'Enviar',
+              width: widthScreen * 0.34,
+              height: heightScreen * 0.08,
+            ),
+            Spacer(),
+          ],
+        )
       ],
     );
   }

@@ -1,7 +1,9 @@
 import 'package:app_plantinha/configs/app.configs.dart';
+import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class DrawerBase extends StatelessWidget {
   const DrawerBase({super.key});
@@ -16,18 +18,19 @@ class DrawerBase extends StatelessWidget {
 
   void retornaNada() {}
 
- 
-
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return Drawer(
-      width: 320,
+      width: widthScreen * 0.662,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           Container(
-            width: 60,
-            height: 235,
+            width: widthScreen * 0.145,
+            height: heightScreen * 0.319,
             decoration: const BoxDecoration(color: Color(0xFF8EB486)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -42,30 +45,29 @@ class DrawerBase extends StatelessWidget {
                         )),
                     IconButton(
                         onPressed: retornaNada,
-                        icon: SvgPicture.asset(
-                          'lib/icons/tema.svg'
-                        )),
+                        icon: Icon(Icons.bedtime_outlined, color: Colors.white,)
+                    ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 20),
+                      margin: EdgeInsets.only(left: widthScreen * 0.048),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           SizedBox(
-                            width: 77,
-                            height: 77,
+                            width: widthScreen * 0.186,
+                            height: heightScreen * 0.104,
                             child: CircleAvatar(
                               backgroundImage:
                                   AssetImage('lib/images/imageUser.webp'),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 10),
+                            padding: EdgeInsets.only(top: heightScreen * 0.013),
                           ),
                           Text(
                             'jiotajoia',
@@ -87,11 +89,11 @@ class DrawerBase extends StatelessWidget {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 235,
+            height: heightScreen - heightScreen * 0.319,
             decoration: const BoxDecoration(color: Color(0xFF997C70)),
             child: Column(
               children: [
-                Padding(padding: EdgeInsets.only(top: 20)),
+                Padding(padding: EdgeInsets.only(top: heightScreen * 0.027)),
                 ...valuesListTiles.map((data) {
                   return ListTile(
                     leading: Icon(
@@ -100,7 +102,7 @@ class DrawerBase extends StatelessWidget {
                     ),
                     title: Text(
                       data['label'],
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize),
                     ),
                     onTap: () {
                       AppConfigs.saveLastRoute(data['route']);
@@ -108,7 +110,7 @@ class DrawerBase extends StatelessWidget {
                     },
                   );
                 }),
-                Padding(padding: EdgeInsets.only(right: 30)),
+                Padding(padding: EdgeInsets.only(right: widthScreen * 0.072)),
                 Spacer(),
                 Text(
                   '• Version 8.88.8',

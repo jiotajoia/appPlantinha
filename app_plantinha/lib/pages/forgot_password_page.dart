@@ -19,9 +19,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     final stepForgotPasswordState = Provider.of<StepForgotPasswordState>(context);
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 159),
+        padding: EdgeInsets.only(top: heightScreen * 0.22),
         child: Center(
           child: Column(
             children: [
@@ -30,7 +33,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 0.007),
                     child: IconButton(
                       onPressed: () {
                         stepForgotPasswordState.resetCurrentStep();
@@ -51,7 +54,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                   const Spacer(),
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10, right: 10),
+                    margin: EdgeInsets.only(bottom: heightScreen * 0.01, right: widthScreen * 0.02),
                     width: 59,
                     height: 59,
                     child: ClipOval(child: Image.asset('lib/images/logo.png')),
