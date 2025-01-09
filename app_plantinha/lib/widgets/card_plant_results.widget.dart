@@ -18,8 +18,9 @@ class CardPlantResults extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 30),
       color: Color(0xFF997C70),
       child: SizedBox(
-        width: widthScreen * 0.9,
-        height: heightScreen * 0.2,
+        //width: fontSizeProvider>= 20 ? widthScreen * 0.98 : widthScreen * 0.9,
+        width: widthScreen * 0.98,
+        height: fontSizeProvider >= 24 ? heightScreen * 0.5 : heightScreen * 0.25,
         child: Padding(
           padding: EdgeInsets.all(8),
           child: Row(

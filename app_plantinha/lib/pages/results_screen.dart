@@ -32,25 +32,28 @@ class _ResultsScreenState extends State<ResultsScreen> {
           top: heightScreen * 0.004,
         ),
         child: Center(
-          child: Column(
-            children: [
-              RowButtonBack(lastRoute: '/homePage'),
-              RowWithText(
-                textLabel: 'Resultados',
-                mainAxisAlignment: MainAxisAlignment.center,
-                fontWeight: FontWeight.bold,
-                fontSize: fontSizeProvider + 9,
-                textDecoration: TextDecoration.underline,
-                marginBottom: 30,
-              ),
-              ...valuesCardsPlants.map((data){
-                return CardPlantResults(
-                  cientificName: data["cientificName"], 
-                  image: data["image"], 
-                  name: data["name"]
-                );
-              }),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                RowButtonBack(lastRoute: '/homePage'),
+                RowWithText(
+                  textLabel: 'Resultados',
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  fontWeight: FontWeight.bold,
+                  fontSize: fontSizeProvider + 9,
+                  textDecoration: TextDecoration.underline,
+                  marginBottom: 30,
+                  textColor: themeProvider == "light" ? Colors.black : Colors.white,
+                ),
+                ...valuesCardsPlants.map((data){
+                  return CardPlantResults(
+                    cientificName: data["cientificName"], 
+                    image: data["image"], 
+                    name: data["name"]
+                  );
+                }),
+              ],
+            ),
           ),
         ),
       ),
