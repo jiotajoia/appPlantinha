@@ -62,6 +62,7 @@ class SettingsPage extends StatelessWidget {
                       context.push('/settingsPage/appSettingsPage');
                     },
                     child: SizedBox(
+                      width:  widthScreen - widthScreen * 0.055,
                       child: Text(
                         'Configurações do Aplicativo ',
                         style: TextStyle(

@@ -21,10 +21,10 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
   double marginLeftContainerButton = 0;
   MainAxisAlignment alignmentButtons = MainAxisAlignment.end;
   
-  var fontSizeState;
-  var lightDarkState;
-  late String tema_selecionado;
-  late double fonte_selecionado;
+  dynamic fontSizeState;
+  dynamic lightDarkState;
+  late String temaSelecionado;
+  late double fonteSelecionado;
 
   @override
   void initState(){
@@ -32,8 +32,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     fontSizeState = Provider.of<FontSizeState>(context,listen: false);
     lightDarkState = Provider.of<LightDarkState>(context,listen: false);
     
-    tema_selecionado = lightDarkState.tema;
-    fonte_selecionado = fontSizeState.fontSize;
+    temaSelecionado = lightDarkState.tema;
+    fonteSelecionado = fontSizeState.fontSize;
   }
 
   dynamic getPropertyAdjested(BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted){
@@ -116,14 +116,14 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       child: SizedBox(
                         width: widthScreen - widthScreen * 0.06068,
                         child: Slider(
-                          value: fonte_selecionado,
+                          value: fonteSelecionado,
                           min: 15,
                           max: 30,
                           divisions: 4,
-                          label: fonte_selecionado.toStringAsFixed(0),
+                          label: fonteSelecionado.toStringAsFixed(0),
                           onChanged: (value) {
                             setState(() {
-                              fonte_selecionado = value;
+                              fonteSelecionado = value;
                             });
                           },
                         ),
@@ -156,11 +156,12 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   children: [
                     ContainerWithButton(
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
+                      color: temaSelecionado == "dark" ? Color(0xFF685752): Color(0xFF997C70),
                       widthAdjusted: widthScreen * 0.364, 
                       heightAdjusted: heightScreen * 0.081,
                       onPressed: () {
                         setState(() {
-                          tema_selecionado = 'dark';
+                          temaSelecionado = 'dark';
                         });
                       },
                       width: widthScreen * 0.266,
@@ -173,7 +174,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       fontSize: Provider.of<FontSizeState>(context).fontSize,
                       onPressed: () {
                         setState(() {
-                          tema_selecionado = 'light';
+                          temaSelecionado = 'light';
                         });
                       },
                       widthAdjusted: widthScreen * 0.364, 
@@ -181,7 +182,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       width: widthScreen * 0.266,
                       height: heightScreen * 0.054,
                       labelText: 'claro',
-                      color: Color(0xFF997C70),
+                      color: temaSelecionado == "light" ? Color(0xFF685752): Color(0xFF997C70),
                       icon: Icon(Icons.light_mode, size: Provider.of<FontSizeState>(context).fontSize),
                     ),
                   ],
@@ -198,8 +199,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                             widthAdjusted: widthScreen * 0.728, 
                             heightAdjusted: heightScreen * 0.122, 
                             onPressed: () {
-                              lightDarkState.setTema(tema_selecionado);
-                              fontSizeState.setFontSize(fonte_selecionado);
+                              lightDarkState.setTema(temaSelecionado);
+                              fontSizeState.setFontSize(fonteSelecionado);
                             },
                             width: widthScreen * 0.533,
                             height: heightScreen * 0.095,

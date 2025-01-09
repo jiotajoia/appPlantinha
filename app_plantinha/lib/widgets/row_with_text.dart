@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RowWithText extends StatefulWidget {
-  const RowWithText({super.key, required this.textLabel, this.fontSize, this.fontWeight, this.marginBottom,this.marginLeft, this.marginRight, this.marginTop, this.mainAxisAlignment});
+  const RowWithText({super.key, required this.textLabel, this.fontSize, this.fontWeight, this.marginBottom,this.marginLeft, this.marginRight, this.marginTop, this.mainAxisAlignment, this.textDecoration, this.textColor});
   final String textLabel;
   final double? fontSize, marginTop, marginBottom, marginLeft, marginRight;
   final FontWeight? fontWeight;
   final MainAxisAlignment? mainAxisAlignment;
+  final TextDecoration? textDecoration;
+  final Color? textColor;
+
 
   @override
   State<RowWithText> createState() => _RowWithTextState();
@@ -24,7 +27,9 @@ class _RowWithTextState extends State<RowWithText> {
               widget.textLabel,
               style: TextStyle(
                 fontSize: widget.fontSize,
-                fontWeight: widget.fontWeight
+                fontWeight: widget.fontWeight,
+                decoration: widget.textDecoration,
+                color: widget.textColor
               ),
             ),
           ),

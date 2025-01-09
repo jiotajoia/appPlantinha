@@ -5,6 +5,7 @@ import 'package:app_plantinha/pages/forgot_password_page.dart';
 import 'package:app_plantinha/pages/help_page.dart';
 import 'package:app_plantinha/pages/history_page.dart';
 import 'package:app_plantinha/pages/home_page.dart';
+import 'package:app_plantinha/pages/results_screen.dart';
 import 'package:app_plantinha/pages/search_by_image_page.dart';
 import 'package:app_plantinha/pages/search_by_quiz_page.dart';
 import 'package:app_plantinha/pages/signup_page.dart';
@@ -46,7 +47,15 @@ class AppPlantinha extends StatelessWidget {
                     path: 'searchByQuizPage',
                     builder: (BuildContext context, GoRouterState state){
                       return const SearchByQuizPage(title: 'Search By Quiz Page');
-                    }
+                    },
+                    routes: <RouteBase>[
+                      GoRoute(
+                        path: 'resultsPage',
+                        builder: (BuildContext context, GoRouterState state){
+                          return const ResultsScreen(title: 'Results Page');
+                        }
+                      )
+                    ]
                   ),
                   GoRoute(
                     path: 'searchByImagePage',

@@ -1,5 +1,6 @@
 import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/provider/font_size.provider.dart';
+import 'package:app_plantinha/provider/light_dark.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -16,19 +17,18 @@ class DrawerBase extends StatelessWidget {
     {'icon': Icons.logout, 'label': 'Sair', 'route': '/'},
   ];
 
-  void retornaNada() {}
-
   @override
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
 
     return Drawer(
-      width: widthScreen * 0.662,
+      width: widthScreen * 0.85,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           Container(
+            padding: EdgeInsets.only(top: heightScreen * 0.027),
             width: widthScreen * 0.145,
             height: heightScreen * 0.319,
             decoration: const BoxDecoration(color: Color(0xFF8EB486)),
@@ -39,12 +39,18 @@ class DrawerBase extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                        onPressed: retornaNada,
+                        onPressed: (){
+                          AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
+                          context.push('/settingsPage/appSettingsPage');
+                        },
                         icon: SvgPicture.asset(
                           'lib/icons/fonte.svg', 
                         )),
                     IconButton(
-                        onPressed: retornaNada,
+                        onPressed: (){
+                          AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
+                          context.push('/settingsPage/appSettingsPage');
+                        },
                         icon: Icon(Icons.bedtime_outlined, color: Colors.white,)
                     ),
                   ],
@@ -106,6 +112,11 @@ class DrawerBase extends StatelessWidget {
                       style: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize + 3),
                     ),
                     onTap: () {
+                      if(data['route'] == "/"){
+                        if(Provider.of<LightDarkState>(context, listen: false).tema == 'dark'){
+                          Provider.of<LightDarkState>(context, listen: false).setTema('light');
+                        }
+                      }
                       AppConfigs.saveLastRoute(data['route']);
                       context.push(data['route']);
                     },

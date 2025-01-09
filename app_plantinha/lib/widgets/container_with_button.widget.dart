@@ -26,6 +26,8 @@ class ContainerWithButton extends StatefulWidget {
     required this.width,
     required this.height,
     required this.heightAdjusted,
+    this.textColor,
+    this.iconColor
   });
 
   final double?
@@ -48,7 +50,7 @@ class ContainerWithButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final FontWeight? fontWeight;
   final bool? rectangleRoundedBorder;
-  final Color? color;
+  final Color? color, textColor, iconColor;
 
   @override
   State<ContainerWithButton> createState() => _ContainerWithButtonState();
@@ -106,11 +108,12 @@ class _ContainerWithButtonState extends State<ContainerWithButton> {
             style: TextStyle(
               fontSize: widget.fontSize,
               fontWeight: widget.fontWeight,
+              color: widget.textColor
             ),
           ),
         ),
         style: ButtonStyle(
-          iconColor: WidgetStateProperty.all(Colors.white),
+          iconColor: WidgetStateProperty.all(widget.iconColor ?? Colors.white),
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           elevation: WidgetStateProperty.all(0),
           backgroundColor:
