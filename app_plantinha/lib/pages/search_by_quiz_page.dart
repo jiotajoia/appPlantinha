@@ -142,7 +142,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                     });
                   }
 
-                  if(counter == 2){
+                  if(counter == 3){
                     AppConfigs.saveLastRoute('/homePage/searchByQuizPage/ResultsPage');
                     context.push('/homePage/searchByQuizPage/ResultsPage');
                   }

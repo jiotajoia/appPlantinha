@@ -1,19 +1,19 @@
 import 'package:app_plantinha/provider/font_size.provider.dart';
-import 'package:app_plantinha/provider/light_dark.provider.dart';
+import 'package:app_plantinha/widgets/results_details_page.dart';
 import 'package:app_plantinha/widgets/row_with_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class CardPlantResults extends StatelessWidget {
-  const CardPlantResults({super.key, required this.cientificName, required this.image, required this.name});
-  final String name, cientificName, image;
+  const CardPlantResults({super.key, required this.cientificName, required this.image, required this.name, required this.ambient, required this.cares, required this.curiosities, required this.shadowOrLightType});
+  final String name, cientificName, image, shadowOrLightType, ambient, cares, curiosities;
 
   @override
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
     double fontSizeProvider = Provider.of<FontSizeState>(context).fontSize;
-    String themeProvider = Provider.of<LightDarkState>(context).tema;
     return Card(
       margin: EdgeInsets.only(bottom: 30),
       color: Color(0xFF997C70),
@@ -25,7 +25,7 @@ class CardPlantResults extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: Row(
             children: [
-              Image.asset(image),
+              Image.asset(image, width: 147, height: 147,),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +41,7 @@ class CardPlantResults extends StatelessWidget {
                     ),
                     RowWithText(
                       marginLeft: 20,
-                      textLabel: cientificName,
+                      textLabel: 'Nome científico: \n$cientificName',
                       fontSize: fontSizeProvider - 2,
                       fontWeight: FontWeight.bold,
                       textColor: Colors.white,
@@ -52,7 +52,22 @@ class CardPlantResults extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         InkWell(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultsDetailsPage(
+                                image: image,
+                                name: name,
+                                cientificName: cientificName,
+                                shadowOrLightType: shadowOrLightType,
+                                ambient: ambient,
+                                cares: cares,
+                                curiosities: curiosities,
+                              ),
+                            ),
+                          );
+                          },
                           child: Text(
                             '• Ver detalhes',
                             style: TextStyle(

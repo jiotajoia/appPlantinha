@@ -16,8 +16,8 @@ class ResultsScreen extends StatefulWidget {
 
 class _ResultsScreenState extends State<ResultsScreen> {
    final List<Map<String, dynamic>> valuesCardsPlants = [
-    {'name':  'Samambaia', 'cientificName': 'Nome científico:  \nNephrolepis exaltata', 'image': 'lib/images/imagePlant.png'},
-    {'name': 'Filodendro-elegante', 'cientificName': 'Nome científico:  \nPhilodendron elegans', 'image': 'lib/images/imagePlant2.png'},
+    {'name': 'Samambaia', 'cientificName': 'Nephrolepis exaltata', 'image': 'lib/images/imagePlant1.png', 'ambient': 'A samambaia prefere locais sombreados, úmidos, com luz indireta, temperaturas amenas e solo bem drenado.', "shadowOrLightType": "Indireta", "cares" : "A samambaia precisa de luz indireta, ambiente úmido, solo bem drenado, temperaturas amenas e evitar sol direto e correntes de ar frio.", "curiosities": "A samambaia é uma das plantas mais antigas do planeta, com fósseis que datam de mais de 300 milhões de anos."},
+    {'name': 'Filodendro-elegante', 'cientificName': 'Philodendron elegans', 'image': 'lib/images/imagePlant2.png', 'ambient': 'A samambaia prefere ambientes sombreados, úmidos, com luz indireta, temperaturas amenas e solo bem drenado.', "shadowOrLightType": "Indireta", "cares" : "A samambaia precisa de luz indireta, ambiente úmido, solo bem drenado, temperaturas amenas e evitar sol direto e correntes de ar frio.", "curiosities": "A samambaia é uma das plantas mais antigas do planeta, com fósseis que datam de mais de 300 milhões de anos."},
   ];
 
   @override
@@ -27,34 +27,32 @@ class _ResultsScreenState extends State<ResultsScreen> {
     double fontSizeProvider = Provider.of<FontSizeState>(context).fontSize;
     String themeProvider = Provider.of<LightDarkState>(context).tema;
     return ScaffoldBase(
-      body: Padding(
-        padding: EdgeInsets.only(
-          top: heightScreen * 0.004,
-        ),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                RowButtonBack(lastRoute: '/homePage'),
-                RowWithText(
-                  textLabel: 'Resultados',
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  fontWeight: FontWeight.bold,
-                  fontSize: fontSizeProvider + 9,
-                  textDecoration: TextDecoration.underline,
-                  marginBottom: 30,
-                  textColor: themeProvider == "light" ? Colors.black : Colors.white,
-                ),
-                ...valuesCardsPlants.map((data){
-                  return CardPlantResults(
-                    cientificName: data["cientificName"], 
-                    image: data["image"], 
-                    name: data["name"]
-                  );
-                }),
-              ],
+      body: SingleChildScrollView(
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            RowButtonBack(lastRoute: '/homePage'),
+            RowWithText(
+              textLabel: 'Resultados',
+              mainAxisAlignment: MainAxisAlignment.center,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSizeProvider + 9,
+              textDecoration: TextDecoration.underline,
+              marginBottom: 30,
+              textColor: themeProvider == "light" ? Colors.black : Colors.white,
             ),
-          ),
+            ...valuesCardsPlants.map((data){
+              return CardPlantResults(
+                curiosities: data["curiosities"],
+                cares: data["cares"],
+                shadowOrLightType: data["shadowOrLightType"],
+                ambient: data["ambient"],
+                cientificName: data["cientificName"], 
+                image: data["image"], 
+                name: data["name"]
+              );
+            }),
+          ],
         ),
       ),
     );
