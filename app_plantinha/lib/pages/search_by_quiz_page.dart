@@ -99,11 +99,11 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                           onPressed: () {
                             setState(() {
                               if (data["isChecked"] == false) {
-                                answers1.forEach((answer) {
+                                for (var answer in answers1) {
                                   if (answer["isChecked"] == true) {
                                     answer["isChecked"] = false;
                                   }
-                                });
+                                }
                                 data["isChecked"] = true;
                               } else {
                                 data["isChecked"] = false;
@@ -126,18 +126,18 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
               }),
               ContainerWithButton(
                 onPressed: () {
-                  answers1.forEach((answer) {
+                  for (var answer in answers1) {
                     if(answer["isChecked"] == true){
                       goToNextQuestion = true;
                     }
-                  });
+                  }
 
                   if(goToNextQuestion == true){
                     incrementCounter();
                     setState(() {
-                      answers1.forEach((answer) {
+                      for (var answer in answers1) {
                         answer["isChecked"] = false;
-                      });
+                      }
                       goToNextQuestion = false;
                     });
                   }

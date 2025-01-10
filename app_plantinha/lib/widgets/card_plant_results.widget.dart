@@ -2,7 +2,6 @@ import 'package:app_plantinha/provider/font_size.provider.dart';
 import 'package:app_plantinha/widgets/results_details_page.dart';
 import 'package:app_plantinha/widgets/row_with_text.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class CardPlantResults extends StatelessWidget {
