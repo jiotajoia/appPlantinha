@@ -16,8 +16,9 @@ class RowButtonBack extends StatelessWidget {
           padding: const EdgeInsets.only(left: 9),
           child: IconButton(
             onPressed: () {
-              AppConfigs.saveLastRoute(lastRoute);
               context.pop();
+              AppConfigs.saveLastRoute(lastRoute);
+              context.push(lastRoute);    
             },
             icon: Icon(
               Icons.arrow_back,

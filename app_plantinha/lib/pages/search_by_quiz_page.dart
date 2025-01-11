@@ -43,6 +43,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
     double widthScreen = MediaQuery.of(context).size.width;
     double fontSizeProvider = Provider.of<FontSizeState>(context).fontSize;
     String themeProvider = Provider.of<LightDarkState>(context).tema;
+
     return ScaffoldBase(
       body: Padding(
         padding: EdgeInsets.only(
@@ -118,7 +119,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                                 color: themeProvider == "light"
                                     ? Colors.black
                                     : Colors.white,
-                                fontWeight: FontWeight.bold),
+                                ),
                           ))),
                     ),
                   ),

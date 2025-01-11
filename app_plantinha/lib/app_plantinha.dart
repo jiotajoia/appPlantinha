@@ -1,3 +1,4 @@
+import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/pages/account_settings_page.dart';
 import 'package:app_plantinha/pages/app_settings_page.dart';
 import 'package:app_plantinha/pages/change_password_page.dart';
@@ -137,7 +138,7 @@ class AppPlantinha extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color(0xFF8EB486),
-          brightness: Provider.of<LightDarkState>(context).tema == 'light' ? Brightness.light : Brightness.dark,
+          brightness: Provider.of<LightDarkState>(context).tema == 'light' || AppConfigs.getLastRoute() == '/' ? Brightness.light : Brightness.dark,
           contrastLevel: 0,
         ),
 

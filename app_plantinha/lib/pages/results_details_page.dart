@@ -71,7 +71,7 @@ class ResultsDetailsPage extends StatelessWidget {
             children: [
               RowButtonBack(
                   lastRoute:
-                      '/homePage/searchByQuizPage/resultsPage/resultsDetailsPage'),
+                      '/homePage/searchByQuizPage/resultsPage'),
               RowWithText(
                   textLabel: 'Detalhes',
                   mainAxisAlignment: MainAxisAlignment.center,

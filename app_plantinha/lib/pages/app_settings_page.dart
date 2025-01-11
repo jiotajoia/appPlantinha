@@ -199,8 +199,10 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                             widthAdjusted: widthScreen * 0.728, 
                             heightAdjusted: heightScreen * 0.122, 
                             onPressed: () {
-                              lightDarkState.setTema(temaSelecionado);
-                              fontSizeState.setFontSize(fonteSelecionado);
+                              setState(() {
+                                lightDarkState.setTema(temaSelecionado);
+                                fontSizeState.setFontSize(fonteSelecionado);
+                              });
                             },
                             width: widthScreen * 0.533,
                             height: heightScreen * 0.095,
