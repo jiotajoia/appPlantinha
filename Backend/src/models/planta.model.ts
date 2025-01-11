@@ -6,8 +6,9 @@ class Planta{
     cuidados: string;
     curiosidades: string;
     ambiente: string;
+    shadowOrLightType: string;
 
-    constructor(idPlanta: number, nome: string, nomeCientifico: string, imagem: string, cuidados: string, curiosidades: string, ambiente: string){
+    constructor(idPlanta: number, shadowOrLightType: string, nome: string, nomeCientifico: string, imagem: string, cuidados: string, curiosidades: string, ambiente: string){
         this.ambiente = ambiente;
         this.curiosidades = curiosidades;
         this.idPlanta = idPlanta;
@@ -15,5 +16,6 @@ class Planta{
         this.nomeCientifico = nomeCientifico;
         this.imagem = imagem;
         this.cuidados = cuidados;
+        this.shadowOrLightType = shadowOrLightType;
     }
 }
