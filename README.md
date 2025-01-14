@@ -44,7 +44,7 @@ O AppPlantinha foca na educação ambiental e assistência botânica, proporcion
 
 [Relatório do Sprint 1](https://docs.google.com/document/d/1Wdr1DFvl6rpd5UEtPbdZ6lYkySnU5VPahz-bv2Nsdpk/edit?usp=sharing)
 
-[Desing de api](https://cxd8dh7cru.apidog.io)
+[Design de api](https://cxd8dh7cru.apidog.io)
 
 ## Telas
 
