@@ -1,12 +1,12 @@
 import { Application, Request, Response } from "express";
-import { Quiz_logic } from "../aplication/quiz_logic";
+import { QuizLogic } from "../aplication/quiz_logic";
 
-export class Quiz_routes{
+export class QuizRoutes{
     app: Application;
-    rota_quiz: string = '/quiz';
-    rota_pergunta : string = '/pergunta/:id'
+    rotaQuiz: string = '/quiz';
+    rotaPergunta : string = '/pergunta/:id'
 
-    quiz_logic = new Quiz_logic();
+    quizLogic: QuizLogic = new QuizLogic();
 
     constructor(app: Application){
         this.app = app;
@@ -14,17 +14,18 @@ export class Quiz_routes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rota_quiz)
+        this.app.route(this.rotaQuiz)
         .get((req: Request,res:Response)=> {
-            let quiz = this.quiz_logic.obter_quiz();
+            let quiz = this.quizLogic.obterQuiz();
             res.json(quiz);
-        })
-        this.app.route(this.rota_pergunta)
+        });
+
+        this.app.route(this.rotaPergunta)
         .get((req: Request,res:Response)=> {
-            let id_pergunta = Number(req.params.id);
-            let pergunta = this.quiz_logic.obter_pergunta(id_pergunta);
+            let idPergunta = Number(req.params.id);
+            let pergunta = this.quizLogic.obterPergunta(idPergunta);
             res.json(pergunta);
-        })
+        });
 
         return this.app;
     }

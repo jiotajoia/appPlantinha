@@ -1,16 +1,16 @@
 import { ResultadoBusca } from "../domain/models/resultado_busca.model";
-import { Resultado_repo } from "../domain/repositories/resultado_repo";
-import { User_repo } from "../domain/repositories/user_repo";
+import { ResultadoRepo } from "../domain/repositories/resultado_repo";
+import { UserRepo as UserRepo } from "../domain/repositories/user_repo";
 
-export class Imagem_logic{
-    private repositorio_result!: Resultado_repo
-    private repositorio_user!: User_repo
+export class ImagemLogic{
+    private repositorioResult!: ResultadoRepo;
+    private repositorioUser!: UserRepo;
 
-    reconhecimento(id_user:number,imagem) : ResultadoBusca{
+    reconhecimento(idUser: number, imagem): ResultadoBusca{
        //reconhecimento por imagem 
         let plantas = {};
-        let resultado = this.repositorio_result.criar_resultado(plantas,'imagem');
-        this.repositorio_user.adicionar_resultado(resultado);
+        let resultado = this.repositorioResult.criarResultado(plantas,'imagem');
+        this.repositorioUser.adicionarResultado(resultado);
 
         return resultado;
     }

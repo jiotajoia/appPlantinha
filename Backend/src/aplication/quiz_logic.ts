@@ -1,16 +1,16 @@
 import { Quiz } from "../domain/models/quiz.model";
-import { Pergunta_repo } from "../domain/repositories/pergunta_repo";
+import { PerguntaRepo } from "../domain/repositories/pergunta_repo";
 
-export class Quiz_logic{
+export class QuizLogic{
+    repositorioPergunta! : PerguntaRepo
     
-    repo_pergunta! : Pergunta_repo
-    obter_quiz(){
+    obterQuiz(){
         let quiz = new Quiz();
         return quiz;
     }
 
-    obter_pergunta(id_pergunta: number){
-        let pergunta = this.repo_pergunta.obter_pergunta(id_pergunta);
+    obterPergunta(idPergunta: number){
+        let pergunta = this.repositorioPergunta.obterPergunta(idPergunta);
         return pergunta;
     }
 }

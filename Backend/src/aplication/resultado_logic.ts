@@ -1,35 +1,32 @@
 import { ResultadoBusca } from "../domain/models/resultado_busca.model";
-import { Resultado_repo } from "../domain/repositories/resultado_repo";
-import { User_repo } from "../domain/repositories/user_repo";
+import { ResultadoRepo } from "../domain/repositories/resultado_repo";
+import { UserRepo } from "../domain/repositories/user_repo";
 
-export class Resultado_logic{
+export class ResultadoLogic{
 
-    private repositorio_resultado! : Resultado_repo;
-    private repositorio_usuario! : User_repo;
+    private repositorioResultado! : ResultadoRepo;
+    private repositorioUsuario! : UserRepo;
 
-    preencher_result(id_user: number,id_resultado: number, respostas : string[]): ResultadoBusca{
+    preencherResult(idUser: number,idResultado: number, respostas : string[]): ResultadoBusca{
         //chamar api plantas
         let plantas:JsonWebKey = {};
 
-        let resultado = this.repositorio_resultado.atualizar_resultado(id_resultado,plantas);
-        this.repositorio_usuario.adicionar_resultado(resultado);
+        let resultado = this.repositorioResultado.atualizarResultado(idResultado,plantas);
+        this.repositorioUsuario.adicionarResultado(resultado);
 
         return resultado;
     }
 
-    obter_result(id_result: number): ResultadoBusca{
-
-        let resultado = this.repositorio_resultado.obter_resultado(id_result);
+    obterResult(idResult: number): ResultadoBusca{
+        let resultado = this.repositorioResultado.obterResultado(idResult);
         return resultado;
     }
 
-    deletar_result(id_result: number):string{
-        if(this.repositorio_resultado.delete_resultado(id_result)){
+    deletarResult(idResult: number):string{
+        if(this.repositorioResultado.deleteResultado(idResult)){
             return 'apagado com sucesso'
-        }else{
-           return 'erro ao apagar'; 
         }
-        
-    }
 
+        return 'erro ao apagar'; 
+    }
 }

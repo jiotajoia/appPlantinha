@@ -1,11 +1,11 @@
 import { Application , Request, Response} from "express";
-import { Imagem_logic } from "../aplication/Imagem_logic";
+import { ImagemLogic } from "../aplication/Imagem_logic";
 
-export class Imagem_routes{
+export class ImagemRoutes{
     app: Application;
-    rota: string = '/user/{id}/imagem';
+    rotaImagem: string = '/user/{id}/imagem';
 
-    imagem_logic = new Imagem_logic();
+    imagemLogic: ImagemLogic = new ImagemLogic();
 
     constructor(app: Application){
         this.app = app;
@@ -13,11 +13,11 @@ export class Imagem_routes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rota)
+        this.app.route(this.rotaImagem)
         .post((req: Request,res:Response)=> {
-            let id_user = Number(req.params.id);
+            let idUser = Number(req.params.id);
             let imagem = req.body;
-            let resultado = this.imagem_logic.reconhecimento(id_user,imagem);
+            let resultado = this.imagemLogic.reconhecimento(idUser,imagem);
             res.json(resultado);
         })
 

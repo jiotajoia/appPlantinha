@@ -1,11 +1,11 @@
 import { ResultadoBusca } from "../models/resultado_busca.model";
 
-export interface Resultado_repo{
-    atualizar_resultado(id: number, plantas: JsonWebKey): ResultadoBusca
+export interface ResultadoRepo{
+    atualizarResultado(id: number, plantas: JsonWebKey): ResultadoBusca;
 
-    obter_resultado(id: number): ResultadoBusca
+    obterResultado(id: number): ResultadoBusca;
 
-    delete_resultado(id:number): ResultadoBusca
+    deleteResultado(id:number): ResultadoBusca;
 
-    criar_resultado(plantas: JsonWebKey,tipo: string): ResultadoBusca
+    criarResultado(plantas: JsonWebKey,tipo: string): ResultadoBusca;
 }

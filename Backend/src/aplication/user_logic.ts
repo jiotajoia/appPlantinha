@@ -1,29 +1,29 @@
 import { Usuario } from "../domain/models/usuario.model";
-import { User_repo } from "../domain/repositories/user_repo";
+import { UserRepo } from "../domain/repositories/user_repo";
 
-export class User_logic{
-    repositorio!: User_repo;
+export class UserLogic{
+    repositorio!: UserRepo;
 
-
-    criar_usuario(dados){
-        let novo_usuario = this.repositorio.criar_user();
+    criarUsuario(dados): Usuario{
+        let novoUsuario = this.repositorio.criarUser();
         
-        return novo_usuario;
+        return novoUsuario;
     }
 
-    obter_usuario(dados: { email: string; senha: string }){
+    obterUsuario(dados: { email: string; senha: string }): Usuario{
         let email = dados.email;
         let senha = dados.senha;
-        let usuario = this.repositorio.obter_user(email,senha);
+        let usuario = this.repositorio.obterUser(email,senha);
         return usuario;
     }
 
-    deletar_usuario(id: number){
-        let usuario = this.repositorio.delete_user(id);
+    deletarUsuario(id: number): Usuario{
+        let usuario = this.repositorio.deleteUser(id);
         return usuario;
     }
-    alterar_usuario(id: number, dados){
-        let usuario_alterado = this.repositorio.update_user(id,dados);
-        return usuario_alterado;
+
+    alterarUsuario(id: number, dados): Usuario{
+        let usuarioAlterado = this.repositorio.updateUser(id,dados);
+        return usuarioAlterado;
     }
 }
