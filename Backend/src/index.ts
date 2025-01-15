@@ -1,9 +1,9 @@
 import express = require("express");
-import { UserRoutes } from "./presentation/user_routes";
-import { QuizRoutes } from "./presentation/quiz_routes";
-import { ResultadoRoutes } from "./presentation/resultado_routes";
-import { HistoricoRoutes } from "./presentation/historico_routes";
-import { ImagemRoutes } from "./presentation/imagem_routes";
+import { UserRoutes } from "./presentation/routes/user_routes";
+import { QuizRoutes } from "./presentation/routes/quiz_routes";
+import { ResultadoRoutes } from "./presentation/routes/resultado_routes";
+import { ImagemRoutes } from "./presentation/routes/imagem_routes";
+import { HistoricoRoutes } from "./presentation/routes/historico_routes";
 
 const app = express();
 const port = 3000;

@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import { HistoricoLogic } from "../aplication/historico_logic";
+import { HistoricoLogic } from "../../aplication/historico_logic";
 
 export class HistoricoRoutes{
     app: Application;

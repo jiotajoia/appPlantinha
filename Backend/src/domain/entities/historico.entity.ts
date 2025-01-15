@@ -1,4 +1,4 @@
-import { ResultadoBusca } from "./resultado_busca.model";
+import { ResultadoBusca } from "./resultado_busca.entity";
 
 export class Historico{
     buscas: ResultadoBusca[];

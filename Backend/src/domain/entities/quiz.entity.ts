@@ -1,5 +1,5 @@
-import { Pergunta } from "./pergunta.model";
-import { ResultadoBusca } from "./resultado_busca.model";
+import { Pergunta } from "./pergunta.entity";
+import { ResultadoBusca } from "./resultado_busca.entity";
 
 export class Quiz{
     idQuiz: number;

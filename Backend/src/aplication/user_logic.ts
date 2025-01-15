@@ -1,4 +1,4 @@
-import { Usuario } from "../domain/models/usuario.model";
+import { Usuario } from "../domain/entities/usuario.entity";
 import { UserRepo } from "../domain/repositories/user_repo";
 
 export class UserLogic{

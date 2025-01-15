@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import { ResultadoLogic } from "../aplication/resultado_logic";
+import { ResultadoLogic } from "../../aplication/resultado_logic";
 
 export class ResultadoRoutes{
     app: Application;

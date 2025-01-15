@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import { QuizLogic } from "../aplication/quiz_logic";
+import { QuizLogic } from "../../aplication/quiz_logic";
 
 export class QuizRoutes{
     app: Application;

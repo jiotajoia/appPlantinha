@@ -1,4 +1,4 @@
-import { Historico } from "../domain/models/historico.model";
+import { Historico } from "../domain/entities/historico.entity";
 import { UserRepo } from "../domain/repositories/user_repo";
 
 export class HistoricoLogic{

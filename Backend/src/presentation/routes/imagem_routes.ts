@@ -1,5 +1,5 @@
 import { Application , Request, Response} from "express";
-import { ImagemLogic } from "../aplication/Imagem_logic";
+import { ImagemLogic } from "../../aplication/Imagem_logic";
 
 export class ImagemRoutes{
     app: Application;

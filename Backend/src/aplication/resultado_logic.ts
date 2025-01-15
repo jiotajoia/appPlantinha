@@ -1,4 +1,4 @@
-import { ResultadoBusca } from "../domain/models/resultado_busca.model";
+import { ResultadoBusca } from "../domain/entities/resultado_busca.entity";
 import { ResultadoRepo } from "../domain/repositories/resultado_repo";
 import { UserRepo } from "../domain/repositories/user_repo";
 

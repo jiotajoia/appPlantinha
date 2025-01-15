@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import { UserLogic } from "../aplication/user_logic";
+import { UserLogic } from "../../aplication/user_logic";
 
 export class UserRoutes{
     app: Application;

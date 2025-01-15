@@ -1,4 +1,4 @@
-import { Planta } from "./planta.model";
+import { Planta } from "./planta.entity";
 
 export class ResultadoBusca {
     idBusca: number;

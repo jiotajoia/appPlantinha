@@ -1,4 +1,4 @@
-import { Quiz } from "../domain/models/quiz.model";
+import { Quiz } from "../domain/entities/quiz.entity";
 import { PerguntaRepo } from "../domain/repositories/pergunta_repo";
 
 export class QuizLogic{
