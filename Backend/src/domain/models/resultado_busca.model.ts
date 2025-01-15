@@ -1,4 +1,6 @@
-class ResultadoBusca {
+import { Planta } from "./planta.model";
+
+export class ResultadoBusca {
     idBusca: number;
     dataBusca: string;
     tipoBusca: string;

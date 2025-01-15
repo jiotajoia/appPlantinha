@@ -1,4 +1,4 @@
-class Pergunta{
+export class Pergunta{
     idPergunta: number;
     indagacao: string;
     opcoes: string[];

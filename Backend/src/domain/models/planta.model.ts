@@ -1,4 +1,4 @@
-class Planta{
+export class Planta{
     idPlanta: number;
     nome: string;
     nomeCientifico: string;

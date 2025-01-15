@@ -1,4 +1,6 @@
-class Usuario {
+import { ResultadoBusca } from "./resultado_busca.model";
+
+export class Usuario {
   idUser: number;
   nome: string;
   email: string;

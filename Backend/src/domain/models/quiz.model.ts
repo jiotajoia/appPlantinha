@@ -1,4 +1,7 @@
-class Quiz{
+import { Pergunta } from "./pergunta.model";
+import { ResultadoBusca } from "./resultado_busca.model";
+
+export class Quiz{
     idQuiz: number;
     perguntas: Pergunta[];
     resultado: ResultadoBusca;

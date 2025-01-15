@@ -56,7 +56,7 @@ class ResultsDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double heightScreen = MediaQuery.of(context).size.height;
+    //double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
     double fontSizeProvider = Provider.of<FontSizeState>(context).fontSize;
     Color colorText = Provider.of<LightDarkState>(context).tema == 'light'

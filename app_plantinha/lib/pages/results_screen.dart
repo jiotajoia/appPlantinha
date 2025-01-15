@@ -23,8 +23,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double heightScreen = MediaQuery.of(context).size.height;
-    double widthScreen = MediaQuery.of(context).size.width;
+    //double heightScreen = MediaQuery.of(context).size.height;
+    //double widthScreen = MediaQuery.of(context).size.width;
     double fontSizeProvider = Provider.of<FontSizeState>(context).fontSize;
     String themeProvider = Provider.of<LightDarkState>(context).tema;
     
