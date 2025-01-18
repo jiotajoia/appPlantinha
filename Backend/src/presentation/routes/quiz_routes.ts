@@ -1,5 +1,6 @@
 import { Application, Request, Response } from "express";
 import { QuizLogic } from "../../aplication/quiz_logic";
+import { QuizController } from "../controllers/quiz.controller";
 
 export class QuizRoutes{
     app: Application;
@@ -14,18 +15,10 @@ export class QuizRoutes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rotaQuiz)
-        .get((req: Request,res:Response)=> {
-            let quiz = this.quizLogic.obterQuiz();
-            res.json(quiz);
-        });
+        const controller: QuizController = new QuizController(this.quizLogic);
+        this.app.route(this.rotaQuiz).get(controller.obterQuiz);
 
-        this.app.route(this.rotaPergunta)
-        .get((req: Request,res:Response)=> {
-            let idPergunta = Number(req.params.id);
-            let pergunta = this.quizLogic.obterPergunta(idPergunta);
-            res.json(pergunta);
-        });
+        this.app.route(this.rotaPergunta).get(controller.obterPergunta);
 
         return this.app;
     }

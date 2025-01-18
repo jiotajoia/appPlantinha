@@ -1,9 +1,10 @@
 import { Application , Request, Response} from "express";
 import { ImagemLogic } from "../../aplication/Imagem_logic";
+import { imagemController } from "../controllers/imagem.controller";
 
 export class ImagemRoutes{
     app: Application;
-    rotaImagem: string = '/user/{id}/imagem';
+    rotaImagem: string = '/user/:id/imagem';
 
     imagemLogic: ImagemLogic = new ImagemLogic();
 
@@ -13,14 +14,9 @@ export class ImagemRoutes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rotaImagem)
-        .post((req: Request,res:Response)=> {
-            let idUser = Number(req.params.id);
-            let imagem = req.body;
-            let resultado = this.imagemLogic.reconhecimento(idUser,imagem);
-            res.json(resultado);
-        })
-
+        const controller: imagemController = new imagemController(this.imagemLogic);
+        this.app.route(this.rotaImagem).post(controller.reconhecimento);
+        
         return this.app
     }
 }

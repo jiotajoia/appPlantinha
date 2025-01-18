@@ -1,5 +1,6 @@
 import { Application, Request, Response } from "express";
 import { HistoricoLogic } from "../../aplication/historico_logic";
+import { HistoricoController } from "../controllers/historico.controller";
 
 export class HistoricoRoutes{
     app: Application;
@@ -13,17 +14,8 @@ export class HistoricoRoutes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rotaHistorico)
-        .get((req: Request,res:Response)=> {
-            let id = Number(req.params.id);
-            let historico = this.historicoLogic.obterHistorico(id);
-            res.json(historico);
-        })
-        .delete((req: Request,res:Response)=> {
-            let id = Number(req.params.id);
-            let message = this.historicoLogic.limparHistorico(id);
-            res.json(message);
-        })
+        const controller: HistoricoController = new HistoricoController(this.historicoLogic);
+        this.app.route(this.rotaHistorico).get(controller.obterHistorico).delete(controller.limparHistorico)
 
         return this.app;
     }

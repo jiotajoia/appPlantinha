@@ -1,5 +1,6 @@
 import { Application, Request, Response } from "express";
 import { ResultadoLogic } from "../../aplication/resultado_logic";
+import { ResultadoBuscaController } from "../controllers/resultado_busca.controller";
 
 export class ResultadoRoutes{
     app: Application;
@@ -14,27 +15,10 @@ export class ResultadoRoutes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rotaUserResult)
-        .patch((req: Request,res:Response)=> {
-            let idUser = Number(req.params.id_user);
-            let idResult = Number(req.params.id_resultado);
-            let respostas: string[] = req.body;
+        const controller: ResultadoBuscaController = new ResultadoBuscaController(this.resultadoLogic);
+        this.app.route(this.rotaUserResult).patch(controller.preencherResult);
 
-            let resultado = this.resultadoLogic.preencherResult(idUser,idResult,respostas);
-            res.json(resultado);
-        })
-
-        this.app.route(this.rotaResultado)
-        .get((req: Request,res:Response)=> {
-            let idResult = Number(req.params.id);
-            let resultado = this.resultadoLogic.obterResult(idResult);
-            res.json(resultado);
-        })
-        .delete((req: Request,res:Response)=> {
-            let idResult = Number(req.params.id);
-            let message = this.resultadoLogic.deletarResult(idResult);
-            res.json(message)
-        })
+        this.app.route(this.rotaResultado).get(controller.obterResult).delete(controller.deletarResult);
 
         return this.app;
     }

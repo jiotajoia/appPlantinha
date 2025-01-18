@@ -6,7 +6,7 @@ export class ImagemLogic{
     private repositorioResult!: ResultadoRepo;
     private repositorioUser!: UserRepo;
 
-    reconhecimento(idUser: number, imagem): ResultadoBusca{
+    public async reconhecimento(idUser: number, imagem): Promise<ResultadoBusca>{
        //reconhecimento por imagem 
         let plantas = {};
         let resultado = this.repositorioResult.criarResultado(plantas,'imagem');

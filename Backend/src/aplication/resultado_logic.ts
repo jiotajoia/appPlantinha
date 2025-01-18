@@ -7,7 +7,7 @@ export class ResultadoLogic{
     private repositorioResultado! : ResultadoRepo;
     private repositorioUsuario! : UserRepo;
 
-    preencherResult(idUser: number,idResultado: number, respostas : string[]): ResultadoBusca{
+    public async preencherResult(idUser: number,idResultado: number, respostas : string[]): Promise<ResultadoBusca>{
         //chamar api plantas
         let plantas:JsonWebKey = {};
 
@@ -17,12 +17,12 @@ export class ResultadoLogic{
         return resultado;
     }
 
-    obterResult(idResult: number): ResultadoBusca{
+    public async obterResult(idResult: number): Promise<ResultadoBusca>{
         let resultado = this.repositorioResultado.obterResultado(idResult);
         return resultado;
     }
 
-    deletarResult(idResult: number):string{
+    public async deletarResult(idResult: number): Promise<string>{
         if(this.repositorioResultado.deleteResultado(idResult)){
             return 'apagado com sucesso'
         }

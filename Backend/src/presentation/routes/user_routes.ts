@@ -1,5 +1,6 @@
 import { Application, Request, Response } from "express";
 import { UserLogic } from "../../aplication/user_logic";
+import { UsuarioController } from "../controllers/usuario.controller";
 
 export class UserRoutes{
     app: Application;
@@ -13,30 +14,10 @@ export class UserRoutes{
     }
 
     iniciarRotas(): Application{
-        this.app.route(this.rota)
-        .post( async (req: Request, res: Response) => {
-            let dados = req.body;
-            let novoUsuario = this.userLogic.criarUsuario(dados);
-            res.json(novoUsuario);
-        })
-        .get(async (req: Request, res: Response) => {
-            let dados = req.body;
-            let usuario = this.userLogic.obterUsuario(dados);
-            res.json(usuario);
-        });
+        const controller: UsuarioController = new UsuarioController(this.userLogic);
+        this.app.route(this.rota).post(controller.criarUsuario).get(controller.obterUsuario);
 
-        this.app.route(this.rota + '/:id')
-        .delete(async (req: Request, res: Response) =>{
-            let idUser = Number(req.params.id);
-            let usuario = this.userLogic.deletarUsuario(idUser);
-            res.json(usuario);
-        })
-        .patch(async (req: Request, res: Response) =>{
-            let idUser = Number(req.params.id);
-            let dados = req.body;
-            let usuarioAlterado = this.userLogic.alterarUsuario(idUser,dados);
-            res.json(usuarioAlterado);
-        });
+        this.app.route(this.rota + '/:id').delete(controller.deletarUsuario).patch(controller.alterarUsuario);
 
         return this.app;
     }
