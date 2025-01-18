@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ImagemLogic } from "../../aplication/Imagem_logic";
 
-export class imagemController{
+export class ImagemController{
     constructor(private imagemLogic: ImagemLogic){}
 
     public reconhecimento = async (req: Request, res: Response) => {

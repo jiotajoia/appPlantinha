@@ -1,6 +1,6 @@
 import { Application , Request, Response} from "express";
 import { ImagemLogic } from "../../aplication/Imagem_logic";
-import { imagemController } from "../controllers/imagem.controller";
+import { ImagemController } from "../controllers/imagem.controller";
 
 export class ImagemRoutes{
     app: Application;
@@ -14,7 +14,7 @@ export class ImagemRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller: imagemController = new imagemController(this.imagemLogic);
+        const controller: ImagemController = new ImagemController(this.imagemLogic);
         this.app.route(this.rotaImagem).post(controller.reconhecimento);
         
         return this.app

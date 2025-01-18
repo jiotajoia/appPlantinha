@@ -1,19 +1,22 @@
-import { Historico } from "../models/historico.model";
-import { ResultadoBusca } from "../models/resultado_busca.model";
-import { Usuario } from "../models/usuario.model";
+import { AlterarUsuarioRequest } from "../../aplication/useCasesUsuario/alterar_usuario.command";
+import { CriarUsuarioRequest } from "../../aplication/useCasesUsuario/criar_usuario.command";
+import { ObterUsuarioRequest } from "../../aplication/useCasesUsuario/obter_usuario.command";
+import { Historico } from "../entities/historico.entity";
+import { ResultadoBusca } from "../entities/resultado_busca.entity";
+import { Usuario } from "../entities/usuario.entity";
 
 export interface UserRepo{
-    criarUser() : Usuario;
+    criarUser(dadosRequest: CriarUsuarioRequest) : Promise<Usuario>;
 
-    obterUser(email : string,senha: string) : Usuario;
+    obterUser(dadosRequest: ObterUsuarioRequest) : Promise<Usuario> ;
 
-    deleteUser(idUser: number) : Usuario;
+    deleteUser(idUser: number) : Promise<Usuario>;
 
-    updateUser(id : number, dados): Usuario;
+    updateUser(id: number, dadosRequest: AlterarUsuarioRequest): Promise<Usuario>;
 
     adicionarResultado(resultado: ResultadoBusca): Usuario;
 
-    obterHistorico(idSser: number): Historico;
+    obterHistorico(idUser: number): Historico;
     
     limparHistorico(idUser: number): Historico;
 }

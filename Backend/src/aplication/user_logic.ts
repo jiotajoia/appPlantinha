@@ -1,11 +1,12 @@
 import { Usuario } from "../domain/entities/usuario.entity";
 import { UserRepo } from "../domain/repositories/user_repo";
+import { CriarUsuarioRequest } from "./useCasesUsuario/criar_usuario.command";
 
 export class UserLogic{
     repositorio!: UserRepo;
 
-    public async criarUsuario(dados): Promise<Usuario>{
-        let novoUsuario = this.repositorio.criarUser();
+    public async criarUsuario(dados: CriarUsuarioRequest): Promise<Usuario>{
+        let novoUsuario = this.repositorio.criarUser(dados);
         
         return novoUsuario;
     }
@@ -13,7 +14,7 @@ export class UserLogic{
     public async obterUsuario(dados: { email: string; senha: string }): Promise<Usuario>{
         let email = dados.email;
         let senha = dados.senha;
-        let usuario = this.repositorio.obterUser(email,senha);
+        let usuario = this.repositorio.obterUser({email: email, senha: senha});
         return usuario;
     }
 
@@ -22,7 +23,7 @@ export class UserLogic{
         return usuario;
     }
 
-    public async alterarUsuario(id: number, dados): Promise<Usuario>{
+    public async alterarUsuario(id: number, dados: any): Promise<Usuario>{
         let usuarioAlterado = this.repositorio.updateUser(id,dados);
         return usuarioAlterado;
     }

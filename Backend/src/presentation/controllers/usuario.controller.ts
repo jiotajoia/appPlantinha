@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
-import { UserLogic } from "../../aplication/user_logic";
+import { AlterarUsuarioCommand } from "../../aplication/useCasesUsuario/alterar_usuario.command";
+import { ObterUsuarioCommand } from "../../aplication/useCasesUsuario/obter_usuario.command";
+import { DeletarUsuarioCommand } from "../../aplication/useCasesUsuario/deletar_usuario.command";
+import { CriarUsuarioCommand } from "../../aplication/useCasesUsuario/criar_usuario.command";
 
 export class UsuarioController{
-    constructor(private userLogic: UserLogic){}
+    constructor(private criarUsuarioCommand: CriarUsuarioCommand, private obterUsuarioCommand: ObterUsuarioCommand, private deleterUsuarioCommand: DeletarUsuarioCommand, private alterarUsuarioCommand: AlterarUsuarioCommand){}
 
     public criarUsuario = async(req: Request, res: Response) => {
         try{
             const {dados} = req.body;
-            res.status(201).json({message: "Usuário criado com sucesso",data: await this.userLogic.criarUsuario(dados)});
+            res.status(201).json({message: "Usuário criado com sucesso",data: await this.criarUsuarioCommand.execute(dados)});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao criar usuário.",
@@ -18,8 +21,8 @@ export class UsuarioController{
 
     public obterUsuario = async (req: Request, res: Response) => {
         try{
-            const {email, senha} = req.body;
-            res.status(200).json({message: "Usuário obtido com sucesso",data: await this.userLogic.obterUsuario({email, senha})});
+            const {dados} = req.body;
+            res.status(200).json({message: "Usuário obtido com sucesso",data: await this.obterUsuarioCommand.execute(dados)});
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter usuário.",
@@ -31,7 +34,7 @@ export class UsuarioController{
     public deletarUsuario = async (req: Request, res: Response) => {
         try{
             const id = Number(req.params.id);
-            res.status(200).json({message: "Usuário deletado com sucesso",data:await this.userLogic.deletarUsuario(id)});
+            res.status(200).json({message: "Usuário deletado com sucesso",data:await this.deleterUsuarioCommand.execute(id)});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar usuário.",
@@ -44,7 +47,7 @@ export class UsuarioController{
         try{
             const id = Number(req.params.id);
             const {dados} = req.body;
-            res.status(200).json({message: "Usuário atualizado com sucesso",data:await this.userLogic.alterarUsuario(id, dados)});
+            res.status(200).json({message: "Usuário atualizado com sucesso",data:await this.alterarUsuarioCommand.execute(id, dados)});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao alterar usuário.",
