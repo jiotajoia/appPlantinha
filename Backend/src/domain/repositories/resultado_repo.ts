@@ -1,11 +1,11 @@
-import { ResultadoBusca } from "../models/resultado_busca.model";
+import { ResultadoBusca } from "../entities/resultado_busca.entity";
 
 export interface ResultadoRepo{
-    atualizarResultado(id: number, plantas: JsonWebKey): ResultadoBusca;
+    atualizarResultado(id: number, plantas: JsonWebKey): Promise<ResultadoBusca>;
 
-    obterResultado(id: number): ResultadoBusca;
+    obterResultado(id: number): Promise<ResultadoBusca>;
 
-    deleteResultado(id:number): ResultadoBusca;
+    deletarResultado(id:number): Promise<string>;
 
-    criarResultado(plantas: JsonWebKey,tipo: string): ResultadoBusca;
+    criarResultado(plantas: JsonWebKey,tipo: string): Promise<ResultadoBusca>;
 }

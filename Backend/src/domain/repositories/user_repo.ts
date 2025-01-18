@@ -16,7 +16,7 @@ export interface UserRepo{
 
     adicionarResultado(resultado: ResultadoBusca): Usuario;
 
-    obterHistorico(idUser: number): Historico;
+    obterHistorico(idUser: number): Promise<Historico>;
     
-    limparHistorico(idUser: number): Historico;
+    limparHistorico(idUser: number): Promise<string>;
 }

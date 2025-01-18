@@ -5,7 +5,7 @@ import { DeletarUsuarioCommand } from "../../aplication/useCasesUsuario/deletar_
 import { CriarUsuarioCommand } from "../../aplication/useCasesUsuario/criar_usuario.command";
 
 export class UsuarioController{
-    constructor(private criarUsuarioCommand: CriarUsuarioCommand, private obterUsuarioCommand: ObterUsuarioCommand, private deleterUsuarioCommand: DeletarUsuarioCommand, private alterarUsuarioCommand: AlterarUsuarioCommand){}
+    constructor(private criarUsuarioCommand: CriarUsuarioCommand, private obterUsuarioCommand: ObterUsuarioCommand, private deletarUsuarioCommand: DeletarUsuarioCommand, private alterarUsuarioCommand: AlterarUsuarioCommand){}
 
     public criarUsuario = async(req: Request, res: Response) => {
         try{
@@ -34,7 +34,7 @@ export class UsuarioController{
     public deletarUsuario = async (req: Request, res: Response) => {
         try{
             const id = Number(req.params.id);
-            res.status(200).json({message: "Usuário deletado com sucesso",data:await this.deleterUsuarioCommand.execute(id)});
+            res.status(200).json({message: "Usuário deletado com sucesso",data:await this.deletarUsuarioCommand.execute(id)});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar usuário.",

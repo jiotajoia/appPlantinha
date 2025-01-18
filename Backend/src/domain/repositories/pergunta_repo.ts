@@ -1,5 +1,5 @@
-import { Pergunta } from "../models/pergunta.model";
+import { Pergunta } from "../entities/pergunta.entity";
 
 export interface PerguntaRepo{
-    obterPergunta(idPergunta: number): Pergunta;
+    obterPergunta(idPergunta: number): Promise<Pergunta>;
 }

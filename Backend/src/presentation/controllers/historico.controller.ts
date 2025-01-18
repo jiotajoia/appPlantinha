@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { HistoricoLogic } from "../../aplication/historico_logic";
+import { LimparHistoricoCommand } from "../../aplication/useCasesHistorico/limpar_historico.command";
+import { ObterHistoricoCommand } from "../../aplication/useCasesHistorico/obter_historico.command";
 
 export class HistoricoController{
-    constructor(private historicoLogic: HistoricoLogic){}
+    constructor(private limparHistoricoCommand: LimparHistoricoCommand, private obterHistoricoCommand: ObterHistoricoCommand){}
 
     public obterHistorico = async (req: Request, res: Response) => {
         try{
             const id = Number(req.params.id);
-            res.status(200).json(this.historicoLogic.obterHistorico(id));
+            res.status(200).json(this.obterHistoricoCommand.execute(id));
         }catch(error: any){
             res.status(404).json({
                 message: "Histórico não encontrado.",
@@ -19,7 +21,7 @@ export class HistoricoController{
     public limparHistorico = async (req: Request, res: Response) => {
         try{
             const id = Number(req.params.id);
-            res.status(200).json(this.historicoLogic.limparHistorico(id));
+            res.status(200).json(this.limparHistoricoCommand.execute(id));
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao limpar histórico.",

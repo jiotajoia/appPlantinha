@@ -10,7 +10,7 @@ export class HistoricoLogic{
     }
 
     public async limparHistorico(idUser:number): Promise<string>{
-        if(this.repositorioUser.limparHistorico(idUser)){
+        if(await this.repositorioUser.limparHistorico(idUser)){
             return 'apagado com sucesso';
         }
         

@@ -11,7 +11,7 @@ export class ResultadoLogic{
         //chamar api plantas
         let plantas:JsonWebKey = {};
 
-        let resultado = this.repositorioResultado.atualizarResultado(idResultado,plantas);
+        let resultado = await this.repositorioResultado.atualizarResultado(idResultado,plantas);
         this.repositorioUsuario.adicionarResultado(resultado);
 
         return resultado;
@@ -23,7 +23,7 @@ export class ResultadoLogic{
     }
 
     public async deletarResult(idResult: number): Promise<string>{
-        if(this.repositorioResultado.deleteResultado(idResult)){
+        if(await this.repositorioResultado.deletarResultado(idResult)){
             return 'apagado com sucesso'
         }
 
