@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { AlterarUsuarioCommand } from "../../aplication/useCasesUsuario/alterar_usuario.command";
-import { ObterUsuarioCommand } from "../../aplication/useCasesUsuario/obter_usuario.command";
-import { DeletarUsuarioCommand } from "../../aplication/useCasesUsuario/deletar_usuario.command";
-import { CriarUsuarioCommand } from "../../aplication/useCasesUsuario/criar_usuario.command";
+import { CriarUsuarioUseCase } from "../../aplication/useCasesUsuario/criar_usuario.command copy";
+import { ObterUsuarioUseCase } from "../../aplication/useCasesUsuario/obter_usuario.command copy";
+import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.command copy";
+import { AlterarUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_usuario.command copy";
 
 export class UsuarioController{
-    constructor(private criarUsuarioCommand: CriarUsuarioCommand, private obterUsuarioCommand: ObterUsuarioCommand, private deletarUsuarioCommand: DeletarUsuarioCommand, private alterarUsuarioCommand: AlterarUsuarioCommand){}
+    constructor(private criarUsuarioUseCase: CriarUsuarioUseCase, private obterUsuarioUseCase: ObterUsuarioUseCase, private deletarUsuarioUseCase: DeletarUsuarioUseCase, private alterarUsuarioUseCase: AlterarUsuarioUseCase){}
 
     public criarUsuario = async(req: Request, res: Response) => {
         try{
-            const {dados} = req.body;
-            res.status(201).json({message: "Usuário criado com sucesso",data: await this.criarUsuarioCommand.execute(dados)});
+            const {nome, email, senha} = req.body;
+            res.status(201).json({message: "Usuário criado com sucesso",data: await this.criarUsuarioUseCase.execute({nome, email, senha})});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao criar usuário.",
@@ -21,8 +21,8 @@ export class UsuarioController{
 
     public obterUsuario = async (req: Request, res: Response) => {
         try{
-            const {dados} = req.body;
-            res.status(200).json({message: "Usuário obtido com sucesso",data: await this.obterUsuarioCommand.execute(dados)});
+            const {email, senha} = req.body;
+            res.status(200).json({message: "Usuário obtido com sucesso",data: await this.obterUsuarioUseCase.execute({email, senha})});
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter usuário.",
@@ -33,8 +33,8 @@ export class UsuarioController{
 
     public deletarUsuario = async (req: Request, res: Response) => {
         try{
-            const id = Number(req.params.id);
-            res.status(200).json({message: "Usuário deletado com sucesso",data:await this.deletarUsuarioCommand.execute(id)});
+            const id = req.params.id;
+            res.status(200).json({message: "Usuário deletado com sucesso",data:await this.deletarUsuarioUseCase.execute({id})});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar usuário.",
@@ -45,9 +45,9 @@ export class UsuarioController{
 
     public alterarUsuario = async(req: Request, res: Response ) => {
         try{
-            const id = Number(req.params.id);
-            const {dados} = req.body;
-            res.status(200).json({message: "Usuário atualizado com sucesso",data:await this.alterarUsuarioCommand.execute(id, dados)});
+            const id = req.params.id;
+            const {novoNome, novoSenha, confirmaSenha} = req.body;
+            res.status(200).json({message: "Usuário atualizado com sucesso",data:await this.alterarUsuarioUseCase.execute({id, novoNome, novoSenha, confirmaSenha})});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao alterar usuário.",

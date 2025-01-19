@@ -47,8 +47,7 @@ class ContainerWithForm extends StatefulWidget {
 class _ContainerWithFormState extends State<ContainerWithForm> {
     final double widthBase = 0, heightBase = 0;
 
-  dynamic getPropertyAdjusted(BuildContext context, dynamic property,
-      dynamic valueBase, dynamic valueAdjusted) {
+  dynamic getPropertyAdjusted(BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted) {
     setState(() {
       if (Provider.of<FontSizeState>(context).fontSize >= 20) {
         property = valueAdjusted;

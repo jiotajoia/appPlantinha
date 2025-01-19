@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage>{
     context.push(lastRoute);
   }
 
-  double getPropertyAdjested(BuildContext context, double property, double valueBase, double valueAdjusted){
+  double getPropertyAdjusted(BuildContext context, double property, double valueBase, double valueAdjusted){
     setState(() {
       if(Provider.of<FontSizeState>(context).fontSize >= 20){
         property = valueAdjusted;
@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage>{
           children: [
             Container(
               margin: EdgeInsets.only(top: heightScreen * 0.04, bottom: heightScreen * 0.081),
-              width: getPropertyAdjested(context, sizeImage, widthScreen * 0.31, widthScreen * 0.36),
-              height: getPropertyAdjested(context, sizeImage, heightScreen * 0.17, heightScreen * 0.2),
+              width: getPropertyAdjusted(context, sizeImage, widthScreen * 0.31, widthScreen * 0.36),
+              height: getPropertyAdjusted(context, sizeImage, heightScreen * 0.17, heightScreen * 0.2),
               child: ClipOval(child: Image.asset('lib/images/logo.png')),
             ),
             RowWithText(

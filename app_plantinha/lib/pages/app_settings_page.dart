@@ -36,7 +36,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     fonteSelecionado = fontSizeState.fontSize;
   }
 
-  dynamic getPropertyAdjested(BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted){
+  dynamic getPropertyAdjusted(BuildContext context, dynamic property, dynamic valueBase, dynamic valueAdjusted){
     setState(() {
       if(Provider.of<FontSizeState>(context).fontSize >= 20){
         property = valueAdjusted;
@@ -188,10 +188,10 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: getPropertyAdjested(context, alignmentButtons, MainAxisAlignment.end, MainAxisAlignment.center),
+                  mainAxisAlignment: getPropertyAdjusted(context, alignmentButtons, MainAxisAlignment.end, MainAxisAlignment.center),
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: getPropertyAdjested(context, marginLeftContainerButton, 0.0, 10.0) ,right: getPropertyAdjested(context, marginRightContainerButton, 45.0, 0.0), top: 95),
+                      margin: EdgeInsets.only(left: getPropertyAdjusted(context, marginLeftContainerButton, 0.0, 10.0) ,right: getPropertyAdjusted(context, marginRightContainerButton, 45.0, 0.0), top: 95),
                       child: Column(
                         children: [
                           ContainerWithButton(

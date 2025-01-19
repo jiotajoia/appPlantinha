@@ -1,9 +1,19 @@
 import { ResultadoBusca } from "./resultado_busca.entity";
 
-export class Historico{
+export type HistoricoProps = {
     buscas: ResultadoBusca[];
+}
+export class Historico{
 
-    constructor(buscas: ResultadoBusca[]){
-        this.buscas = buscas;
+    constructor(private props: HistoricoProps){}
+
+    public static create(){
+        return new Historico({
+            buscas: []
+        });
+    }
+
+    public get buscas(){
+        return this.props.buscas;
     }
 }

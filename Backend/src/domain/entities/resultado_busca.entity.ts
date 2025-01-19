@@ -1,15 +1,41 @@
 import { Planta } from "./planta.entity";
 
+export type resultProps = {
+  id: string;
+  dataBusca: string;
+  tipoBusca: string;
+  plantas: Planta[];
+}
+
 export class ResultadoBusca {
-    idBusca: number;
-    dataBusca: string;
-    tipoBusca: string;
-    plantas: Planta[];
-  
-    constructor(idBusca: number, dataBusca: string, tipoBusca: string, plantas: Planta[]) {
-      this.idBusca = idBusca;
-      this.dataBusca = dataBusca;
-      this.tipoBusca = tipoBusca;
-      this.plantas = plantas;
+    constructor(private props: resultProps){}
+
+    public static create(dataBusca: string, tipoBusca: string, plantas: Planta[]){
+      return new ResultadoBusca({
+        id: crypto.randomUUID.toString(),
+        dataBusca, 
+        tipoBusca, 
+        plantas: []
+      });
+    }
+
+    public static with(props: resultProps){
+      return new ResultadoBusca(props);
+    }
+
+    public get id(){
+      return this.props.id;
+    }
+
+    public get dataBusca(){
+      return this.props.dataBusca;
+    }
+
+    public get tipoBusca(){
+      return this.props.tipoBusca;
+    }
+
+    public get plantas(){
+      return this.props.plantas;
     }
   }

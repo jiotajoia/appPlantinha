@@ -18,8 +18,7 @@ class SearchByQuizPage extends StatefulWidget {
 }
 
 class _SearchByQuizPageState extends State<SearchByQuizPage> {
-  List<String> answers = <String>['Sim', 'Não'];
-  List<Map<String, dynamic>> answers1 = [
+  List<Map<String, dynamic>> answers = [
     {
       "isChecked": false,
       "answer": "simosdfvewrvwemkrgpwk4toigj3poitjbgpoi53jtbpoi35juibdig"
@@ -68,7 +67,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                 fontWeight: FontWeight.bold,
                 fontSize: fontSizeProvider + 5,
               ),
-              ...answers1.map((data) {
+              ...answers.map((data) {
                 return SingleChildScrollView(
                   child: IntrinsicHeight(
                     child: Container(
@@ -100,7 +99,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                           onPressed: () {
                             setState(() {
                               if (data["isChecked"] == false) {
-                                for (var answer in answers1) {
+                                for (var answer in answers) {
                                   if (answer["isChecked"] == true) {
                                     answer["isChecked"] = false;
                                   }
@@ -127,7 +126,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
               }),
               ContainerWithButton(
                 onPressed: () {
-                  for (var answer in answers1) {
+                  for (var answer in answers) {
                     if(answer["isChecked"] == true){
                       goToNextQuestion = true;
                     }
@@ -136,7 +135,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                   if(goToNextQuestion == true){
                     incrementCounter();
                     setState(() {
-                      for (var answer in answers1) {
+                      for (var answer in answers) {
                         answer["isChecked"] = false;
                       }
                       goToNextQuestion = false;

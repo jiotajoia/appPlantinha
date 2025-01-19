@@ -23,8 +23,6 @@ class _LoginPageState extends State<LoginPage> {
     context.go(lastRoute);
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;

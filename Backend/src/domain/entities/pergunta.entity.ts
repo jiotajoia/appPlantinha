@@ -1,11 +1,33 @@
-export class Pergunta{
-    idPergunta: number;
+export type PerguntaProps = {
+    id: string;
     indagacao: string;
     opcoes: string[];
+}
 
-    constructor(idPergunta: number, indagacao: string, opcoes: string[]){
-        this.idPergunta = idPergunta;
-        this.indagacao = indagacao;
-        this.opcoes = opcoes;
+export class Pergunta{
+    constructor(private props: PerguntaProps){}
+
+    public static create(indagacao: string){
+        return new Pergunta({
+            id: crypto.randomUUID.toString(),
+            indagacao,
+            opcoes: []
+        })
+    }
+
+    public with(props: PerguntaProps){
+        return new Pergunta(props);
+    }
+
+    public get id(){
+        return this.props.id;
+    }
+
+    public get indagacao(){
+        return this.props.indagacao;
+    }
+
+    public get opcoes(){
+        return this.props.opcoes;
     }
 }

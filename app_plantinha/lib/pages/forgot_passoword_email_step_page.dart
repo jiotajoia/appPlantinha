@@ -13,8 +13,7 @@ class ForgotPassowordEmailStepPage extends StatefulWidget {
       _ForgotPassowordEmailStepPageState();
 }
 
-class _ForgotPassowordEmailStepPageState
-    extends State<ForgotPassowordEmailStepPage> {
+class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepPage> {
   final emailController = TextEditingController();
   final _form = GlobalKey<FormState>();
 
