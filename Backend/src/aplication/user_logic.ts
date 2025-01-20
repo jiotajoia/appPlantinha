@@ -1,6 +1,6 @@
 import { Usuario } from "../domain/entities/usuario.entity";
 import { UserRepo } from "../domain/repositories/user_repo";
-import { CriarUsuarioRequest } from "./useCasesUsuario/criar_usuario.command";
+import { CriarUsuarioRequest } from "./useCasesUsuario/criar_usuario.usecase";
 
 export class UserLogic{
     repositorio!: UserRepo;

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { CriarUsuarioUseCase } from "../../aplication/useCasesUsuario/criar_usuario.command copy";
-import { ObterUsuarioUseCase } from "../../aplication/useCasesUsuario/obter_usuario.command copy";
-import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.command copy";
-import { AlterarUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_usuario.command copy";
+import { CriarUsuarioUseCase } from "../../aplication/useCasesUsuario/criar_usuario.usecase";
+import { ObterUsuarioUseCase } from "../../aplication/useCasesUsuario/obter_usuario.usecase";
+import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
+import { AlterarUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_usuario.usecase";
 
 export class UsuarioController{
     constructor(private criarUsuarioUseCase: CriarUsuarioUseCase, private obterUsuarioUseCase: ObterUsuarioUseCase, private deletarUsuarioUseCase: DeletarUsuarioUseCase, private alterarUsuarioUseCase: AlterarUsuarioUseCase){}
