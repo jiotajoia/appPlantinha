@@ -1,18 +1,18 @@
-import { Application, Request, Response } from "express";
-import { ResultadoLogic } from "../../aplication/resultado_logic";
+import { Application} from "express";
 import { ResultadoBuscaController } from "../controllers/resultado_busca.controller";
-import { UserRepo } from "../../domain/repositories/user_repo";
-import { ResultadoRepo } from "../../domain/repositories/resultado_repo";
-import { PreencherResultadoCommand } from "../../aplication/useCasesResultadoBusca/preencher_resultado.command";
-import { ObterResultadoCommand } from "../../aplication/useCasesResultadoBusca/obter_resultado.command";
-import { DeletarResultadoCommand } from "../../aplication/useCasesResultadoBusca/deletar_resultado.command";
+import { UserGateway } from "../../domain/gateways/user.gateway";
+import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
+import { PreencherResultadoUseCase } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
+import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
+import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
+import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
 
 export class ResultadoRoutes{
     app: Application;
     rotaResultado: string = '/resultado/:id';
     rotaUserResult: string = `/user/:id_user/${this.rotaResultado}`;
-    userRepo!: UserRepo;
-    resultRepo!: ResultadoRepo;
+    userGateway!: UserGateway;
+    resultGateway!: ResultadoGateway;
 
     constructor(app: Application){
         this.app = app;
@@ -20,7 +20,7 @@ export class ResultadoRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller: ResultadoBuscaController = new ResultadoBuscaController(new PreencherResultadoCommand(this.userRepo, this.resultRepo), new ObterResultadoCommand(this.resultRepo), new DeletarResultadoCommand(this.resultRepo));
+        const controller = new ResultadoBuscaController(new PreencherResultadoUseCase(this.userGateway, this.resultGateway), new ObterResultadoUseCase(this.resultGateway), new DeletarResultadoUseCase(this.resultGateway));
         this.app.route(this.rotaUserResult).patch(controller.preencherResult);
 
         this.app.route(this.rotaResultado).get(controller.obterResult).delete(controller.deletarResult);

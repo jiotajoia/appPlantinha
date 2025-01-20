@@ -1,11 +1,15 @@
+import { criarResultadoInputDto } from "../../aplication/useCasesImagem/reconhecimento.usecase";
+import { DeletarResultadoInputDto } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
+import { ObterResultadoInputDto } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
+import { atualizarResultadoInputDto } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 import { ResultadoBusca } from "../entities/resultado_busca.entity";
 
 export interface ResultadoGateway{
-    atualizarResultado(id: number, plantas: JsonWebKey): Promise<ResultadoBusca>;
+    atualizarResultado(dados: atualizarResultadoInputDto): Promise<ResultadoBusca>;
 
-    obterResultado(id: number): Promise<ResultadoBusca>;
+    obterResultado(dados: ObterResultadoInputDto): Promise<ResultadoBusca>;
 
-    deletarResultado(id:number): Promise<string>;
+    deletarResultado(dados: DeletarResultadoInputDto): Promise<string>;
 
-    criarResultado(plantas: JsonWebKey,tipo: string): Promise<ResultadoBusca>;
+    criarResultado(dados: criarResultadoInputDto): Promise<ResultadoBusca>;
 }

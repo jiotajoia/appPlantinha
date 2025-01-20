@@ -1,16 +1,15 @@
-import { Application , Request, Response} from "express";
-import { ImagemLogic } from "../../aplication/Imagem_logic";
+import { Application } from "express";
 import { ImagemController } from "../controllers/imagem.controller";
-import { ReconhecimentoCommand } from "../../aplication/useCasesImagem/reconhecimento.command";
-import { UserRepo } from "../../domain/repositories/user_repo";
-import { ResultadoRepo } from "../../domain/repositories/resultado_repo";
+import { UserGateway } from "../../domain/gateways/user.gateway";
+import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
+import { ReconhecimentoUseCase } from "../../aplication/useCasesImagem/reconhecimento.usecase";
 
 export class ImagemRoutes{
     app: Application;
     rotaImagem: string = '/user/:id/imagem';
 
-    userRepo!: UserRepo;
-    resultRepo!: ResultadoRepo;
+    userGateway!: UserGateway;
+    resultGateway!: ResultadoGateway;
 
     constructor(app: Application){
         this.app = app;
@@ -18,7 +17,7 @@ export class ImagemRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller: ImagemController = new ImagemController(new ReconhecimentoCommand(this.resultRepo, this.userRepo));
+        const controller: ImagemController = new ImagemController(new ReconhecimentoUseCase(this.resultGateway, this.userGateway));
         this.app.route(this.rotaImagem).post(controller.reconhecimento);
         
         return this.app
