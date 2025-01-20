@@ -40,6 +40,8 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
     }
 
     async execute({idUser, idResultado, respostas}: PreencherResultadoInputDto): Promise<PreencherResultadoOutputDto>{
+        
+
         let plantas:JsonWebKey = {};
 
         let resultado = await this.resultGateway.atualizarResultado({id: idResultado, plantas});

@@ -21,6 +21,7 @@ export class ResultadoRoutes{
 
     iniciarRotas(): Application{
         const controller = new ResultadoBuscaController(new PreencherResultadoUseCase(this.userGateway, this.resultGateway), new ObterResultadoUseCase(this.resultGateway), new DeletarResultadoUseCase(this.resultGateway));
+        
         this.app.route(this.rotaUserResult).patch(controller.preencherResult);
 
         this.app.route(this.rotaResultado).get(controller.obterResult).delete(controller.deletarResult);
