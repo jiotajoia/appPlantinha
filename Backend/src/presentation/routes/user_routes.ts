@@ -18,6 +18,7 @@ export class UserRoutes{
 
     iniciarRotas(): Application{
         const controller: UsuarioController = new UsuarioController(new CriarUsuarioUseCase(this.userGateway), new ObterUsuarioUseCase(this.userGateway), new DeletarUsuarioUseCase(this.userGateway), new AlterarUsuarioUseCase(this.userGateway));
+        
         this.app.route(this.rota).post(controller.criarUsuario).get(controller.obterUsuario);
 
         this.app.route(this.rota + '/:id').delete(controller.deletarUsuario).patch(controller.alterarUsuario);

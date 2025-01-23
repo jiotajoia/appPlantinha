@@ -5,6 +5,7 @@ import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_
 import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
 export class ResultadoBuscaController{
     constructor( private preencherResultadoUseCase: PreencherResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
+    
     public preencherResult = async (req: Request, res: Response) => {
         try{
             let idUser = req.params.idUser;

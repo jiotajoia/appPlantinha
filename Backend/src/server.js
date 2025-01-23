@@ -16,21 +16,54 @@ app.get('/', function (req, res) {
 //teste perenual
 app.get('/perenual', function (req, res) {
     var url = "https://perenual.com/api/species-list?key=sk-g3X1678e55cae03338309&q=coconut";
-    axios_1.default.get(url)
-        .then(function (response) {
+    axios_1.default.get(url).then(function (response) {
         res.json((response.data.data));
-    })
-        .catch(function (error) {
+    }).catch(function (error) {
         console.log(error);
     });
 });
 app.get('/perenual/detalhes', function (req, res) {
-    var url = "https://perenual.com/api/species/details/1?key=sk-g3X1678e55cae03338309";
-    axios_1.default.get(url)
-        .then(function (response) {
+    var url = "https://perenual.com/api/species/details/2?key=sk-g3X1678e55cae03338309";
+    axios_1.default.get(url).then(function (response) {
         res.json((response.data));
-    })
-        .catch(function (error) {
+    }).catch(function (error) {
+        console.log(error);
+    });
+});
+//teste trefle
+/*app.get('/treefle', (req, res) => {
+
+  const url = `https://trefle.io/api/v1/plants?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU`;
+  
+  axios.get(url).then((response) => {
+    res.json((response.data.data));
+  }).catch((error) => {
+    console.log(error);
+  });
+});*/
+app.get('/treefle', function (req, res) {
+    var url = "https://trefle.io/api/v1/species?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU";
+    axios_1.default.get(url).then(function (response) {
+        res.json((response.data.data));
+    }).catch(function (error) {
+        console.log(error);
+    });
+});
+/*app.get('/treefle/detalhes', (req, res) => {
+
+  const url = `https://trefle.io/api/v1/plants/24?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU`;
+  
+  axios.get(url).then((response) => {
+    res.json((response.data));
+  }).catch((error) => {
+    console.log(error);
+  });
+});*/
+app.get('/treefle/detalhes', function (req, res) {
+    var url = "https://trefle.io/api/v1/species/24?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU";
+    axios_1.default.get(url).then(function (response) {
+        res.json((response.data.data));
+    }).catch(function (error) {
         console.log(error);
     });
 });

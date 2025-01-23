@@ -5,16 +5,16 @@ var Planta = /** @class */ (function () {
     function Planta(props) {
         this.props = props;
     }
-    Planta.create = function (nome, nomeCientifico, imagem, cuidados, curiosidades, ambiente, shadowOrLightType) {
+    Planta.create = function (nome, nomeCientifico, imagem, descricao, nivelDeCuidado, usoMedico, luminosidade) {
         return new Planta({
             id: crypto.randomUUID.toString(),
             nome: nome,
             nomeCientifico: nomeCientifico,
             imagem: imagem,
-            cuidados: cuidados,
-            curiosidades: curiosidades,
-            ambiente: ambiente,
-            shadowOrLightType: shadowOrLightType
+            descricao: descricao,
+            nivelDeCuidado: nivelDeCuidado,
+            usoMedico: usoMedico,
+            luminosidade: luminosidade
         });
     };
     Planta.with = function (props) {
@@ -48,30 +48,30 @@ var Planta = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Planta.prototype, "cuidados", {
+    Object.defineProperty(Planta.prototype, "descricao", {
         get: function () {
-            return this.props.cuidados;
+            return this.props.descricao;
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Planta.prototype, "curiosidades", {
+    Object.defineProperty(Planta.prototype, "nivelDeCuidado", {
         get: function () {
-            return this.props.curiosidades;
+            return this.props.nivelDeCuidado;
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Planta.prototype, "ambiente", {
+    Object.defineProperty(Planta.prototype, "usoMedico", {
         get: function () {
-            return this.props.ambiente;
+            return this.props.usoMedico;
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Planta.prototype, "shadowOrLightType", {
+    Object.defineProperty(Planta.prototype, "luminosidade", {
         get: function () {
-            return this.props.shadowOrLightType;
+            return this.props.luminosidade;
         },
         enumerable: false,
         configurable: true
