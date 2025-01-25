@@ -17,10 +17,10 @@ export type ReconhecimentoOutputDto = {
         nome: string;
         nomeCientifico: string;
         imagem: string;
-        cuidados: string;
-        curiosidades: string;
-        ambiente: string;
-        shadowOrLightType: string;
+        descricao: string;
+        nivelDeCuidado: string;
+        usoMedico: string;
+        luminosidade: string;
     }[];
 }
 
@@ -55,10 +55,10 @@ export class ReconhecimentoUseCase implements UseCase<ReconhecimentoInputDto, Re
                 nome: planta.nome,
                 nomeCientifico: planta.nomeCientifico,
                 imagem: planta.imagem,
-                cuidados: planta.cuidados,
-                curiosidades: planta.curiosidades,
-                ambiente: planta.ambiente,
-                shadowOrLightType: planta.shadowOrLightType
+                descricao: planta.descricao,
+                nivelDeCuidado: planta.nivelDeCuidado,
+                usoMedico: planta.usoMedico,
+                luminosidade: planta.luminosidade
             }))
         }
     }
