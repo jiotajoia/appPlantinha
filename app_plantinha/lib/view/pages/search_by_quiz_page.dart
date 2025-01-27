@@ -1,10 +1,10 @@
 import 'package:app_plantinha/configs/app.configs.dart';
-import 'package:app_plantinha/provider/font_size.provider.dart';
-import 'package:app_plantinha/provider/light_dark.provider.dart';
-import 'package:app_plantinha/widgets/container_with_button.widget.dart';
-import 'package:app_plantinha/widgets/row_button_back.widget.dart';
-import 'package:app_plantinha/widgets/row_with_text.dart';
-import 'package:app_plantinha/widgets/scaffold_base.widget.dart';
+import 'package:app_plantinha/controler/provider/font_size.provider.dart';
+import 'package:app_plantinha/controler/provider/light_dark.provider.dart';
+import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
+import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
+import 'package:app_plantinha/view/widgets/row_with_text.dart';
+import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

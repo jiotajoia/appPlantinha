@@ -1,8 +1,8 @@
 import 'package:app_plantinha/configs/app.configs.dart';
-import 'package:app_plantinha/pages/forgot_passoword_email_step_page.dart';
-import 'package:app_plantinha/pages/forgot_password_update_step.dart';
-import 'package:app_plantinha/pages/forgot_password_verification_code_step_page.dart';
-import 'package:app_plantinha/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/view/pages/forgot_passoword_email_step_page.dart';
+import 'package:app_plantinha/view/pages/forgot_password_update_step.dart';
+import 'package:app_plantinha/view/pages/forgot_password_verification_code_step_page.dart';
+import 'package:app_plantinha/controler/provider/step_forgot_password_state.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
 import 'package:app_plantinha/configs/app.configs.dart';
-import 'package:app_plantinha/provider/font_size.provider.dart';
-import 'package:app_plantinha/provider/light_dark.provider.dart';
+import 'package:app_plantinha/controler/provider/font_size.provider.dart';
+import 'package:app_plantinha/controler/provider/light_dark.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';

@@ -1,6 +1,6 @@
 import 'package:app_plantinha/configs/app.configs.dart';
-import 'package:app_plantinha/widgets/container_with_button.widget.dart';
-import 'package:app_plantinha/widgets/container_with_form.widget.dart';
+import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
+import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

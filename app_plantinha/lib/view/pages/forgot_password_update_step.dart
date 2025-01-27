@@ -1,7 +1,7 @@
-import 'package:app_plantinha/provider/step_forgot_password_state.provider.dart';
-import 'package:app_plantinha/widgets/container_with_button.widget.dart';
-import 'package:app_plantinha/widgets/container_with_form.widget.dart';
-import 'package:app_plantinha/widgets/row_with_text.dart';
+import 'package:app_plantinha/controler/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
+import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
+import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
