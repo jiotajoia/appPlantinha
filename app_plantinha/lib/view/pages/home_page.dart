@@ -22,6 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>{
   double width = 0, height = 0, sizeImage = 0;
+
   void navigateToSearchPage(String lastRoute){
     AppConfigs.saveLastRoute(lastRoute);
     context.push(lastRoute);

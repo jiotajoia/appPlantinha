@@ -5,9 +5,8 @@ import { ResultadoRoutes } from "./presentation/routes/resultado_routes";
 import { ImagemRoutes } from "./presentation/routes/imagem_routes";
 import { HistoricoRoutes } from "./presentation/routes/historico_routes";
 import admin from 'firebase-admin';
-import nodemailer, { TransportOptions } from 'nodemailer';
 import dotenv from 'dotenv';
-import { google } from 'googleapis';
+import { Password_routes } from './presentation/routes/password_routes';
 
 dotenv.config();
 
@@ -20,11 +19,7 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, TypeScript with Express!');
-});
-
-app.post('/reset-password', async (req: Request, res: Response) => {
+/*app.post('/reset-password', async (req: Request, res: Response) => {
   const {email, newPassword, confirmPassword} = req.body;
 
   if (!email || !newPassword || !confirmPassword) {
@@ -80,6 +75,7 @@ app.post('/verify-code', async (req: Request, res: Response) => {
   }
 });
 
+
 app.post('/send-code', async (req: Request, res: Response) => {
 const { email } = req.body;
 
@@ -101,6 +97,8 @@ try {
     process.env.GOOGLE_CLIENT_SECRET, // Client Secret do OAuth
     process.env.GOOGLE_REDIRECT_URI  // URI de redirecionamento
   );
+
+  
   http://localhost:3000/oauth2callback
   oauth2Client.setCredentials({
     refresh_token: process.env.GOOGLE_REFRESH_TOKEN, // O Refresh Token gerado
@@ -139,12 +137,14 @@ try {
    res.status(500).json({ error: 'Erro ao enviar código de verificação.' });
 }
 });
+*/
 
 new UserRoutes(app);
 new QuizRoutes(app);
 new ResultadoRoutes(app);
 new HistoricoRoutes(app);
 new ImagemRoutes(app);
+new Password_routes(app);
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
