@@ -4,6 +4,7 @@ import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { UserGateway } from "../../domain/gateways/user.gateway";
 import { UseCase } from "../usecase";
 import { Planta } from "../../domain/entities/planta.entity";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 
 export type PreencherResultadoInputDto = {
     idUser: string;
@@ -34,11 +35,32 @@ export type atualizarResultadoInputDto = {
     plantas: Planta[];
 }
 
-export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInputDto, PreencherResultadoOutputDto>{
-    constructor(private userGateway: UserGateway, private resultGateway: ResultadoGateway){}
+export type adicionarResultadoInputDto = {
+    idUser: string,
+    resultado: {
+        id: string;
+        dataBusca: string;
+        tipoBusca: string;
+        plantas: {
+            id: string;
+            nome: string;
+            nomeCientifico: string;
+            imagem: string;
+            descricao: string;
+            nivelDeCuidado: string;
+            usoMedico: string;
+            luminosidade: string;
+        }[];
+    };
+}
 
-    public create(userGateway: UserGateway, resultGateway: ResultadoGateway){
-        return new PreencherResultadoUseCase(userGateway, resultGateway);
+export type adicionarResultadoOutputDto = void;
+
+export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInputDto, PreencherResultadoOutputDto>{
+    constructor(private userRepoFirebase: UserRepoFirebase, private resultGateway: ResultadoGateway){}
+
+    public create(userRepoFirebase: UserRepoFirebase, resultGateway: ResultadoGateway){
+        return new PreencherResultadoUseCase(userRepoFirebase, resultGateway);
     }
 
     async execute({idUser, idResultado, respostas}: PreencherResultadoInputDto): Promise<PreencherResultadoOutputDto>{
@@ -96,7 +118,7 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
         }
         
         let resultado = await this.resultGateway.atualizarResultado({id: idResultado, plantas: plantasProntas});
-        this.userGateway.adicionarResultado(resultado);
+        this.userRepoFirebase.adicionarResultado(resultado);
 
         let output = this.presentOutput(resultado);
         return output;

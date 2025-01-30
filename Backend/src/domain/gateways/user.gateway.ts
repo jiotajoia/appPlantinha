@@ -1,5 +1,6 @@
 import { LimparHistoricoInputDto, LimparHistoricoOutputDto } from "../../aplication/useCasesHistorico/limpar_historico.usecase";
 import { ObterHistoricoInputDto, ObterHistoricoOutputDto } from "../../aplication/useCasesHistorico/obter_historico.usecase";
+import { adicionarResultadoInputDto, adicionarResultadoOutputDto } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 import { AlterarNomeUsuarioInputDto, AlterarNomeUsuarioOutputDto } from "../../aplication/useCasesUsuario/alterar_nome_usuario.usecase";
 import { AlterarSenhaUsuarioInputDto, AlterarSenhaUsuarioOutputDto } from "../../aplication/useCasesUsuario/alterar_senha_usuario.usecase";
 import { CriarUsuarioInputDto } from "../../aplication/useCasesUsuario/criar_usuario.usecase";
@@ -20,7 +21,7 @@ export interface UserGateway{
 
     updateUserPassword(dados: AlterarSenhaUsuarioInputDto): Promise<AlterarSenhaUsuarioOutputDto>;
 
-    adicionarResultado(resultado: ResultadoBusca): Usuario;
+    adicionarResultado(dados: adicionarResultadoInputDto): Promise<adicionarResultadoOutputDto>;
 
     obterHistorico(dados: ObterHistoricoInputDto): Promise<ObterHistoricoOutputDto>;
     

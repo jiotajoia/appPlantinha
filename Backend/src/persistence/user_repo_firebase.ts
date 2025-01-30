@@ -1,15 +1,14 @@
 import { CriarUsuarioInputDto } from "../aplication/useCasesUsuario/criar_usuario.usecase";
 import { DeletarUsuarioInputDto } from "../aplication/useCasesUsuario/deletar_usuario.usecase";
 import {ObterUsuarioInputDto, ObterUsuarioOutputDto,} from "../aplication/useCasesUsuario/obter_usuario.usecase";
-import { Historico } from "../domain/entities/historico.entity";
 import { ResultadoBusca } from "../domain/entities/resultado_busca.entity";
-import { Usuario } from "../domain/entities/usuario.entity";
 import { UserGateway } from "../domain/gateways/user.gateway";
 import { auth, db } from "./firebase_config/firebase";
 import {AlterarNomeUsuarioInputDto, AlterarNomeUsuarioOutputDto,} from "../aplication/useCasesUsuario/alterar_nome_usuario.usecase";
 import {AlterarSenhaUsuarioInputDto, AlterarSenhaUsuarioOutputDto,} from "../aplication/useCasesUsuario/alterar_senha_usuario.usecase";
 import { ObterHistoricoInputDto, ObterHistoricoOutputDto } from "../aplication/useCasesHistorico/obter_historico.usecase";
 import { LimparHistoricoInputDto, LimparHistoricoOutputDto } from "../aplication/useCasesHistorico/limpar_historico.usecase";
+import { adicionarResultadoInputDto, adicionarResultadoOutputDto } from "../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 
 export class UserRepoFirebase implements UserGateway {
   async criarUser(dados: CriarUsuarioInputDto): Promise<void> {
@@ -76,9 +75,24 @@ export class UserRepoFirebase implements UserGateway {
     return user;
   }
 
-  adicionarResultado(resultado: ResultadoBusca): Usuario {
-    throw new Error("Method not implemented.");
+  async adicionarResultado(dados: adicionarResultadoInputDto): Promise<adicionarResultadoOutputDto> {
+    const { idUser, resultado } = dados;
+
+    await db.collection('users').doc(idUser).collection('historico').doc(resultado.id).set({
+        id: resultado.id,
+        dataBusca: resultado.dataBusca,
+        tipoBusca: resultado.tipoBusca
+    });
+
+
+    resultado.plantas.forEach((planta) => {
+        const plantaRef = db.collection('users').doc(idUser).collection('historico').doc(resultado.id).collection('plantas').doc(planta.id);
+        db.batch().set(plantaRef, planta);
+    });
+
+    await db.batch().commit(); // Executa a operação em lote para melhor desempenho
   }
+
 
   async obterHistorico(dados: ObterHistoricoInputDto): Promise<ObterHistoricoOutputDto> {
     const {idUser} = dados;
