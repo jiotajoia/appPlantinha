@@ -1,10 +1,10 @@
 import { Usuario } from "../../domain/entities/usuario.entity";
 import { UserGateway } from "../../domain/gateways/user.gateway";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { UseCase } from "../usecase";
 
 export type ObterUsuarioInputDto = {
-    email: string;
-    senha: string;
+    idToken:string,
 }
 
 export type ObterUsuarioOutputDto = {
@@ -12,7 +12,6 @@ export type ObterUsuarioOutputDto = {
         id: string;
         nome: string;
         email: string;
-        senha: string;
         historico: Array<{
             id: string;
             dataBusca: string;
@@ -33,45 +32,13 @@ export type ObterUsuarioOutputDto = {
 
 
 export class ObterUsuarioUseCase implements UseCase<ObterUsuarioInputDto, ObterUsuarioOutputDto>{
-    constructor(private readonly userGateway: UserGateway){}
+    constructor(private readonly userRepoFirebase : UserRepoFirebase){}
 
-    public create(userGateway: UserGateway){
-        return new ObterUsuarioUseCase(userGateway);
+    public create(userRepoFirebase : UserRepoFirebase){
+        return new ObterUsuarioUseCase(userRepoFirebase);
     }
 
-
-
-    async execute({email, senha}: ObterUsuarioInputDto): Promise<ObterUsuarioOutputDto>{
-        const usuario = await this.userGateway.obterUser({email: email, senha: senha});
-        const output = this.presentOutput(usuario);
-        return output;
+    async execute({idToken}: ObterUsuarioInputDto): Promise<ObterUsuarioOutputDto>{
+        return await this.userRepoFirebase.obterUser({idToken});
     }
-
-    private presentOutput(usuario: Usuario): ObterUsuarioOutputDto {
-        return {
-            usuario: {
-                id: usuario.id,
-                nome: usuario.nome,
-                email: usuario.email,
-                senha: usuario.senha,
-                historico: usuario.historico.map((resultado) => ({
-                    id: resultado.id,
-                    dataBusca: resultado.dataBusca,
-                    tipoBusca: resultado.tipoBusca,
-                    plantas: resultado.plantas.map((planta) => ({
-                        id: planta.id,
-                        nome: planta.nome,
-                        nomeCientifico: planta.nomeCientifico,
-                        imagem: planta.imagem,
-                        descricao: planta.descricao,
-                        nivelDeCuidado: planta.nivelDeCuidado,
-                        usoMedico: planta.usoMedico,
-                        luminosidade: planta.luminosidade,
-                    })),
-                })),
-            },
-        };
-    }
-    
-    
 }

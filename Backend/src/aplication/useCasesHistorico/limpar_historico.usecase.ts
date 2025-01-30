@@ -1,4 +1,5 @@
 import { UserGateway } from "../../domain/gateways/user.gateway";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { UseCase } from "../usecase";
 
 export type LimparHistoricoInputDto = {
@@ -10,14 +11,13 @@ export type LimparHistoricoOutputDto = {
 }
 
 export class LimparHistoricoUseCase implements UseCase<LimparHistoricoInputDto, LimparHistoricoOutputDto> {
-    constructor(private userGateway: UserGateway){}
+    constructor(private userRepoFirebase: UserRepoFirebase){}
 
-    public create(userGateway: UserGateway): LimparHistoricoUseCase {
-        return new LimparHistoricoUseCase(userGateway);
+    public create(userRepoFirebase: UserRepoFirebase): LimparHistoricoUseCase {
+        return new LimparHistoricoUseCase(userRepoFirebase);
     }
 
     async execute({idUser}: LimparHistoricoInputDto): Promise<LimparHistoricoOutputDto> {
-        const mensagem = await this.userGateway.limparHistorico(idUser);
-        return { mensagem };
+        return await this.userRepoFirebase.limparHistorico({idUser});
     }
 }

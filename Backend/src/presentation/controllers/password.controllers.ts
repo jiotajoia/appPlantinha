@@ -4,25 +4,19 @@ import { VerifyCodeUseCase } from "../../aplication/useCasesPassword/verify_code
 import { SendCodeUseCase } from "../../aplication/useCasesPassword/send_code.usecase";
 
 export class PasswordController {
-  private editarSenhaUseCases: EditarSenhaUseCase = new EditarSenhaUseCase();
-  private verifyCodeUseCases: VerifyCodeUseCase = new VerifyCodeUseCase();
-  private sendCodeUseCases: SendCodeUseCase = new SendCodeUseCase();
-
+  constructor(private editarSenhaUseCases: EditarSenhaUseCase, private verifyCodeUseCases: VerifyCodeUseCase, private sendCodeUseCases: SendCodeUseCase) {}
+  
   resetPassword = async (req: Request, res: Response) => {
     const { email, newPassword, confirmPassword } = req.body;
 
     if (!email || !newPassword || !confirmPassword) {
+      res.status(400).json({error:"As senhas e email não podem estar vazias"});
     }
 
     const regex = new RegExp("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\$&*~]).{8,}$");
 
     if (!regex.test(newPassword)) {
-      res
-        .status(400)
-        .json({
-          error:
-            "A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, um número e um caractere especial.",
-        });
+      res.status(400).json({error:"A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, um número e um caractere especial.",});
     }
 
     if (newPassword !== confirmPassword) {
