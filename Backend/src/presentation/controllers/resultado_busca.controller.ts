@@ -22,8 +22,9 @@ export class ResultadoBuscaController{
 
     public obterResult = async (req: Request, res: Response) => {
         try{
-            let idUser = req.params.id_user;
-            res.status(200).json(this.obterResultadoUseCase.execute({id: idUser}));
+            let idUser = req.params.idUser;
+            let idResultado = req.params.idResultado
+            res.status(200).json(this.obterResultadoUseCase.execute({idUser, idResultado}));
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter resultado.",
@@ -34,8 +35,9 @@ export class ResultadoBuscaController{
 
     public deletarResult = async (req: Request, res: Response) => {
         try{
-            let idUser = req.params.id_user;
-            res.status(200).json(this.deletarResultadoUseCase.execute({id: idUser}));
+            let idUser = req.params.idUser;
+            let idResultado = req.params.idResultado
+            res.status(200).json(this.deletarResultadoUseCase.execute({idUser, idResultado}));
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar resultado.",

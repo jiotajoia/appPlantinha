@@ -1,7 +1,5 @@
 import axios from "axios";
-import { ResultadoBusca } from "../../domain/entities/resultado_busca.entity";
 import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
-import { UserGateway } from "../../domain/gateways/user.gateway";
 import { UseCase } from "../usecase";
 import { Planta } from "../../domain/entities/planta.entity";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
@@ -30,12 +28,13 @@ export type PreencherResultadoOutputDto = {
     };
 };
 
-export type atualizarResultadoInputDto = {
-    id: string;
+export type AtualizarResultadoInputDto = {
+    idUser: string;
+    idResultado: string;
     plantas: Planta[];
 }
 
-export type adicionarResultadoInputDto = {
+export type AtualizarResultadoOutputDto = {
     idUser: string,
     resultado: {
         id: string;
@@ -54,7 +53,26 @@ export type adicionarResultadoInputDto = {
     };
 }
 
-export type adicionarResultadoOutputDto = void;
+export type AdicionarResultadoInputDto = {
+    idUser: string,
+    resultado: {
+        id: string;
+        dataBusca: string;
+        tipoBusca: string;
+        plantas: {
+            id: string;
+            nome: string;
+            nomeCientifico: string;
+            imagem: string;
+            descricao: string;
+            nivelDeCuidado: string;
+            usoMedico: string;
+            luminosidade: string;
+        }[];
+    };
+}
+
+export type AdicionarResultadoOutputDto = void;
 
 export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInputDto, PreencherResultadoOutputDto>{
     constructor(private userRepoFirebase: UserRepoFirebase, private resultGateway: ResultadoGateway){}
@@ -69,10 +87,10 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
         let url = 'https://trefle.io/api/v1/species?';
         //fazer filtragem , imagino que poderia ser feito com as respostas sendo um json e e cada campo com valor de filtro
         
-        if(respostas.tamanho != null){
+        /*if(respostas.tamanho != null){
             url += `&filter[average_height]=${respostas.tamanho}`;
 
-        }
+        }*/
 
         url += '&token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU';
   
@@ -117,30 +135,9 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
             });
         }
         
-        let resultado = await this.resultGateway.atualizarResultado({id: idResultado, plantas: plantasProntas});
+        let resultado = await this.resultGateway.atualizarResultado({idUser, idResultado, plantas: plantasProntas});
         this.userRepoFirebase.adicionarResultado(resultado);
 
-        let output = this.presentOutput(resultado);
-        return output;
-    }
-
-    private presentOutput(resultado: ResultadoBusca): PreencherResultadoOutputDto {
-        return {
-            resultado: {
-                id: resultado.id,
-                dataBusca: resultado.dataBusca,
-                tipoBusca: resultado.tipoBusca,
-                plantas: resultado.plantas.map((planta) => ({
-                    id: planta.id,
-                    nome: planta.nome,
-                    nomeCientifico: planta.nomeCientifico,
-                    imagem: planta.imagem,
-                    descricao: planta.descricao,
-                    nivelDeCuidado: planta.nivelDeCuidado,
-                    usoMedico: planta.usoMedico,
-                    luminosidade: planta.luminosidade
-                }))
-            }
-        }
+        return resultado;
     }
 }

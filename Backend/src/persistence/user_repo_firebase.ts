@@ -8,7 +8,7 @@ import {AlterarNomeUsuarioInputDto, AlterarNomeUsuarioOutputDto,} from "../aplic
 import {AlterarSenhaUsuarioInputDto, AlterarSenhaUsuarioOutputDto,} from "../aplication/useCasesUsuario/alterar_senha_usuario.usecase";
 import { ObterHistoricoInputDto, ObterHistoricoOutputDto } from "../aplication/useCasesHistorico/obter_historico.usecase";
 import { LimparHistoricoInputDto, LimparHistoricoOutputDto } from "../aplication/useCasesHistorico/limpar_historico.usecase";
-import { adicionarResultadoInputDto, adicionarResultadoOutputDto } from "../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
+import { AdicionarResultadoInputDto, AdicionarResultadoOutputDto } from "../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 
 export class UserRepoFirebase implements UserGateway {
   async criarUser(dados: CriarUsuarioInputDto): Promise<void> {
@@ -75,7 +75,7 @@ export class UserRepoFirebase implements UserGateway {
     return user;
   }
 
-  async adicionarResultado(dados: adicionarResultadoInputDto): Promise<adicionarResultadoOutputDto> {
+  async adicionarResultado(dados: AdicionarResultadoInputDto): Promise<AdicionarResultadoOutputDto> {
     const { idUser, resultado } = dados;
 
     await db.collection('users').doc(idUser).collection('historico').doc(resultado.id).set({

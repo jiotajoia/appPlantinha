@@ -1,10 +1,12 @@
 import { Planta } from "../../domain/entities/planta.entity";
 import { ResultadoBusca } from "../../domain/entities/resultado_busca.entity";
 import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
+import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 import { UseCase } from "../usecase";
 
 export type ObterResultadoInputDto = {
-    id: string;
+    idUser: string;
+    idResultado: string;
 }
 
 export type ObterResultadoOutputDto = {
@@ -26,35 +28,14 @@ export type ObterResultadoOutputDto = {
 };
 
 export class ObterResultadoUseCase implements UseCase<ObterResultadoInputDto, ObterResultadoOutputDto>{
-    constructor(private resultGateway: ResultadoGateway){}
+    constructor(private resultRepoFirebase: ResultRepoFirebase){}
 
-    public create(resultGateway: ResultadoGateway){
-        return new ObterResultadoUseCase(resultGateway);
+    public create(resultRepoFirebase: ResultRepoFirebase){
+        return new ObterResultadoUseCase(resultRepoFirebase);
     }
 
-    async execute({id}: ObterResultadoInputDto): Promise<ObterResultadoOutputDto>{
-        let resultado = await this.resultGateway.obterResultado({id});
-        let output = this.presentOutput(resultado);
-        return output;
-    }
-
-    private presentOutput(resultado: ResultadoBusca): ObterResultadoOutputDto {
-        return {
-            resultado: {
-                id: resultado.id,
-                dataBusca: resultado.dataBusca,
-                tipoBusca: resultado.tipoBusca,
-                plantas: resultado.plantas.map((planta) => ({
-                    id: planta.id,
-                    nome: planta.nome,
-                    nomeCientifico: planta.nomeCientifico,
-                    imagem: planta.imagem,
-                    descricao: planta.descricao,
-                    nivelDeCuidado: planta.nivelDeCuidado,
-                    usoMedico: planta.usoMedico,
-                    luminosidade: planta.luminosidade
-                }))
-            }
-        }
+    async execute({idUser, idResultado}: ObterResultadoInputDto): Promise<ObterResultadoOutputDto>{
+        let resultado = await this.resultRepoFirebase.obterResultado({idUser, idResultado});
+        return resultado;
     }
 }
