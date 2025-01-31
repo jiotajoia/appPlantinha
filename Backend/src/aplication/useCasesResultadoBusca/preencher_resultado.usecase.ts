@@ -4,6 +4,7 @@ import { UseCase } from "../usecase";
 import { Planta } from "../../domain/entities/planta.entity";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { Pergunta } from "../../domain/entities/pergunta.entity";
+import { filter } from "cheerio/lib/api/traversing";
 
 export type PreencherResultadoInputDto = {
     idUser: string;
@@ -86,34 +87,47 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
         let plantas_trefle: { common_name: string }[] = [];
 
         let perguntas: Pergunta[] = [
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é comestível?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
-            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['01', '02', '03'], ''),
         ]
 
-        let url = 'https://trefle.io/api/v1/species?';
+        let url = 'https://trefle.io/api/v1/species?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU';
         //fazer filtragem , imagino que poderia ser feito com as respostas sendo um json e e cada campo com valor de filtro
+        
         let respostas1 = {
-            avarage_heigh : '',
+            avarage_heigh : true,
             ediable: '',
             flower: '',
         }
+
+        Object.entries(respostas1).forEach(([chave, valor]) => {
+            if(valor != null){
+                url += `&filter[${chave}]=${valor}`;
+            
+            }
+        }
+        );
         
-        /*if(respostas.tamanho != null){
+        /*
+        
+        respostas.add{pergunta1.filtro: alternativas[alternativa_escolhida]};
+
+
+
+        if(resposta1.eable_parts != null){
             url += `&filter[average_height]=${respostas.tamanho}`;
 
-        }*/
+        }
+            
+        if(){
+        }
+        */
+
+
 
         //Pergunta: A planta é uma arvore?
+        //Pergunta: A planta é encontrada no Brazil?
+        //Pergunta: A planta é toxica?
+        //Pergunta: A planta é medicinal?
     
         //Pergunta: A planta é comestivel?
         //sim = (filter_not ediable_parts = null) // direcionar para pergunta de qual parte é comestivel
@@ -123,7 +137,6 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
 
         //Pergunta: 
         // filter e filter_not
-        url += '&token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU';
   
         axios.get(url).then((response) => {
             plantas_trefle = (response.data.data);
