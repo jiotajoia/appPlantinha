@@ -9,7 +9,6 @@ export type ObterQuizOutputDto = {
     perguntas: {
         id: string;
         indagacao: string;
-        opcoes: string[];
     }[];
     resultado: {
         id: string;
@@ -36,7 +35,7 @@ export class ObterQuizUseCase implements UseCase<ObterQuizInputDto, ObterQuizOut
     }
 
     async execute(): Promise<ObterQuizOutputDto>{
-        let resultado: ResultadoBusca = ResultadoBusca.create("03-09-2004", "quiz", []);
+        let resultado: ResultadoBusca = ResultadoBusca.create("03-09-2004", "quiz");
         let quiz = Quiz.create(resultado);
 
         let output = this.presentOutput(quiz);
@@ -50,7 +49,6 @@ export class ObterQuizUseCase implements UseCase<ObterQuizInputDto, ObterQuizOut
             perguntas: quiz.perguntas.map((pergunta) => ({
                 id: pergunta.id,
                 indagacao: pergunta.indagacao,
-                opcoes: pergunta.opcoes.map((opcao) => opcao)
             })),
             resultado: {
                 id: quiz.resultado.id,

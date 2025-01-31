@@ -26,6 +26,7 @@ export class UserRoutes{
 
         this.app.route(this.rota + '/:id/alterarNome').patch(controller.alterarNomeUsuario);
         this.app.route(this.rota + '/:id/alterarSenha').patch(controller.alterarNomeUsuario);
+        
         return this.app;
     }
 }

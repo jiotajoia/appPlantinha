@@ -3,6 +3,7 @@ import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { UseCase } from "../usecase";
 import { Planta } from "../../domain/entities/planta.entity";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
+import { Pergunta } from "../../domain/entities/pergunta.entity";
 
 export type PreencherResultadoInputDto = {
     idUser: string;
@@ -84,14 +85,44 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
     async execute({idUser, idResultado, respostas}: PreencherResultadoInputDto): Promise<PreencherResultadoOutputDto>{
         let plantas_trefle: { common_name: string }[] = [];
 
+        let perguntas: Pergunta[] = [
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é comestível?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+            Pergunta.create('A planta é uma árvore?', ['qwdqwe', 'vervewrvetv', 'wevwqrverv']),
+        ]
+
         let url = 'https://trefle.io/api/v1/species?';
         //fazer filtragem , imagino que poderia ser feito com as respostas sendo um json e e cada campo com valor de filtro
+        let respostas1 = {
+            avarage_heigh : '',
+            ediable: '',
+            flower: '',
+        }
         
         /*if(respostas.tamanho != null){
             url += `&filter[average_height]=${respostas.tamanho}`;
 
         }*/
 
+        //Pergunta: A planta é uma arvore?
+    
+        //Pergunta: A planta é comestivel?
+        //sim = (filter_not ediable_parts = null) // direcionar para pergunta de qual parte é comestivel
+        //não = 
+        //talvez = () //direcionar para outra pergunta
+
+
+        //Pergunta: 
+        // filter e filter_not
         url += '&token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU';
   
         axios.get(url).then((response) => {

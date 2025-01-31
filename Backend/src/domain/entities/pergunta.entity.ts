@@ -1,17 +1,24 @@
 export type PerguntaProps = {
     id: string;
     indagacao: string;
-    opcoes: string[];
+    indicacao: string[];
 }
 
+/*
+let pergunta1 ={ 
+    id = '01',
+    indagacao = 'A planta é comestivel?'
+    indicacao = ['02','05','08']
+}
+*/
 export class Pergunta{
     constructor(private props: PerguntaProps){}
 
-    public static create(indagacao: string){
+    public static create(indagacao: string, indicacao: string[]){
         return new Pergunta({
             id: crypto.randomUUID.toString(),
             indagacao,
-            opcoes: []
+            indicacao
         })
     }
 
@@ -25,9 +32,5 @@ export class Pergunta{
 
     public get indagacao(){
         return this.props.indagacao;
-    }
-
-    public get opcoes(){
-        return this.props.opcoes;
     }
 }

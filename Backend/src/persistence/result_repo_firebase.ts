@@ -22,7 +22,7 @@ export class ResultRepoFirebase implements ResultadoGateway{
     async deletarResultado(dados: DeletarResultadoInputDto): Promise<DeletarResultadoOutputDto> {
         const {idUser, idResultado} = dados;
         await db.collection('users').doc(idUser).collection('historico').doc(idResultado).delete();
-        return {mensagem: "usuário deletado com sucesso"}
+        return {mensagem: "usuário deletado com sucesso"};
     }
     criarResultado(dados: criarResultadoInputDto): Promise<ResultadoBusca> {
         throw new Error("Method not implemented.");

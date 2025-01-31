@@ -10,7 +10,7 @@ export type resultProps = {
 export class ResultadoBusca {
     constructor(private props: resultProps){}
 
-    public static create(dataBusca: string, tipoBusca: string, plantas: Planta[]){
+    public static create(dataBusca: string, tipoBusca: string){
       return new ResultadoBusca({
         id: crypto.randomUUID.toString(),
         dataBusca, 

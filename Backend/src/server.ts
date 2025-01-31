@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { UserRoutes } from "./presentation/routes/user_routes";
 import { QuizRoutes } from "./presentation/routes/quiz_routes";
 import { ResultadoRoutes } from "./presentation/routes/resultado_routes";

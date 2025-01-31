@@ -2,7 +2,6 @@ import { Application} from "express";
 import { ResultadoBuscaController } from "../controllers/resultado_busca.controller";
 import { PreencherResultadoUseCase } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
-import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
 import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
