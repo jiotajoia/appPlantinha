@@ -1,5 +1,6 @@
 import { Usuario } from "../../domain/entities/usuario.entity";
 import { UserGateway } from "../../domain/gateways/user.gateway";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { UseCase } from "../usecase";
 
 export type CriarUsuarioInputDto = {
@@ -8,71 +9,16 @@ export type CriarUsuarioInputDto = {
     senha: string;
 }
 
-export type CriarUsuarioOutputDto = {
-    usuario: {
-        id: string;
-        nome: string;
-        email: string;
-        senha: string;
-        historico:{
-            id: string;
-            dataBusca: string;
-            tipoBusca: string;
-            plantas:{
-                id: string;
-                nome: string;
-                nomeCientifico: string;
-                imagem: string;
-                cuidados: string;
-                curiosidades: string;
-                ambiente: string;
-                shadowOrLightType: string;
-            }[];
-        }[];
-    };
-};
-
+export type CriarUsuarioOutputDto = void;
 
 export class CriarUsuarioUseCase implements UseCase<CriarUsuarioInputDto, CriarUsuarioOutputDto>{
-    constructor(private readonly userGateway: UserGateway){}
+    constructor(private readonly userRepoFireBase : UserRepoFirebase){}
 
-    public create(userGateway: UserGateway){
-        return new CriarUsuarioUseCase(userGateway);
+    public create(userRepoFireBase : UserRepoFirebase){
+        return new CriarUsuarioUseCase(userRepoFireBase);
     }
 
-    async execute({nome, email, senha}: CriarUsuarioInputDto): Promise<CriarUsuarioOutputDto>{
-        const usuario = Usuario.create(nome, email, senha);
-        await this.userGateway.save(usuario);
-
-        const output = this.presentOutput(usuario);
-        return output;
+    async execute({nome, email, senha}: CriarUsuarioInputDto): Promise<void>{
+        await this.userRepoFireBase.criarUser({nome, email, senha});
     }
-
-    private presentOutput(usuario: Usuario): CriarUsuarioOutputDto {
-        return {
-            usuario: {
-                id: usuario.id,
-                nome: usuario.nome,
-                email: usuario.email,
-                senha: usuario.senha,
-                historico: usuario.historico.map((resultado) => ({
-                    id: resultado.id,
-                    dataBusca: resultado.dataBusca,
-                    tipoBusca: resultado.tipoBusca,
-                    plantas: resultado.plantas.map((planta) => ({
-                        id: planta.id,
-                        nome: planta.nome,
-                        nomeCientifico: planta.nomeCientifico,
-                        imagem: planta.imagem,
-                        cuidados: planta.cuidados,
-                        curiosidades: planta.curiosidades,
-                        ambiente: planta.ambiente,
-                        shadowOrLightType: planta.shadowOrLightType,
-                    })),
-                })),
-            },
-        };
-    }
-    
-    
 }

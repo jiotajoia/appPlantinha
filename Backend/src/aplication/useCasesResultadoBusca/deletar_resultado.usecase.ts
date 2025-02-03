@@ -1,8 +1,10 @@
 import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
+import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 import { UseCase } from "../usecase";
 
 export type DeletarResultadoInputDto = {
-    id: string;
+    idUser: string;
+    idResultado: string;
 }
 
 export type DeletarResultadoOutputDto = {
@@ -10,14 +12,14 @@ export type DeletarResultadoOutputDto = {
 }
 
 export class DeletarResultadoUseCase implements UseCase<DeletarResultadoInputDto, DeletarResultadoOutputDto>{
-    constructor(private resultGateway: ResultadoGateway){}
+    constructor(private resultRepoFirebase: ResultRepoFirebase){}
 
-    public create(resultGateway: ResultadoGateway){
-        return new DeletarResultadoUseCase(resultGateway);
+    public create(resultRepoFirebase: ResultRepoFirebase){
+        return new DeletarResultadoUseCase(resultRepoFirebase);
     }
 
-    async execute({id}: DeletarResultadoInputDto): Promise<DeletarResultadoOutputDto>{
-        let mensagem = await this.resultGateway.deletarResultado({id});
-        return {mensagem};
+    async execute({idUser, idResultado}: DeletarResultadoInputDto): Promise<DeletarResultadoOutputDto>{
+        let mensagem = await this.resultRepoFirebase.deletarResultado({idUser, idResultado});
+        return mensagem;
     }
 }

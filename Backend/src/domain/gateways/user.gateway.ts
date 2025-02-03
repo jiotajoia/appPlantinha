@@ -1,25 +1,29 @@
-import { AlterarUsuarioInputDto } from "../../aplication/useCasesUsuario/alterar_usuario.usecase";
+import { LimparHistoricoInputDto, LimparHistoricoOutputDto } from "../../aplication/useCasesHistorico/limpar_historico.usecase";
+import { ObterHistoricoInputDto, ObterHistoricoOutputDto } from "../../aplication/useCasesHistorico/obter_historico.usecase";
+import { AdicionarResultadoInputDto, AdicionarResultadoOutputDto } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
+import { AlterarNomeUsuarioInputDto, AlterarNomeUsuarioOutputDto } from "../../aplication/useCasesUsuario/alterar_nome_usuario.usecase";
+import { AlterarSenhaUsuarioInputDto, AlterarSenhaUsuarioOutputDto } from "../../aplication/useCasesUsuario/alterar_senha_usuario.usecase";
 import { CriarUsuarioInputDto } from "../../aplication/useCasesUsuario/criar_usuario.usecase";
 import { DeletarUsuarioInputDto } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
-import { ObterUsuarioInputDto } from "../../aplication/useCasesUsuario/obter_usuario.usecase";
+import { ObterUsuarioInputDto, ObterUsuarioOutputDto } from "../../aplication/useCasesUsuario/obter_usuario.usecase";
 import { Historico } from "../entities/historico.entity";
 import { ResultadoBusca } from "../entities/resultado_busca.entity";
 import { Usuario } from "../entities/usuario.entity";
 
 export interface UserGateway{
-    save(usuario: Usuario): Promise<void>;
+    criarUser(dados: CriarUsuarioInputDto): Promise<void>;
 
-    criarUser(dados: CriarUsuarioInputDto) : Promise<Usuario>;
+    obterUser(dados: ObterUsuarioInputDto) : Promise<ObterUsuarioOutputDto>;
 
-    obterUser(dados: ObterUsuarioInputDto) : Promise<Usuario>;
+    deleteUser(dados: DeletarUsuarioInputDto) : Promise<void>;
 
-    deleteUser(dados: DeletarUsuarioInputDto) : Promise<Usuario>;
+    updateUserName(dados: AlterarNomeUsuarioInputDto): Promise<AlterarNomeUsuarioOutputDto>;
 
-    updateUser(dados: AlterarUsuarioInputDto): Promise<Usuario>;
+    updateUserPassword(dados: AlterarSenhaUsuarioInputDto): Promise<AlterarSenhaUsuarioOutputDto>;
 
-    adicionarResultado(resultado: ResultadoBusca): Usuario;
+    adicionarResultado(dados: AdicionarResultadoInputDto): Promise<AdicionarResultadoOutputDto>;
 
-    obterHistorico(idUser: string): Promise<Historico>;
+    obterHistorico(dados: ObterHistoricoInputDto): Promise<ObterHistoricoOutputDto>;
     
-    limparHistorico(idUser: string): Promise<string>;
+    limparHistorico(dados: LimparHistoricoInputDto): Promise<LimparHistoricoOutputDto>;
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001795053415",
+    "project_id": "appplantinha",
+    "storage_bucket": "appplantinha.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001795053415:android:925fcb3ee97f229bd771c2",
+        "android_client_info": {
+          "package_name": "com.example.app_plantinha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001795053415-45hm21dojb71sc5v0o567084ugai5976.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgDcrK1YDRVYqsuYlfsnujdGzqgqQvkIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001795053415-45hm21dojb71sc5v0o567084ugai5976.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

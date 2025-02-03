@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { PreencherResultadoUseCase } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
-import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
 import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
 export class ResultadoBuscaController{
     constructor( private preencherResultadoUseCase: PreencherResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
@@ -22,8 +21,9 @@ export class ResultadoBuscaController{
 
     public obterResult = async (req: Request, res: Response) => {
         try{
-            let idUser = req.params.id_user;
-            res.status(200).json(this.obterResultadoUseCase.execute({id: idUser}));
+            let idUser = req.params.idUser;
+            let idResultado = req.params.idResultado
+            res.status(200).json(this.obterResultadoUseCase.execute({idUser, idResultado}));
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter resultado.",
@@ -34,8 +34,9 @@ export class ResultadoBuscaController{
 
     public deletarResult = async (req: Request, res: Response) => {
         try{
-            let idUser = req.params.id_user;
-            res.status(200).json(this.deletarResultadoUseCase.execute({id: idUser}));
+            let idUser = req.params.idUser;
+            let idResultado = req.params.idResultado
+            res.status(200).json(this.deletarResultadoUseCase.execute({idUser, idResultado}));
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar resultado.",

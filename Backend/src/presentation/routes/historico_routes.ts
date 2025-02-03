@@ -3,11 +3,12 @@ import { HistoricoController } from "../controllers/historico.controller";
 import { UserGateway } from "../../domain/gateways/user.gateway";
 import { LimparHistoricoUseCase } from "../../aplication/useCasesHistorico/limpar_historico.usecase";
 import { ObterHistoricoUseCase } from "../../aplication/useCasesHistorico/obter_historico.usecase";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 
 export class HistoricoRoutes{
     app: Application;
     rotaHistorico: string = '/user/:id/historico';
-    userGateway!: UserGateway;
+    userRepoFirebase!: UserRepoFirebase;
 
     constructor(app: Application){
         this.app = app;
@@ -15,8 +16,8 @@ export class HistoricoRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller: HistoricoController = new HistoricoController(new LimparHistoricoUseCase(this.userGateway), new ObterHistoricoUseCase(this.userGateway));
-        this.app.route(this.rotaHistorico).get(controller.obterHistorico).delete(controller.limparHistorico)
+        const controller: HistoricoController = new HistoricoController(new LimparHistoricoUseCase(this.userRepoFirebase), new ObterHistoricoUseCase(this.userRepoFirebase));
+        this.app.route(this.rotaHistorico).get(controller.obterHistorico).patch(controller.limparHistorico)
 
         return this.app;
     }
