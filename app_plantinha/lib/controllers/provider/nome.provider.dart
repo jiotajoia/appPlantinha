@@ -7,6 +7,6 @@ class NomeState extends ChangeNotifier {
 
   void setNome(String newNome) {
     _nome = newNome;
-    notifyListeners(); 
+    notifyListeners();  
   }
 }

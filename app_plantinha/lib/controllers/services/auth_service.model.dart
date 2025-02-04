@@ -7,8 +7,7 @@ class AuthService {
 
   final String backExterno = "http://192.168.18.173:3000";
 
-  void cadastrarUsers(String nome, String email, String password,
-      String confirmPassword) async {
+  Future<void> cadastrarUsers(String nome, String email, String password, String confirmPassword) async {
     try {
       await http.post(
         Uri.parse('$backExterno/user'),
@@ -31,13 +30,13 @@ class AuthService {
     }
   }
 
-  void logarUsers(String email, String password) async {
+  Future<void> logarUsers(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      
+
       final String? idToken = await userCredential.user!.getIdToken();
       await http.post(
         Uri.parse('$backExterno/user/obter'),
@@ -49,11 +48,10 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       // ignore: avoid_print
       print("Erro ao fazer login: ${e.message}");
-      throw Exception("Erro ao fazer login. Verifique suas credenciais.");
+      rethrow;
     } catch (e) {
       // ignore: avoid_print
-      print("Ocorreu um erro inesperado: $e");
-      throw Exception("Erro inesperado ao criar conta.");
+      rethrow;
     }
   }
 
@@ -61,17 +59,13 @@ class AuthService {
     try {
       User? user = _auth.currentUser;
       String idUser = user!.uid;
-        if (newName.isNotEmpty) {
-          await http.patch(
-            Uri.parse('$backExterno/user/$idUser/alterarNome'),
+      if (newName.isNotEmpty) {
+        await http.patch(Uri.parse('$backExterno/user/$idUser/alterarNome'),
             headers: {'Content-Type': 'application/json'},
-            body: {
-              'novoNome': newName
-            }
-          );
-        } else {
-          throw Exception("Nome não pode ser vazio.");
-        } 
+            body: {'novoNome': newName});
+      } else {
+        throw Exception("Nome não pode ser vazio.");
+      }
     } catch (e) {
       rethrow;
     }
@@ -103,7 +97,7 @@ class AuthService {
     }
   }
 
-  Future<void> resetarSenha( String newPassword, String confirmPassword) async {
+  Future<void> resetarSenha(String newPassword, String confirmPassword) async {
     try {
       User? user = _auth.currentUser;
       String idUser = user!.uid;
@@ -111,12 +105,10 @@ class AuthService {
       final response = await http.post(
         Uri.parse('$backExterno/user/$idUser/alterarSenha'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'newPassword': newPassword,
-          'confirmPassword': confirmPassword
-        }),
+        body: jsonEncode(
+            {'newPassword': newPassword, 'confirmPassword': confirmPassword}),
       );
-      
+
       if (response.statusCode != 200) {
         throw Exception(jsonDecode(response.body).error);
       }
@@ -127,7 +119,8 @@ class AuthService {
     }
   }
 
-  Future<void> redefinirSenha( String email,String newPassword, String confirmPassword) async {
+  Future<void> redefinirSenha(
+      String email, String newPassword, String confirmPassword) async {
     try {
       final response = await http.post(
         Uri.parse('$backExterno/reset-password'),
@@ -138,7 +131,7 @@ class AuthService {
           'confirmPassword': confirmPassword
         }),
       );
-      
+
       if (response.statusCode != 200) {
         throw Exception(jsonDecode(response.body).error);
       }
@@ -148,20 +141,16 @@ class AuthService {
       throw Exception("Erro ao resetar senha");
     }
   }
-  
+
   Future<void> deletarConta() async {
     User? user = _auth.currentUser;
     String idUser = user!.uid;
 
-    final response = await http.delete(
-      Uri.parse('$backExterno/user/$idUser'),
-      headers: {'Content-Type': 'application/json'}
-    );
-      
-      
-      if (response.statusCode != 200) {
-        throw Exception(jsonDecode(response.body).error);
-      }
-  }
+    final response = await http.delete(Uri.parse('$backExterno/user/$idUser'),
+        headers: {'Content-Type': 'application/json'});
 
+    if (response.statusCode != 200) {
+      throw Exception(jsonDecode(response.body).error);
+    }
+  }
 }

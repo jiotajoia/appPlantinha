@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class TakePicturePage extends StatefulWidget {
@@ -38,32 +38,32 @@ class TakePicturePageState extends State<TakePicturePage> {
     super.dispose();
   }
 
-  Future<void> sendImageToServer(String imagePath) async {
-    try {
-      final uri = Uri.parse('url eba'); //mudar url !!!
-      final request = http.MultipartRequest('POST', uri);
+  // Future<void> sendImageToServer(String imagePath) async {
+  //   try {
+  //     final uri = Uri.parse('url eba'); //mudar url !!!
+  //     final request = http.MultipartRequest('POST', uri);
 
-      final file = File(imagePath);
-      final fileStream = http.ByteStream(file.openRead());
-      final length = await file.length();
+  //     final file = File(imagePath);
+  //     final fileStream = http.ByteStream(file.openRead());
+  //     final length = await file.length();
 
-      request.files.add(http.MultipartFile('file', fileStream, length,
-          filename: 'image.jpg'));
+  //     request.files.add(http.MultipartFile('file', fileStream, length,
+  //         filename: 'image.jpg'));
 
-      final response = await request.send();
+  //     final response = await request.send();
 
-      if (response.statusCode == 200) {
-        // ignore: avoid_print
-        print('Imagem enviada com sucesso');
-      } else {
-        // ignore: avoid_print
-        print('Falha ao enviar imagem: ${response.statusCode}');
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print('Erro ao enviar imagem: $e');
-    }
-  }
+  //     if (response.statusCode == 200) {
+  //       // ignore: avoid_print
+  //       print('Imagem enviada com sucesso');
+  //     } else {
+  //       // ignore: avoid_print
+  //       print('Falha ao enviar imagem: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print('Erro ao enviar imagem: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class TakePicturePageState extends State<TakePicturePage> {
 
               if (!context.mounted) return;
 
-              await sendImageToServer(image.path);
+              //await sendImageToServer(image.path);
 
               // ignore: use_build_context_synchronously
               await Navigator.of(context).push(

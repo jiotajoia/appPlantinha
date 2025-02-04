@@ -25,8 +25,10 @@ class AppPlantinha extends StatelessWidget {
   const AppPlantinha(
       {super.key,
       required this.initialRoute,
-      required CameraDescription camera});
+      required this.camera});
   final String initialRoute;
+  
+  final CameraDescription camera;
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +80,7 @@ class AppPlantinha extends StatelessWidget {
                                   path: 'takePicture',
                                   builder: (BuildContext context,
                                       GoRouterState state) {
-                                    final CameraDescription camera =
-                                        state.extra as CameraDescription;
+                                   
                                     return TakePicturePage(camera: camera);
                                   })
                             ])
