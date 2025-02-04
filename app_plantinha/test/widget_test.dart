@@ -9,13 +9,18 @@ import 'package:app_plantinha/app_plantinha.dart';
 import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:camera/camera.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     WidgetsFlutterBinding.ensureInitialized();
     final initialRoute = await AppConfigs.getLastRoute() ?? '/';
+
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
     // Build our app and trigger a frame.
-    await tester.pumpWidget( AppPlantinha(initialRoute: initialRoute ,));
+    await tester.pumpWidget(
+        AppPlantinha(initialRoute: initialRoute, camera: firstCamera));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

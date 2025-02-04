@@ -10,12 +10,12 @@ export type resultProps = {
 export class ResultadoBusca {
     constructor(private props: resultProps){}
 
-    public static create(dataBusca: string, tipoBusca: string){
+    public static create( tipoBusca: string, plantas : Planta[]){
       return new ResultadoBusca({
         id: crypto.randomUUID.toString(),
-        dataBusca, 
+        dataBusca: new Date().toISOString().split('T')[0];
         tipoBusca, 
-        plantas: []
+        plantas: plantas
       });
     }
 

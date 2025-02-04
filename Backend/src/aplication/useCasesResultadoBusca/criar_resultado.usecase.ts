@@ -5,14 +5,14 @@ import { Planta } from "../../domain/entities/planta.entity";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { Pergunta } from "../../domain/entities/pergunta.entity";
 import { filter } from "cheerio/lib/api/traversing";
+import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 
-export type PreencherResultadoInputDto = {
+export type CriarResultadoInputDto = {
     idUser: string;
-    idResultado: string;
-    respostas: string[];
+    respostas: JSON;
 }
 
-export type PreencherResultadoOutputDto = {
+export type CriarResultadoOutputDto = {
     resultado: {
         id: string;
         dataBusca: string;
@@ -30,14 +30,11 @@ export type PreencherResultadoOutputDto = {
     };
 };
 
-export type AtualizarResultadoInputDto = {
-    idUser: string;
-    idResultado: string;
+export type CriarRepoResultadoInputDto = {
     plantas: Planta[];
 }
 
-export type AtualizarResultadoOutputDto = {
-    idUser: string,
+export type CriarRepoResultadoOutputDto = {
     resultado: {
         id: string;
         dataBusca: string;
@@ -76,67 +73,53 @@ export type AdicionarResultadoInputDto = {
 
 export type AdicionarResultadoOutputDto = void;
 
-export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInputDto, PreencherResultadoOutputDto>{
-    constructor(private userRepoFirebase: UserRepoFirebase, private resultGateway: ResultadoGateway){}
+export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, CriarResultadoOutputDto>{
+    constructor(private userRepoFirebase: UserRepoFirebase, private resultRepoFirebase: ResultRepoFirebase){}
 
-    public create(userRepoFirebase: UserRepoFirebase, resultGateway: ResultadoGateway){
-        return new PreencherResultadoUseCase(userRepoFirebase, resultGateway);
+    public create(userRepoFirebase: UserRepoFirebase, resultRepoFirebase: ResultRepoFirebase){
+        return new CriarResultadoUseCase(userRepoFirebase, resultRepoFirebase);
     }
 
-    async execute({idUser, idResultado, respostas}: PreencherResultadoInputDto): Promise<PreencherResultadoOutputDto>{
+    async execute({idUser, respostas}: CriarResultadoInputDto): Promise<CriarResultadoOutputDto>{
         let plantas_trefle: { common_name: string }[] = [];
 
+        /*
         let perguntas: Pergunta[] = [
-            Pergunta.create('A planta é uma árvore?', ['01', '02', '03'], ''),
-        ]
+            Pergunta.create('A planta é uma árvore?', ['01', '02', '03'], 'filtro_A',['true','false',null]),
+        ];
+        */
 
         let url = 'https://trefle.io/api/v1/species?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU';
         //fazer filtragem , imagino que poderia ser feito com as respostas sendo um json e e cada campo com valor de filtro
-        
-        let respostas1 = {
-            avarage_heigh : true,
-            ediable: '',
-            flower: '',
-        }
 
-        Object.entries(respostas1).forEach(([chave, valor]) => {
-            if(valor != null){
-                url += `&filter[${chave}]=${valor}`;
-            
-            }
-        }
-        );
-        
         /*
-        
-        respostas.add{pergunta1.filtro: alternativas[alternativa_escolhida]};
-
-
-
-        if(resposta1.eable_parts != null){
-            url += `&filter[average_height]=${respostas.tamanho}`;
-
-        }
-            
-        if(){
+        let respostas1 = {
+            avarage_heigh : '3m',
+            ediale: 'false',
+            flower: 'true',
         }
         */
 
-
+        Object.entries(respostas).forEach(([chave, valor]) => {
+            if(valor != null){
+                url += `&filter[${chave}]=${valor}`;
+            }
+        });
 
         //Pergunta: A planta é uma arvore?
         //Pergunta: A planta é encontrada no Brazil?
         //Pergunta: A planta é toxica?
         //Pergunta: A planta é medicinal?
-    
+        //Pergunta: As folhas da planta caem no outono?
+        //Pergunta: A flores são vermelhas/azuis/brancas/roxas/rosas/amarelas?
+        //Pergunta: A planta é comumente encontrada em florestas/areas umidas/campo aberto/ deserto?
+        //Pergunta: A planta é de sol/sombra/ equilibrado?
+        //Pergunta: A planta é muito/pouco/medio tolerante seca?
+        
         //Pergunta: A planta é comestivel?
-        //sim = (filter_not ediable_parts = null) // direcionar para pergunta de qual parte é comestivel
-        //não = 
-        //talvez = () //direcionar para outra pergunta
-
-
-        //Pergunta: 
-        // filter e filter_not
+        //sim =  true // direcionar para pergunta de qual parte é comestivel
+        //não =  false
+        //talvez = null() //direcionar para outra pergunta
   
         axios.get(url).then((response) => {
             plantas_trefle = (response.data.data);
@@ -179,8 +162,8 @@ export class PreencherResultadoUseCase implements UseCase<PreencherResultadoInpu
             });
         }
         
-        let resultado = await this.resultGateway.atualizarResultado({idUser, idResultado, plantas: plantasProntas});
-        this.userRepoFirebase.adicionarResultado(resultado);
+        let resultado =  this.resultRepoFirebase.criarResultado({plantas: plantasProntas});
+        await this.userRepoFirebase.adicionarResultado({idUser, resultado: resultado.resultado});
 
         return resultado;
     }

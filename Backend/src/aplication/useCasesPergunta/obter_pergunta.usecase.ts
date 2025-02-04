@@ -9,14 +9,16 @@ export type ObterPerguntaInputDto = {
 export type ObterPerguntaOutputDto = {
     id: string;
     indagacao: string;
-    opcoes: string[];
+    indicacao: string[];
+    filtro: string;
+    alternativas : string | null[];
 }
 
 export class ObterPerguntaUseCase implements UseCase<ObterPerguntaInputDto, ObterPerguntaOutputDto>{
-    constructor(private perguntaGateway: PerguntaGateway){}
+    constructor(private perguntaRepoFirebase: PerguntaRepoFirebase){}
 
-    public create(perguntaGateway: PerguntaGateway): ObterPerguntaUseCase{
-        return new ObterPerguntaUseCase(perguntaGateway);
+    public create(perguntaRepoFirebase: PerguntaRepoFirebase): ObterPerguntaUseCase{
+        return new ObterPerguntaUseCase(perguntaRepoFirebase);
     }
 
     async execute({id} :ObterPerguntaInputDto): Promise<ObterPerguntaOutputDto>{
@@ -29,9 +31,11 @@ export class ObterPerguntaUseCase implements UseCase<ObterPerguntaInputDto, Obte
 
     private presentOutput(pergunta: Pergunta): ObterPerguntaOutputDto{
         return {
-            id: pergunta.id,
-            indagacao: pergunta.indagacao,
-            opcoes: pergunta.opcoes
+            id: pergunta.id;
+            indagacao: pergunta.indagacao
+            indicacao: pergunta.indicacao
+            filtro: pergunta.alternativas;
+            alternativas : pergunta.alternativas;
         }
     }
 }

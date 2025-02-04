@@ -1,4 +1,4 @@
-import 'package:app_plantinha/controler/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';

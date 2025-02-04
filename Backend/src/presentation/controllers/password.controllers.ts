@@ -20,7 +20,7 @@ export class PasswordController {
     }
 
     if (newPassword !== confirmPassword) {
-      res.status(400).json({ error: "As senhas não conferem." });
+      res.status(400).json({error: "As senhas não conferem."});
     }
 
     try {

@@ -1,4 +1,6 @@
-import 'package:app_plantinha/controler/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/provider/forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
@@ -24,6 +26,7 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
     final stepForgotPasswordState = Provider.of<StepForgotPasswordState>(context);
+    final AuthService auth = AuthService();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widthScreen * 0.039),
@@ -72,9 +75,18 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
           Align(
             alignment: Alignment.centerRight,
             child: ContainerWithButton(
-              onPressed: () {
-                stepForgotPasswordState.resetCurrentStep();
-                context.go('/');
+              onPressed: () async{
+                try{
+                  await auth.redefinirSenha(Provider.of<ForgotPasswordState>(context).email,valuesItems[0]['valor'].text , valuesItems[1]['valor'].text);
+                  stepForgotPasswordState.resetCurrentStep();
+                  // ignore: use_build_context_synchronously
+                  context.go('/');
+                }catch(e){
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Erro: $e'))
+                  );
+                }
               },
               widthAdjusted: 139,
               heightAdjusted: 58,

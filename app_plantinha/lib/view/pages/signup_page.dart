@@ -1,4 +1,5 @@
 import 'package:app_plantinha/configs/app.configs.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
@@ -14,14 +15,32 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final AuthService auth = AuthService();
   static final List<Map<String, dynamic>> valuesItems = [
-    {'label': 'Nome', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
-    {'label': 'E-mail', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
-    {'label': 'Senha', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
-    {'label': 'Confirmar senha', 'form': GlobalKey<FormState>(), 'valor': TextEditingController()},
+    {
+      'label': 'Nome',
+      'form': GlobalKey<FormState>(),
+      'valor': TextEditingController()
+    },
+    {
+      'label': 'E-mail',
+      'form': GlobalKey<FormState>(),
+      'valor': TextEditingController()
+    },
+    {
+      'label': 'Senha',
+      'form': GlobalKey<FormState>(),
+      'valor': TextEditingController()
+    },
+    {
+      'label': 'Confirmar senha',
+      'form': GlobalKey<FormState>(),
+      'valor': TextEditingController()
+    },
   ];
 
-  void navigateToHomePage() {
+  Future<void> cadastrarUser(String nome, String email, String password, String confirmPassword) async{
+    auth.cadastrarUsers(nome, email, password, confirmPassword);
     AppConfigs.saveLastRoute('/homePage');
     context.go('/homePage');
   }
@@ -36,11 +55,11 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.only(top: heightScreen * 0.05),
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min, 
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Cabeçalho
               Row(
-                mainAxisSize: MainAxisSize.min, 
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
                     onPressed: () {
@@ -58,7 +77,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   const Spacer(), // Cria um espaço flexível entre o texto e a imagem.
                   Container(
-                    margin: EdgeInsets.only(bottom: heightScreen * 0.01, right: widthScreen * 0.02),
+                    margin: EdgeInsets.only(
+                        bottom: heightScreen * 0.01, right: widthScreen * 0.02),
                     width: widthScreen * 0.14,
                     height: heightScreen * 0.08,
                     child: ClipOval(
@@ -106,7 +126,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Criar conta',
                   marginRight: widthScreen * 0.02,
                   marginTop: heightScreen * 0.04,
-                  onPressed: navigateToHomePage,
+                  onPressed: () async {
+                    await cadastrarUser(valuesItems[0]['valor'].text, valuesItems[1]['valor'].text, valuesItems[2]['valor'].text, valuesItems[3]['valor'].text);
+                  },
                 ),
               ),
             ],

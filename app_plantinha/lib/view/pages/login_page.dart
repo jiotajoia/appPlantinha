@@ -1,4 +1,5 @@
 import 'package:app_plantinha/configs/app.configs.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   final _form1 = GlobalKey<FormState>();
   final _valor = TextEditingController();
   final _valor1 = TextEditingController();
+  final AuthService auth = AuthService();
+  void logarUser(String lastRoute, String email, String password) {
+    auth.logarUsers(email, password);
+    AppConfigs.saveLastRoute(lastRoute);
+    context.go(lastRoute);
+  }
 
-  void navigateToPage(String lastRoute){
+  void navigateToPage(String lastRoute) {
     AppConfigs.saveLastRoute(lastRoute);
     context.go(lastRoute);
   }
@@ -27,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
-    
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: heightScreen * 0.098),
@@ -97,17 +104,16 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               ContainerWithButton(
-                heightAdjusted: heightScreen * 0.09,
-                widthAdjusted: widthScreen * 0.41,
-                marginTop: heightScreen * 0.02,
-                width: widthScreen * 0.41,
-                height: heightScreen * 0.09,
-                labelText: 'Login',
-                marginBottom: heightScreen * 0.04,
-                onPressed: (){
-                  navigateToPage('/homePage');
-                }
-              ),
+                  heightAdjusted: heightScreen * 0.09,
+                  widthAdjusted: widthScreen * 0.41,
+                  marginTop: heightScreen * 0.02,
+                  width: widthScreen * 0.41,
+                  height: heightScreen * 0.09,
+                  labelText: 'Login',
+                  marginBottom: heightScreen * 0.04,
+                  onPressed: () {
+                    logarUser('/homePage', _valor.text, _valor1.text);
+                  }),
               InkWell(
                 onTap: () {
                   context.go('/splashScreenPage');
@@ -119,13 +125,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: heightScreen * 0.09, bottom: heightScreen * 0.01),
+                margin: EdgeInsets.only(
+                    top: heightScreen * 0.09, bottom: heightScreen * 0.01),
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     AppConfigs.saveLastRoute('/signUpPage');
                     context.push('/signUpPage');
                   },
-                  child: Text('Cadastre-se', style: TextStyle(fontSize: 15),),
+                  child: Text(
+                    'Cadastre-se',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ),
               )
             ],

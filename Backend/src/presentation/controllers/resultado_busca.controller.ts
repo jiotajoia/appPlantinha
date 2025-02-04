@@ -2,18 +2,18 @@ import { Request, Response } from "express";
 import { PreencherResultadoUseCase } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
 import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
+
 export class ResultadoBuscaController{
-    constructor( private preencherResultadoUseCase: PreencherResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
+    constructor( private criarResultadoUseCase: CriarResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
     
     public preencherResult = async (req: Request, res: Response) => {
         try{
             let idUser = req.params.idUser;
-            let idResultado = req.params.idResultado;
-            let respostas: string[] = req.body;
-            res.status(200).json(this.preencherResultadoUseCase.execute({idUser, idResultado, respostas}));
+            let respostas = req.body;
+            res.status(200).json(this.criarResultadoUseCase.execute({idUser, respostas}));
         }catch(error: any){
             res.status(500).json({
-                message: "Erro ao preencher resultado.",
+                message: "Erro ao criar resultado.",
                 error: error.message,
             });
         }

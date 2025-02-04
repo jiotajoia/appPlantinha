@@ -1,4 +1,5 @@
-import 'package:app_plantinha/controler/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
@@ -18,8 +19,9 @@ class ChangePasswordPage extends StatefulWidget {
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _form = GlobalKey<FormState>();
   final _form1 = GlobalKey<FormState>();
-  final _valor = TextEditingController();
-  final _valor1 = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final AuthService auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 width: widthScreen * 0.762,
                 marginTop: heightScreen * 0.02,
                 textHintForm: 'Digite nova senha...',
-                controllerForm: _valor, 
+                controllerForm: newPasswordController, 
                 keyForm: _form
               ),
               ContainerWithForm(
@@ -65,7 +67,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 width: widthScreen * 0.762,
                 marginTop: heightScreen * 0.004,
                 textHintForm: 'Confirme nova senha...',
-                controllerForm: _valor1, 
+                controllerForm: confirmPasswordController, 
                 keyForm: _form1
               ),
               ContainerWithButton(
@@ -75,8 +77,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 width: widthScreen * 0.230,
                 height: heightScreen * 0.05,
                 labelText: 'Alterar',
-                onPressed: (){
-                
+                onPressed:  () async{
+                  try{
+                    await auth.resetarSenha(newPasswordController.text, confirmPasswordController.text);
+                  }catch(e){
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Erro: $e'))
+                    );
+                  }
                 },
                 fontSize: Provider.of<FontSizeState>(context).fontSize,
               ),

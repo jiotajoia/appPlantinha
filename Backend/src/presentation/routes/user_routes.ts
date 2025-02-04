@@ -20,12 +20,13 @@ export class UserRoutes{
     iniciarRotas(): Application{
         const controller: UsuarioController = new UsuarioController(new CriarUsuarioUseCase(this.userRepoFirebase), new ObterUsuarioUseCase(this.userRepoFirebase), new DeletarUsuarioUseCase(this.userRepoFirebase), new AlterarNomeUsuarioUseCase(this.userRepoFirebase), new AlterarSenhaUsuarioUseCase(this.userRepoFirebase));
         
-        this.app.route(this.rota).post(controller.criarUsuario).get(controller.obterUsuario);
+        this.app.route(this.rota).post(controller.criarUsuario)
+        this.app.route(this.rota +'/obter').post(controller.obterUsuario);
 
         this.app.route(this.rota + '/:id').delete(controller.deletarUsuario);
 
         this.app.route(this.rota + '/:id/alterarNome').patch(controller.alterarNomeUsuario);
-        this.app.route(this.rota + '/:id/alterarSenha').patch(controller.alterarNomeUsuario);
+        this.app.route(this.rota + '/:id/alterarSenha').patch(controller.alterarSenhaUsuario);
         
         return this.app;
     }

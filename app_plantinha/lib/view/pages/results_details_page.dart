@@ -1,5 +1,5 @@
-import 'package:app_plantinha/controler/provider/font_size.provider.dart';
-import 'package:app_plantinha/controler/provider/light_dark.provider.dart';
+import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';

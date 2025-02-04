@@ -1,9 +1,9 @@
 import { Application} from "express";
-import { QuizController } from "../controllers/pergunta.controller";
+import { PerguntaController } from "../controllers/pergunta.controller";
 import { PerguntaGateway } from "../../domain/gateways/pergunta.gateway";
 import { ObterPerguntaUseCase } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
 
-export class QuizRoutes{
+export class PerguntaRoutes{
     app: Application;
     rotaPergunta : string = '/pergunta/:id'
     perguntaGateway!: PerguntaGateway; 
@@ -14,7 +14,7 @@ export class QuizRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller: QuizController = new QuizController(new ObterPerguntaUseCase(this.perguntaGateway));
+        const controller: PerguntaController = new PerguntaController(new ObterPerguntaUseCase(this.perguntaGateway));
         
         this.app.route(this.rotaPergunta).get(controller.obterPergunta);
 

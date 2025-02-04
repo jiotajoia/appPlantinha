@@ -8,6 +8,7 @@ import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 
 export class ResultadoRoutes{
     app: Application;
+    rotaResult: string = `/user/:idUser/resultado`;
     rotaUserResult: string = `/user/:idUser/resultado/:idResultado`;
     userRepoFirebase!: UserRepoFirebase;
     resultRepoFirebase!: ResultRepoFirebase;
@@ -18,9 +19,9 @@ export class ResultadoRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller = new ResultadoBuscaController(new PreencherResultadoUseCase(this.userRepoFirebase, this.resultRepoFirebase), new ObterResultadoUseCase(this.resultRepoFirebase), new DeletarResultadoUseCase(this.resultRepoFirebase));
+        const controller = new ResultadoBuscaController(new CriarResultadoUseCase(this.userRepoFirebase, this.resultRepoFirebase), new ObterResultadoUseCase(this.resultRepoFirebase), new DeletarResultadoUseCase(this.resultRepoFirebase));
         
-        this.app.route(this.rotaUserResult).patch(controller.preencherResult);
+        this.app.route(this.rotaResult).post(controller.criarResult);
 
         this.app.route(this.rotaUserResult).get(controller.obterResult).delete(controller.deletarResult);
 

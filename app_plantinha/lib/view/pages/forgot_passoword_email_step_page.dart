@@ -1,5 +1,6 @@
-import 'package:app_plantinha/controler/provider/forgot_password_state.provider.dart';
-import 'package:app_plantinha/controler/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/provider/forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class ForgotPassowordEmailStepPage extends StatefulWidget {
 class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepPage> {
   final emailController = TextEditingController();
   final _form = GlobalKey<FormState>();
+  final AuthService auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +72,17 @@ class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepP
             ContainerWithButton(
               widthAdjusted: widthScreen * 0.34,
               heightAdjusted: heightScreen * 0.08,
-              onPressed: () {
-                forgotPasswordState.updateEmail(emailController.text);
-                stepForgotPasswordState.incrementCurrentStep();
+              onPressed: () async{
+                try{
+                  await auth.enviarCodigo(emailController.text);
+                  forgotPasswordState.updateEmail(emailController.text);
+                  stepForgotPasswordState.incrementCurrentStep();
+                }catch(e){
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Erro: $e'))
+                  );
+                }
               },
               labelText: 'Enviar',
               width: widthScreen * 0.34,

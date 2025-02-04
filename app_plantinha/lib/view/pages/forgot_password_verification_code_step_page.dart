@@ -1,5 +1,6 @@
-import 'package:app_plantinha/controler/provider/forgot_password_state.provider.dart';
-import 'package:app_plantinha/controler/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/provider/forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/provider/step_forgot_password_state.provider.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class ForgotPasswordVerificationCodeStepPage extends StatefulWidget {
 class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordVerificationCodeStepPage> {
   final verificationCodeController = TextEditingController();
   final _form = GlobalKey<FormState>();
+  final AuthService auth = AuthService();
 
   String _obfuscateEmail(String email) {
     if (email.isEmpty) return '';
@@ -86,8 +88,17 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
               flex: 3,
             ),
             ContainerWithButton(
-              onPressed: () {
-                Provider.of<StepForgotPasswordState>(context, listen: false).incrementCurrentStep();
+              onPressed: () async{
+                try{
+                  await auth.verificarCodigo(Provider.of<ForgotPasswordState>(context).email, verificationCodeController.text);
+                // ignore: use_build_context_synchronously
+                  Provider.of<StepForgotPasswordState>(context, listen: false).incrementCurrentStep();
+                }catch(e){
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Erro: $e'))
+                  );
+                }
               },
               widthAdjusted: widthScreen * 0.34,
               heightAdjusted: heightScreen * 0.08,

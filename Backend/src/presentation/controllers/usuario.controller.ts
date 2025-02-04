@@ -81,7 +81,6 @@ export class UsuarioController{
 
             if ( !novoSenha || !confirmaSenha) {
               res.status(400).json({error:"As senhas não podem estar vazias"});
-
             }
         
             const regex = new RegExp("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\$&*~]).{8,}$");

@@ -1,4 +1,4 @@
-import 'package:app_plantinha/controler/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

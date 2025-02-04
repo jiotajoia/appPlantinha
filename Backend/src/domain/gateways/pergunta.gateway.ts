@@ -1,4 +1,4 @@
-import { ObterPerguntaInputDto } from "../../aplication/useCasesQuiz/obter_pergunta.usecase";
+import { ObterPerguntaInputDto } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
 import { Pergunta } from "../entities/pergunta.entity";
 
 export interface PerguntaGateway{

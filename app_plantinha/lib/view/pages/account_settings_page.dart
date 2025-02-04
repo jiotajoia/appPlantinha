@@ -1,5 +1,7 @@
 import 'package:app_plantinha/configs/app.configs.dart';
-import 'package:app_plantinha/controler/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/nome.provider.dart';
+import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
@@ -20,6 +22,7 @@ class AccountSettingsPage extends StatefulWidget {
 class _AccountSettingsPageState extends State<AccountSettingsPage> {
   final _form = GlobalKey<FormState>();
   final _valor = TextEditingController();
+  final AuthService auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +63,21 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ContainerWithButton(
                 widthAdjusted: widthScreen * 0.291, 
                 heightAdjusted: heightScreen * 0.061,
-                onPressed: () {},
+                onPressed: () async{
+                  try{
+                    await auth.alterarNome(_valor.text);
+                    // ignore: use_build_context_synchronously
+                    Provider.of<NomeState>(context).setNome(_valor.text);
+                  }catch(e){
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Erro: $e'),
+                      )
+                    );
+                  }
+
+                },
                 marginTop: heightScreen * 0.013,
                 width: widthScreen * 0.206,
                 height: heightScreen * 0.047,
@@ -105,7 +122,34 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 width: widthScreen * 0.206,
                 height: heightScreen * 0.047,
                 labelText: 'Excluir',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context, 
+                    builder: (BuildContext context){
+                      return AlertDialog(
+                        title: Text('Tem certeza que Deseja excluir sua conta?'),
+                        content: Text('Caso você exclua sua conta, infelizmente não haverá maneira de recuperá-la. Clique em confirmar caso tenha certeza de sua decisão.'),
+                        actions: [
+                          TextButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }, 
+                            child: Text('Cancelar')
+                          ),
+                          TextButton(
+                            onPressed: () async{
+                              await auth.deletarConta();
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStateProperty.all(Colors.red)
+                            ),
+                            child: Text('Confirmar'),
+                           )
+                        ],
+                      );
+                    }
+                  );
+                },
                 fontSize: Provider.of<FontSizeState>(context).fontSize - 2,
               ),
             ],

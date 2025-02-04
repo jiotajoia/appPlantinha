@@ -1,6 +1,7 @@
 import 'package:app_plantinha/configs/app.configs.dart';
-import 'package:app_plantinha/controler/provider/font_size.provider.dart';
-import 'package:app_plantinha/controler/provider/light_dark.provider.dart';
+import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
+import 'package:app_plantinha/controllers/provider/nome.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -19,6 +20,7 @@ class DrawerBase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String username = Provider.of<NomeState>(context).nome;
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
 
@@ -77,7 +79,7 @@ class DrawerBase extends StatelessWidget {
                             padding: EdgeInsets.only(top: heightScreen * 0.013),
                           ),
                           Text(
-                            'jiotajoia',
+                            username,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: Provider.of<FontSizeState>(context).fontSize - 1,

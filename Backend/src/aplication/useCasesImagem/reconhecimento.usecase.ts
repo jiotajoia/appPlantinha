@@ -24,11 +24,6 @@ export type ReconhecimentoOutputDto = {
     }[];
 }
 
-export type criarResultadoInputDto = {
-    plantas: JsonWebKey;
-    tipo: string;
-}
-
 export class ReconhecimentoUseCase implements UseCase<ReconhecimentoInputDto, ReconhecimentoOutputDto>{
     constructor(private resultGateway: ResultadoGateway, private userGateway: UserGateway){}
 

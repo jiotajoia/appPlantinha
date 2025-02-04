@@ -1,5 +1,3 @@
-import { Usuario } from "../../domain/entities/usuario.entity";
-import { UserGateway } from "../../domain/gateways/user.gateway";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { UseCase } from "../usecase";
 

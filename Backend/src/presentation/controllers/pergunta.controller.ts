@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ObterPerguntaUseCase } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
 
-export class QuizController{
+export class PerguntaController{
     constructor(private ObterPerguntaUseCase: ObterPerguntaUseCase){}
 
     public obterPergunta = async (req: Request, res: Response) => {
