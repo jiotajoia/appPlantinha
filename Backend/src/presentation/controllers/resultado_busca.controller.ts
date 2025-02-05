@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { PreencherResultadoUseCase } from "../../aplication/useCasesResultadoBusca/preencher_resultado.usecase";
 import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
 import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
+import { CriarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/criar_resultado.usecase";
 
 export class ResultadoBuscaController{
     constructor( private criarResultadoUseCase: CriarResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}

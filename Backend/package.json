@@ -10,7 +10,7 @@
         "dev": "nodemon --watch src --exec ts-node src/server.js",
         "build": "tsc",
         "start": "node dist/server.js"
-    },
+    },  
     "keywords": [],
     "author": "",
     "license": "ISC",

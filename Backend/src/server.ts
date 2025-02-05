@@ -23,6 +23,7 @@ new ResultadoRoutes(app);
 new HistoricoRoutes(app);
 new ImagemRoutes(app);
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+app.listen(3000, '0.0.0.0', () => {
+    console.log('Servidor rodando na porta 3000');
+  });
+  
