@@ -1,6 +1,6 @@
 import { PerguntaController } from "../controllers/pergunta.controller";
 import { ObterPerguntaUseCase } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
-export class Pergunta {
+export class PerguntaRoutes {
     app;
     rotaPergunta = '/pergunta/:id';
     perguntaGateway;

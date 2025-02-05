@@ -7,15 +7,15 @@ export class Password_routes {
     rotaReset = '/reset-password';
     rotaVerify = '/verify-code';
     rotaSend = '/send-code';
-    controler = new PasswordController(new EditarSenhaUseCase(), new VerifyCodeUseCase(), new SendCodeUseCase());
     constructor(app) {
         this.app = app;
         this.iniciarRotas();
     }
     iniciarRotas() {
-        this.app.route(this.rotaReset).post(this.controler.resetPassword);
-        this.app.route(this.rotaVerify).post(this.controler.verifyCode);
-        this.app.route(this.rotaSend).post(this.controler.sendCode);
+        const controler = new PasswordController(new EditarSenhaUseCase(), new VerifyCodeUseCase(), new SendCodeUseCase());
+        this.app.route(this.rotaReset).post(controler.resetPassword);
+        this.app.route(this.rotaVerify).post(controler.verifyCode);
+        this.app.route(this.rotaSend).post(controler.sendCode);
         return this.app;
     }
 }

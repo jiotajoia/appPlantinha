@@ -9,5 +9,6 @@ export class EditarSenhaUseCase {
         await admin.auth().updateUser(user.uid, {
             password: newPassword
         });
+        //implementar camada de abstração infraestructure(ou common), para colocar Implementações de autenticação
     }
 }

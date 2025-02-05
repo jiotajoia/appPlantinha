@@ -1,10 +1,10 @@
 export class ObterPerguntaUseCase {
-    perguntaGateway;
-    constructor(perguntaGateway) {
-        this.perguntaGateway = perguntaGateway;
+    perguntaRepoFirebase;
+    constructor(perguntaRepoFirebase) {
+        this.perguntaRepoFirebase = perguntaRepoFirebase;
     }
-    create(perguntaGateway) {
-        return new ObterPerguntaUseCase(perguntaGateway);
+    create(perguntaRepoFirebase) {
+        return new ObterPerguntaUseCase(perguntaRepoFirebase);
     }
     async execute({ id }) {
         const pergunta = await this.perguntaGateway.obterPergunta({ id });
@@ -15,7 +15,9 @@ export class ObterPerguntaUseCase {
         return {
             id: pergunta.id,
             indagacao: pergunta.indagacao,
-            opcoes: pergunta.opcoes
+            indicacao: pergunta.indicacao,
+            filtro: pergunta.alternativas,
+            alternativas: pergunta.alternativas
         };
     }
 }

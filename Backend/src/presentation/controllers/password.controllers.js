@@ -21,7 +21,7 @@ export class PasswordController {
         }
         try {
             await this.editarSenhaUseCases.execute(email, newPassword);
-            res.status(200).json({ success: true, message: "Senha alterada com sucesso!" });
+            res.status(200).json({ message: "Senha alterada com sucesso!" });
         }
         catch (error) {
             console.error("Erro ao alterar senha:", error);
@@ -41,7 +41,7 @@ export class PasswordController {
             if (savedCode !== code) {
                 res.status(403).json({ error: "Código inválido." });
             }
-            res.status(200).json({ success: true, message: "Código verificado com sucesso!" });
+            res.status(200).json({ message: "Código verificado com sucesso!" });
         }
         catch (error) {
             console.error("Erro ao verificar código:", error);
@@ -57,7 +57,7 @@ export class PasswordController {
         }
         try {
             await this.sendCodeUseCases.execute(email);
-            res.status(200).json({ success: true, message: "Código enviado com sucesso!" });
+            res.status(200).json({ message: "Código enviado com sucesso!" });
         }
         catch (error) {
             console.error("Erro ao enviar código:", error);

@@ -26,8 +26,8 @@ export class SendCodeUseCase {
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,
-            secure: false,
-            requireTLS: true,
+            secure: false, // Use `true` para produção com STARTTLS ou 465 com SSL
+            requireTLS: true, // Adicione esta linha para garantir o TLS
             auth: {
                 type: "OAuth2",
                 user: process.env.EMAIL_USER,

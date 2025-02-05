@@ -23,7 +23,7 @@ export class UserRepoFirebase {
             }
             throw error;
         }
-    } //S2
+    }
     async obterUser(dados) {
         try {
             const { idToken } = dados;
@@ -67,7 +67,7 @@ export class UserRepoFirebase {
             const plantaRef = db.collection('users').doc(idUser).collection('historico').doc(resultado.id).collection('plantas').doc(planta.id);
             db.batch().set(plantaRef, planta);
         });
-        await db.batch().commit(); // Executa a operação em lote para melhor desempenho
+        await db.batch().commit();
     }
     async obterHistorico(dados) {
         const { idUser } = dados;

@@ -3,12 +3,12 @@ export class ResultadoBusca {
     constructor(props) {
         this.props = props;
     }
-    static create(dataBusca, tipoBusca) {
+    static create(tipoBusca, plantas) {
         return new ResultadoBusca({
             id: crypto.randomUUID.toString(),
-            dataBusca,
+            dataBusca: new Date().toISOString().split('T')[0],
             tipoBusca,
-            plantas: []
+            plantas: plantas
         });
     }
     static with(props) {

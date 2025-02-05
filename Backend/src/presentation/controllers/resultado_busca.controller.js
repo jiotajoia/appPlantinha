@@ -2,19 +2,16 @@ export class ResultadoBuscaController {
     criarResultadoUseCase;
     obterResultadoUseCase;
     deletarResultadoUseCase;
-
     constructor(criarResultadoUseCase, obterResultadoUseCase, deletarResultadoUseCase) {
         this.criarResultadoUseCase = criarResultadoUseCase;
         this.obterResultadoUseCase = obterResultadoUseCase;
         this.deletarResultadoUseCase = deletarResultadoUseCase;
     }
-
-    criarResult = async (req, res) => {
+    preencherResult = async (req, res) => {
         try {
             let idUser = req.params.idUser;
-            let idResultado = req.params.idResultado;
             let respostas = req.body;
-            res.status(200).json(this.preencherResultadoUseCase.execute({ idUser, respostas }));
+            res.status(200).json(this.criarResultadoUseCase.execute({ idUser, respostas }));
         }
         catch (error) {
             res.status(500).json({
