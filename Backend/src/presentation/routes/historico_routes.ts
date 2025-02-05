@@ -1,6 +1,5 @@
 import { Application} from "express";
 import { HistoricoController } from "../controllers/historico.controller";
-import { UserGateway } from "../../domain/gateways/user.gateway";
 import { LimparHistoricoUseCase } from "../../aplication/useCasesHistorico/limpar_historico.usecase";
 import { ObterHistoricoUseCase } from "../../aplication/useCasesHistorico/obter_historico.usecase";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";

@@ -52,7 +52,9 @@ export class UsuarioController{
     public deletarUsuario = async (req: Request, res: Response) => {
         try{
             const id = req.params.id;
-            res.status(200).json({message: "Usuário deletado com sucesso", data:await this.deletarUsuarioUseCase.execute({id})});
+            await this.deletarUsuarioUseCase.execute({id});
+            
+            res.status(200).json({message: "Usuário deletado com sucesso"});
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar usuário.",

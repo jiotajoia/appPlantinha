@@ -1,7 +1,6 @@
 import { CriarUsuarioInputDto } from "../aplication/useCasesUsuario/criar_usuario.usecase";
 import { DeletarUsuarioInputDto } from "../aplication/useCasesUsuario/deletar_usuario.usecase";
 import {ObterUsuarioInputDto, ObterUsuarioOutputDto,} from "../aplication/useCasesUsuario/obter_usuario.usecase";
-import { ResultadoBusca } from "../domain/entities/resultado_busca.entity";
 import { UserGateway } from "../domain/gateways/user.gateway";
 import { auth, db } from "./firebase_config/firebase";
 import {AlterarNomeUsuarioInputDto, AlterarNomeUsuarioOutputDto,} from "../aplication/useCasesUsuario/alterar_nome_usuario.usecase";
@@ -34,7 +33,7 @@ export class UserRepoFirebase implements UserGateway {
       }
       throw error;
     }
-  } //S2
+  }
 
   async obterUser(dados: ObterUsuarioInputDto): Promise<ObterUsuarioOutputDto> {
     try {

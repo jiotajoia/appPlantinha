@@ -46,7 +46,6 @@ export class AlterarNomeUsuarioUseCase implements UseCase<AlterarNomeUsuarioInpu
             throw new Error("O nome não pode ser vazio");
         }
     
-        return await this.userFireBaseRepo.updateUserName({id, novoNome});
-        
+        return await this.userFireBaseRepo.updateUserName({id, novoNome}); 
     }
 }

@@ -10,17 +10,17 @@ export class Password_routes{
     rotaVerify: string = '/verify-code';
     rotaSend: string = '/send-code';
 
-    controler: PasswordController = new PasswordController(new EditarSenhaUseCase(), new VerifyCodeUseCase(), new SendCodeUseCase());
-    
     constructor(app: Application){
         this.app = app;
         this.iniciarRotas();
     }
     
     iniciarRotas(): Application{
-        this.app.route(this.rotaReset).post(this.controler.resetPassword);
-        this.app.route(this.rotaVerify).post(this.controler.verifyCode);
-        this.app.route(this.rotaSend).post(this.controler.sendCode);
+        const controler: PasswordController = new PasswordController(new EditarSenhaUseCase(), new VerifyCodeUseCase(), new SendCodeUseCase());
+        
+        this.app.route(this.rotaReset).post(controler.resetPassword);
+        this.app.route(this.rotaVerify).post(controler.verifyCode);
+        this.app.route(this.rotaSend).post(controler.sendCode);
 
         return this.app;
     }

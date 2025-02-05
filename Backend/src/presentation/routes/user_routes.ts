@@ -10,7 +10,7 @@ import { AlterarSenhaUsuarioUseCase } from "../../aplication/useCasesUsuario/alt
 export class UserRoutes{
     app: Application;
     rota: string = '/user';
-    userRepoFirebase!: UserRepoFirebase;
+    userRepoFirebase: UserRepoFirebase = new UserRepoFirebase();
 
     constructor(app: Application){
         this.app = app;
@@ -20,7 +20,7 @@ export class UserRoutes{
     iniciarRotas(): Application{
         const controller: UsuarioController = new UsuarioController(new CriarUsuarioUseCase(this.userRepoFirebase), new ObterUsuarioUseCase(this.userRepoFirebase), new DeletarUsuarioUseCase(this.userRepoFirebase), new AlterarNomeUsuarioUseCase(this.userRepoFirebase), new AlterarSenhaUsuarioUseCase(this.userRepoFirebase));
         
-        this.app.route(this.rota).post(controller.criarUsuario)
+        this.app.route(this.rota).post(controller.criarUsuario);
         this.app.route(this.rota +'/obter').post(controller.obterUsuario);
 
         this.app.route(this.rota + '/:id').delete(controller.deletarUsuario);

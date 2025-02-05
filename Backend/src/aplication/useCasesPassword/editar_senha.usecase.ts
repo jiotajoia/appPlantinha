@@ -10,8 +10,10 @@ export class EditarSenhaUseCase{
     async execute(email: string, newPassword: string): Promise<void>{
 
         const user = await admin.auth().getUserByEmail(email);
-            await admin.auth().updateUser(user.uid, {
-              password: newPassword
-            });
+        await admin.auth().updateUser(user.uid, {
+          password: newPassword
+        });
+        
+        //implementar camada de abstração infraestructure(ou common), para colocar Implementações de autenticação
     }
 }
