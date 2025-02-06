@@ -1,10 +1,7 @@
 import axios from "axios";
-import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { UseCase } from "../usecase";
 import { Planta } from "../../domain/entities/planta.entity";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
-import { Pergunta } from "../../domain/entities/pergunta.entity";
-import { filter } from "cheerio/lib/api/traversing";
 import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 
 export type CriarResultadoInputDto = {

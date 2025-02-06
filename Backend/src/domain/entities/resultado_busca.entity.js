@@ -1,29 +1,49 @@
-export class ResultadoBusca {
-    props;
-    constructor(props) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResultadoBusca = void 0;
+var ResultadoBusca = /** @class */ (function () {
+    function ResultadoBusca(props) {
         this.props = props;
     }
-    static create(tipoBusca, plantas) {
+    ResultadoBusca.create = function (tipoBusca, plantas) {
         return new ResultadoBusca({
             id: crypto.randomUUID.toString(),
             dataBusca: new Date().toISOString().split('T')[0],
-            tipoBusca,
+            tipoBusca: tipoBusca,
             plantas: plantas
         });
-    }
-    static with(props) {
+    };
+    ResultadoBusca.with = function (props) {
         return new ResultadoBusca(props);
-    }
-    get id() {
-        return this.props.id;
-    }
-    get dataBusca() {
-        return this.props.dataBusca;
-    }
-    get tipoBusca() {
-        return this.props.tipoBusca;
-    }
-    get plantas() {
-        return this.props.plantas;
-    }
-}
+    };
+    Object.defineProperty(ResultadoBusca.prototype, "id", {
+        get: function () {
+            return this.props.id;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ResultadoBusca.prototype, "dataBusca", {
+        get: function () {
+            return this.props.dataBusca;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ResultadoBusca.prototype, "tipoBusca", {
+        get: function () {
+            return this.props.tipoBusca;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ResultadoBusca.prototype, "plantas", {
+        get: function () {
+            return this.props.plantas;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return ResultadoBusca;
+}());
+exports.ResultadoBusca = ResultadoBusca;

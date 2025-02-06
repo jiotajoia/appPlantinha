@@ -1,10 +1,9 @@
-import admin from "firebase-admin";
+import * as admin from "firebase-admin";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 
-
 admin.initializeApp({
-  credential: admin.credential.cert(require("../teste-key.json")),
+  credential: admin.credential.cert(require("../../../key_admin_sdk.json")),
 });
 
 export const auth = getAuth();

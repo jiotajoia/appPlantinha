@@ -13,7 +13,7 @@ export class ResultadoBusca {
     public static create( tipoBusca: string, plantas : Planta[]){
       return new ResultadoBusca({
         id: crypto.randomUUID.toString(),
-        dataBusca: new Date().toISOString().split('T')[0];
+        dataBusca: new Date().toISOString().split('T')[0],
         tipoBusca, 
         plantas: plantas
       });

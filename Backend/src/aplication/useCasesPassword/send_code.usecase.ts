@@ -1,6 +1,6 @@
 import * as admin from "firebase-admin";
 import { google } from "googleapis";
-import nodemailer, { TransportOptions } from "nodemailer";
+import * as nodemailer from "nodemailer";
 
 export class SendCodeUseCase {
   constructor() {}
@@ -44,7 +44,7 @@ export class SendCodeUseCase {
         refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
         accessToken: accessToken.token,
       },
-    } as TransportOptions);
+    } as nodemailer.TransportOptions);
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
