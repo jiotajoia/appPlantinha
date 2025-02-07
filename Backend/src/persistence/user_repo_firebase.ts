@@ -83,7 +83,6 @@ export class UserRepoFirebase implements UserGateway {
         tipoBusca: resultado.tipoBusca
     });
 
-
     resultado.plantas.forEach((planta) => {
         const plantaRef = db.collection('users').doc(idUser).collection('historico').doc(resultado.id).collection('plantas').doc(planta.id);
         db.batch().set(plantaRef, planta);

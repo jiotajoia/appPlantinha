@@ -1,6 +1,3 @@
-import { Planta } from "../../domain/entities/planta.entity";
-import { ResultadoBusca } from "../../domain/entities/resultado_busca.entity";
-import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 import { UseCase } from "../usecase";
 
@@ -35,7 +32,6 @@ export class ObterResultadoUseCase implements UseCase<ObterResultadoInputDto, Ob
     }
 
     async execute({idUser, idResultado}: ObterResultadoInputDto): Promise<ObterResultadoOutputDto>{
-        let resultado = await this.resultRepoFirebase.obterResultado({idUser, idResultado});
-        return resultado;
+        return await this.resultRepoFirebase.obterResultado({idUser, idResultado});
     }
 }

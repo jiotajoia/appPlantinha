@@ -7,7 +7,7 @@ export class ObterPerguntaUseCase {
         return new ObterPerguntaUseCase(perguntaRepoFirebase);
     }
     async execute({ id }) {
-        const pergunta = await this.perguntaGateway.obterPergunta({ id });
+        const pergunta = await this.perguntaRepoFirebase.obterPergunta({ id });
         const output = this.presentOutput(pergunta);
         return output;
     }
@@ -16,8 +16,8 @@ export class ObterPerguntaUseCase {
             id: pergunta.id,
             indagacao: pergunta.indagacao,
             indicacao: pergunta.indicacao,
-            filtro: pergunta.alternativas,
-            alternativas: pergunta.alternativas
+            filtro: pergunta.filtro,
+            alternativas: pergunta.alternativas,
         };
     }
 }

@@ -22,20 +22,7 @@ export class ObterPerguntaUseCase implements UseCase<ObterPerguntaInputDto, Obte
     }
 
     async execute({id} :ObterPerguntaInputDto): Promise<ObterPerguntaOutputDto>{
-        const pergunta = await this.perguntaRepoFirebase.obterPergunta({id});
-
-        const output = this.presentOutput(pergunta);
-
-        return output;
+        return await this.perguntaRepoFirebase.obterPergunta({id});
     }
 
-    private presentOutput(pergunta: Pergunta): ObterPerguntaOutputDto{
-        return {
-            id: pergunta.id,
-            indagacao: pergunta.indagacao,
-            indicacao: pergunta.indicacao,
-            filtro: pergunta.filtro,
-            alternativas : pergunta.alternativas,
-        }
-    }
 }

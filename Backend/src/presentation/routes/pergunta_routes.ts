@@ -1,12 +1,12 @@
 import { Application} from "express";
 import { PerguntaController } from "../controllers/pergunta.controller";
-import { PerguntaGateway } from "../../domain/gateways/pergunta.gateway";
 import { ObterPerguntaUseCase } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
+import { PerguntaRepoFirebase } from "../../persistence/pergunta_repo";
 
 export class PerguntaRoutes{
     app: Application;
     rotaPergunta : string = '/pergunta/:id'
-    perguntaGateway!: PerguntaGateway; 
+    perguntaRepofirebase: PerguntaRepoFirebase = new PerguntaRepoFirebase(); 
 
     constructor(app: Application){
         this.app = app;
@@ -14,7 +14,7 @@ export class PerguntaRoutes{
     }
 
     iniciarRotas(): Application{
-        const controller: PerguntaController = new PerguntaController(new ObterPerguntaUseCase(this.perguntaGateway));
+        const controller: PerguntaController = new PerguntaController(new ObterPerguntaUseCase(this.perguntaRepofirebase));
         
         this.app.route(this.rotaPergunta).get(controller.obterPergunta);
 

@@ -6,10 +6,9 @@ import { ResultadoGateway } from "../domain/gateways/resultado.gateway";
 import { db } from "./firebase_config/firebase";
 
 export class ResultRepoFirebase implements ResultadoGateway{
-    async obterResultado(dados: ObterResultadoInputDto): Promise<ObterResultadoOutputDto> {
+    async obterResultado(dados: ObterResultadoInputDto): Promise<ObterResultadoOutputDto>{
         const {idUser, idResultado} = dados;
-        const resultado = (await db.collection('users').doc(idUser).collection('historico').doc(idResultado).get()).data() as ObterResultadoOutputDto;
-        return resultado;
+        return (await db.collection('users').doc(idUser).collection('historico').doc(idResultado).get()).data() as ObterResultadoOutputDto;
     }
     
     async deletarResultado(dados: DeletarResultadoInputDto): Promise<DeletarResultadoOutputDto> {
@@ -19,9 +18,9 @@ export class ResultRepoFirebase implements ResultadoGateway{
     }
 
     criarResultado(dados: CriarRepoResultadoInputDto): CriarRepoResultadoOutputDto{
-        const {plantas} = dados;
+        const {plantas, tipo} = dados;
         
-        let resultado = ResultadoBusca.create('quiz',plantas);
+        let resultado: ResultadoBusca = ResultadoBusca.create(tipo,plantas);
 
         const resultadoDto: CriarRepoResultadoOutputDto = {
             resultado: {

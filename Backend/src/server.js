@@ -6,17 +6,17 @@ var user_routes_1 = require("./presentation/routes/user_routes");
 //import { HistoricoRoutes } from "./presentation/routes/historico_routes";
 var password_routes_1 = require("./presentation/routes/password_routes");
 //import { PerguntaRoutes } from './presentation/routes/pergunta_routes';
-var express = require("express");
+var express_1 = require("express");
 var dotenv_1 = require("dotenv");
-dotenv_1.config({ path: '../.env' });
+dotenv_1.default.config();
 var perenual = process.env.API_KEY_PERENUAL;
 if (!perenual) {
     console.log('Variável não carregada!');
 }
 console.log('perenual: ', perenual);
-var app = express();
+var app = (0, express_1.default)();
 var port = 3000;
-app.use(express.json());
+app.use(express_1.default.json());
 //melhorar padronização de nomes em geral
 new user_routes_1.UserRoutes(app); //verificado, funcionamento esperado.
 new password_routes_1.Password_routes(app); //verificado, funcionamento esperado.

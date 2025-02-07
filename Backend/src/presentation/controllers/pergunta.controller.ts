@@ -5,7 +5,7 @@ export class PerguntaController{
     constructor(private ObterPerguntaUseCase: ObterPerguntaUseCase){}
 
     public obterPergunta = async (req: Request, res: Response) => {
-        const id = req.params.idPergunta;
+        const id = req.params.id;
         try{
             res.status(200).json(this.ObterPerguntaUseCase.execute({id}));
         }catch(error: any){

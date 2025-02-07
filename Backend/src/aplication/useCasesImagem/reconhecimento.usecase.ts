@@ -1,3 +1,4 @@
+import { Planta } from "../../domain/entities/planta.entity";
 import { ResultadoBusca } from "../../domain/entities/resultado_busca.entity";
 import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { UserGateway } from "../../domain/gateways/user.gateway";
@@ -32,29 +33,11 @@ export class ReconhecimentoUseCase implements UseCase<ReconhecimentoInputDto, Re
     }
 
     async execute({idUser, imagem} :ReconhecimentoInputDto): Promise<ReconhecimentoOutputDto>{
-        let plantas = {};
-        let resultado = await this.resultGateway.criarResultado({plantas,tipo: 'imagem'});
-        this.userGateway.adicionarResultado(resultado);
+        let plantas: Planta[] = [];
 
-        const output = this.presentOutput(resultado);
-        return output;
-    }
+        let resultado = this.resultGateway.criarResultado({plantas,tipo: 'imagem'});
+        this.userGateway.adicionarResultado({idUser, resultado: resultado.resultado});
 
-    private presentOutput(resultado: ResultadoBusca): ReconhecimentoOutputDto{
-        return {
-            id: resultado.id,
-            dataBusca: resultado.dataBusca,
-            tipoBusca: resultado.tipoBusca,
-            plantas: resultado.plantas.map(planta => ({
-                id: planta.id,
-                nome: planta.nome,
-                nomeCientifico: planta.nomeCientifico,
-                imagem: planta.imagem,
-                descricao: planta.descricao,
-                nivelDeCuidado: planta.nivelDeCuidado,
-                usoMedico: planta.usoMedico,
-                luminosidade: planta.luminosidade
-            }))
-        }
+        return resultado.resultado;
     }
 }

@@ -4,7 +4,7 @@ import { EditarSenhaUseCase } from "../../aplication/useCasesPassword/editar_sen
 import { VerifyCodeUseCase } from "../../aplication/useCasesPassword/verify_code.usecase";
 import { SendCodeUseCase } from "../../aplication/useCasesPassword/send_code.usecase";
 
-export class Password_routes{
+export class PasswordRoutes{
     app: Application;
     rotaReset: string = '/reset-password';
     rotaVerify: string = '/verify-code';

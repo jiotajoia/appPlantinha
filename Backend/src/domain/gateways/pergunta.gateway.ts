@@ -1,6 +1,4 @@
-import { ObterPerguntaInputDto } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
-import { Pergunta } from "../entities/pergunta.entity";
-
+import { ObterPerguntaInputDto, ObterPerguntaOutputDto } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
 export interface PerguntaGateway{
-    obterPergunta(dados: ObterPerguntaInputDto): Promise<Pergunta>;
+    obterPergunta(dados: ObterPerguntaInputDto): Promise<ObterPerguntaOutputDto>;
 }

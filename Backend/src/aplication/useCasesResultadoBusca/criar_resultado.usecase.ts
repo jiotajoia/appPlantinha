@@ -29,6 +29,7 @@ export type CriarResultadoOutputDto = {
 
 export type CriarRepoResultadoInputDto = {
     plantas: Planta[];
+    tipo: string;
 }
 
 export type CriarRepoResultadoOutputDto = {
@@ -130,9 +131,10 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
 
         while (contador < 5){
             nomePlantasSelecionadas.push(plantas_trefle[contador].common_name);
+            contador++;
         }
 
-        for(let nome of nomePlantasSelecionadas){
+        for(let nome of nomePlantasSelecionadas){ //pode-se futuramente modularizar isso em função para ser usado aqui e no reconhecimento
 
             const url_perenual1 = `https://perenual.com/api/species-list?key=sk-g3X1678e55cae03338309&q=${nome}`;
         
@@ -159,7 +161,7 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
             });
         }
         
-        let resultado =  this.resultRepoFirebase.criarResultado({plantas: plantasProntas});
+        let resultado = this.resultRepoFirebase.criarResultado({plantas: plantasProntas, tipo: 'quiz'});
         await this.userRepoFirebase.adicionarResultado({idUser, resultado: resultado.resultado});
 
         return resultado;

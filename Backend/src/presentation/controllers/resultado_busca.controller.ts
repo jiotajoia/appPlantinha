@@ -6,14 +6,14 @@ import { CriarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/c
 export class ResultadoBuscaController{
     constructor( private criarResultadoUseCase: CriarResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
     
-    public preencherResult = async (req: Request, res: Response) => {
+    public criarResultQuiz = async (req: Request, res: Response) => {
         try{
             let idUser = req.params.idUser;
             let respostas = req.body;
             res.status(200).json(this.criarResultadoUseCase.execute({idUser, respostas}));
         }catch(error: any){
             res.status(500).json({
-                message: "Erro ao criar resultado.",
+                message: "Erro ao criar resultado quiz.",
                 error: error.message,
             });
         }

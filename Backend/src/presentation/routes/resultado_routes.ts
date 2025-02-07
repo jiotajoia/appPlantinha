@@ -8,10 +8,10 @@ import { CriarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/c
 
 export class ResultadoRoutes{
     app: Application;
-    rotaResult: string = `/user/:idUser/resultado`;
+    rotaResultQuiz: string = `/user/:idUser/resultado-quiz`;
     rotaUserResult: string = `/user/:idUser/resultado/:idResultado`;
-    userRepoFirebase!: UserRepoFirebase;
-    resultRepoFirebase!: ResultRepoFirebase;
+    userRepoFirebase: UserRepoFirebase = new UserRepoFirebase();
+    resultRepoFirebase: ResultRepoFirebase = new ResultRepoFirebase();
 
     constructor(app: Application){
         this.app = app;
@@ -21,7 +21,7 @@ export class ResultadoRoutes{
     iniciarRotas(): Application{
         const controller = new ResultadoBuscaController(new CriarResultadoUseCase(this.userRepoFirebase, this.resultRepoFirebase), new ObterResultadoUseCase(this.resultRepoFirebase), new DeletarResultadoUseCase(this.resultRepoFirebase));
         
-        this.app.route(this.rotaResult).post(controller.preencherResult);
+        this.app.route(this.rotaResultQuiz).post(controller.criarResultQuiz);
 
         this.app.route(this.rotaUserResult).get(controller.obterResult).delete(controller.deletarResult);
 
