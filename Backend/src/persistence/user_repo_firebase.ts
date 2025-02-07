@@ -93,13 +93,12 @@ export class UserRepoFirebase implements UserGateway {
 
   async obterHistorico(dados: ObterHistoricoInputDto): Promise<ObterHistoricoOutputDto> {
     const {idUser} = dados;
-    const historico = (await db.collection('users').doc(idUser).get()).data()?.historico as ObterHistoricoOutputDto;
-    return historico;
+    return (await db.collection('users').doc(idUser).get()).data()?.historico as ObterHistoricoOutputDto;
   }
 
   async limparHistorico(dados: LimparHistoricoInputDto): Promise<LimparHistoricoOutputDto> {
     const {idUser} = dados;
-    await db.collection('users').doc(idUser).update({historico: []});
+    await db.collection('users').doc(idUser).update({historico: []});//perceber como o firebase devolve os dados
     return {mensagem: "Histórico limpo com sucesso"} as LimparHistoricoOutputDto;
   }
 }

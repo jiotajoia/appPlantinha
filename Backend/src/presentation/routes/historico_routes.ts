@@ -7,7 +7,7 @@ import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 export class HistoricoRoutes{
     app: Application;
     rotaHistorico: string = '/user/:id/historico';
-    userRepoFirebase!: UserRepoFirebase;
+    userRepoFirebase: UserRepoFirebase = new UserRepoFirebase();
 
     constructor(app: Application){
         this.app = app;
@@ -16,7 +16,7 @@ export class HistoricoRoutes{
 
     iniciarRotas(): Application{
         const controller: HistoricoController = new HistoricoController(new LimparHistoricoUseCase(this.userRepoFirebase), new ObterHistoricoUseCase(this.userRepoFirebase));
-        this.app.route(this.rotaHistorico).get(controller.obterHistorico).patch(controller.limparHistorico)
+        this.app.route(this.rotaHistorico).get(controller.obterHistorico).patch(controller.limparHistorico);
 
         return this.app;
     }

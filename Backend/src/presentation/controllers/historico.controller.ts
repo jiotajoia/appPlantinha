@@ -22,7 +22,7 @@ export class HistoricoController{
             const id = req.params.id;
             res.status(200).json(this.limparHistoricoUseCase.execute({idUser: id}));
         }catch(error: any){
-            res.status(500).json({
+            res.status(404).json({
                 message: "Erro ao limpar histórico.",
                 error: error.message,
             });

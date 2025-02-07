@@ -78,7 +78,7 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
         return new CriarResultadoUseCase(userRepoFirebase, resultRepoFirebase);
     }
 
-    async execute({idUser, respostas}: CriarResultadoInputDto): Promise<CriarResultadoOutputDto>{
+    async execute({idUser, respostas}: CriarResultadoInputDto): Promise<CriarResultadoOutputDto>{ //esconder chaves de api
         let plantas_trefle: { common_name: string }[] = [];
 
         /*
