@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import { auth } from "../../persistence/firebase_config/firebase";
 
 export class EditarSenhaUseCase{
     constructor(){}
@@ -9,8 +9,8 @@ export class EditarSenhaUseCase{
 
     async execute(email: string, newPassword: string): Promise<void>{
 
-        const user = await admin.auth().getUserByEmail(email);
-        await admin.auth().updateUser(user.uid, {
+        const user = await auth.getUserByEmail(email);
+        await auth.updateUser(user.uid, {
           password: newPassword
         });
         

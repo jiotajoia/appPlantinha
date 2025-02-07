@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import { db } from "../../persistence/firebase_config/firebase";
 
 export class VerifyCodeUseCase{
     constructor(){}
@@ -8,7 +8,6 @@ export class VerifyCodeUseCase{
     }
 
     async execute(email: string){
-        const db = admin.firestore();
         const doc = await db.collection('verificationCodes').doc(email).get();
         return doc.data()?.code;
     }

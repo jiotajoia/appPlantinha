@@ -1,4 +1,3 @@
-import { Pergunta } from "../../domain/entities/pergunta.entity";
 import { PerguntaRepoFirebase } from "../../persistence/pergunta_repo";
 import { UseCase } from "../usecase";
 

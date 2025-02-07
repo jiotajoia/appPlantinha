@@ -1,6 +1,10 @@
-import * as admin from "firebase-admin";
 import { google } from "googleapis";
 import * as nodemailer from "nodemailer";
+import { db } from "../../persistence/firebase_config/firebase";
+import { FieldValue } from "firebase-admin/firestore";
+
+
+
 
 export class SendCodeUseCase {
   constructor() {}
@@ -12,10 +16,9 @@ export class SendCodeUseCase {
   async execute(email: string): Promise<void> {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const db = admin.firestore();
     await db.collection("verificationCodes").doc(email).set({
       code: code,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt:  FieldValue.serverTimestamp(),
     });
 
     const oauth2Client = new google.auth.OAuth2(

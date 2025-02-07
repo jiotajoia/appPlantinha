@@ -1,37 +1,34 @@
-import { UserRoutes } from "./presentation/routes/user_routes";
-import { ResultadoRoutes } from "./presentation/routes/resultado_routes";
-//import { ImagemRoutes } from "./presentation/routes/imagem_routes";
-//import { HistoricoRoutes } from "./presentation/routes/historico_routes";
-import { PasswordRoutes } from './presentation/routes/password_routes';
-import { PerguntaRoutes } from './presentation/routes/pergunta_routes';
-import express from 'express';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
+import express from 'express';
+import { PasswordRoutes } from './presentation/routes/password_routes';
+import { UserRoutes } from './presentation/routes/user_routes';
+import { PerguntaRoutes } from './presentation/routes/pergunta_routes';
+import { ResultadoRoutes } from './presentation/routes/resultado_routes';
+//import { ImagemRoutes } from "./presentation/routes/imagem_routes";
+//import { HistoricoRoutes } from "./presentation/routes/historico_routes";
+
+const port = 3000;
 const perenual = process.env.API_KEY_PERENUAL;
 
 if (!perenual) {
     console.log('Variável não carregada!');
-  }
-console.log('perenual: ', perenual)
+}
+console.log('perenual: ', perenual);
 
 const app = express();
-const port = 3000;
 
 app.use(express.json());
 
-//melhorar padronização de nomes em geral
-
+// Iniciando as rotas
+new PasswordRoutes(app); //verificado, funcionamento esperado.
 new UserRoutes(app); //verificado, funcionamento esperado.
-new PasswordRoutes(app);//verificado, funcionamento esperado.
 new PerguntaRoutes(app);//verificado, funcionamento esperado. obs: falta Adicionar perguntas no bando de dados
 new ResultadoRoutes(app);//verificado, funcionamento esperado.
 //new HistoricoRoutes(app);
 //new ImagemRoutes(app);
 
-
 app.listen(port, '0.0.0.0', () => {
-    console.log('Servidor rodando na porta 3000');
-  });
-  
+    console.log(`Servidor rodando na porta ${port}`);
+});

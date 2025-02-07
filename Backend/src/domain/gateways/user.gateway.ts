@@ -7,7 +7,6 @@ import { CriarUsuarioInputDto } from "../../aplication/useCasesUsuario/criar_usu
 import { DeletarUsuarioInputDto } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
 import { ObterUsuarioInputDto, ObterUsuarioOutputDto } from "../../aplication/useCasesUsuario/obter_usuario.usecase";
 
-
 export interface UserGateway{
     criarUser(dados: CriarUsuarioInputDto): Promise<void>;
 

@@ -1,5 +1,4 @@
 import { Planta } from "../../domain/entities/planta.entity";
-import { ResultadoBusca } from "../../domain/entities/resultado_busca.entity";
 import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { UserGateway } from "../../domain/gateways/user.gateway";
 import { UseCase } from "../usecase";
