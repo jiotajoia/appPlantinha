@@ -42,6 +42,9 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<void> cadastrarUser(String nome, String email, String password, String confirmPassword) async{
     try {
       await auth.cadastrarUsers(nome, email, password, confirmPassword);
+      // ignore: use_build_context_synchronously
+      await auth.logarUsers(email, password, context);
+
       AppConfigs.saveLastRoute('/homePage');
       if (mounted) {
         context.go('/homePage');

@@ -32,7 +32,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
     return ScaffoldBase(
       body: Padding(
         padding: EdgeInsets.only(top: heightScreen * 0.017),
-        child: Center(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               RowButtonBack(lastRoute: '/settingsPage'),
@@ -67,7 +67,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   try{
                     await auth.alterarNome(_valor.text);
                     // ignore: use_build_context_synchronously
-                    Provider.of<NomeState>(context).setNome(_valor.text);
+                    Provider.of<NomeState>(context,listen: false).setNome(_valor.text);
                   }catch(e){
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -76,7 +76,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       )
                     );
                   }
-
+          
                 },
                 marginTop: heightScreen * 0.013,
                 width: widthScreen * 0.206,
@@ -139,6 +139,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                           TextButton(
                             onPressed: () async{
                               await auth.deletarConta();
+                              // ignore: use_build_context_synchronously
+                              context.go('/');
                             },
                             style: ButtonStyle(
                               backgroundColor: WidgetStateProperty.all(Colors.red)

@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> logarUser(String lastRoute, String email, String password) async {
     try {
-      await auth.logarUsers(email, password);
+      await auth.logarUsers(email, password,context);
       AppConfigs.saveLastRoute(lastRoute);
       if (mounted) {
         context.go(lastRoute);

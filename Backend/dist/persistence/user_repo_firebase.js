@@ -32,6 +32,11 @@ export class UserRepoFirebase {
             if (!user.exists) {
                 throw new Error("Usuario não encontrado");
             }
+            /*{
+              id: '0qgQ3ch1qVR4q0cM9IuxH2a8MJn2',
+              nome: 'ital',
+              email: 'itallinho13@gmail.com'
+            }*/
             return user.data();
         }
         catch (error) {
@@ -71,12 +76,11 @@ export class UserRepoFirebase {
     }
     async obterHistorico(dados) {
         const { idUser } = dados;
-        const historico = (await db.collection('users').doc(idUser).get()).data()?.historico;
-        return historico;
+        return (await db.collection('users').doc(idUser).get()).data()?.historico;
     }
     async limparHistorico(dados) {
         const { idUser } = dados;
-        await db.collection('users').doc(idUser).update({ historico: [] });
+        await db.collection('users').doc(idUser).update({ historico: [] }); //perceber como o firebase devolve os dados
         return { mensagem: "Histórico limpo com sucesso" };
     }
 }

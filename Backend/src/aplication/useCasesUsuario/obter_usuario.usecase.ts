@@ -8,26 +8,24 @@ export type ObterUsuarioInputDto = {
 }
 
 export type ObterUsuarioOutputDto = {
-    usuario: {
+    id: string;
+    nome: string;
+    email: string;
+    historico: {
         id: string;
-        nome: string;
-        email: string;
-        historico: Array<{
+        dataBusca: string;
+        tipoBusca: string;
+        plantas: {
             id: string;
-            dataBusca: string;
-            tipoBusca: string;
-            plantas: {
-                id: string;
-                nome: string;
-                nomeCientifico: string;
-                imagem: string;
-                descricao: string;
-                nivelDeCuidado: string;
-                usoMedico: string;
-                luminosidade: string;
-            }[];
-        }>;
-    };
+            nome: string;
+            nomeCientifico: string;
+            imagem: string;
+            descricao: string;
+            nivelDeCuidado: string;
+            usoMedico: string;
+            luminosidade: string;
+        }[];
+    }[] | null;
 };
 
 

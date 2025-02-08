@@ -40,7 +40,7 @@ export class UsuarioController{
     public obterUsuario = async (req: Request, res: Response) => {
         try{
             const {idToken} = req.body;
-            res.status(200).json({message: "Usuário obtido com sucesso",data: await this.obterUsuarioUseCase.execute({idToken})});
+            res.status(200).json({message: "Usuário obtido com sucesso", data: await this.obterUsuarioUseCase.execute({idToken})});
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter usuário.",

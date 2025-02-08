@@ -8,7 +8,6 @@ export type AlterarSenhaUsuarioInputDto = {
 }
 
 export type AlterarSenhaUsuarioOutputDto = {
-    usuario: {
         id: string;
         nome: string;
         email: string;
@@ -17,17 +16,16 @@ export type AlterarSenhaUsuarioOutputDto = {
             dataBusca: string;
             tipoBusca: string;
             plantas:{
-                id: string;
-                nome: string;
-                nomeCientifico: string;
-                imagem: string;
-                descricao: string;
-                nivelDeCuidado: string;
-                usoMedico: string;
-                luminosidade: string;
-            }[];
+            id: string;
+            nome: string;
+            nomeCientifico: string;
+            imagem: string;
+            descricao: string;
+            nivelDeCuidado: string;
+           usoMedico: string;
+            luminosidade: string;
         }[];
-    };
+    }[] | null;
 };
 
 

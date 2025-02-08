@@ -44,6 +44,11 @@ export class UserRepoFirebase implements UserGateway {
       if (!user.exists) {
         throw new Error("Usuario não encontrado");
       }
+      /*{
+        id: '0qgQ3ch1qVR4q0cM9IuxH2a8MJn2',
+        nome: 'ital',
+        email: 'itallinho13@gmail.com'
+      }*/
 
       return user.data() as ObterUsuarioOutputDto;
     } catch (error: any) {

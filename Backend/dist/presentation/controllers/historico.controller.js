@@ -23,7 +23,7 @@ export class HistoricoController {
             res.status(200).json(this.limparHistoricoUseCase.execute({ idUser: id }));
         }
         catch (error) {
-            res.status(500).json({
+            res.status(404).json({
                 message: "Erro ao limpar histórico.",
                 error: error.message,
             });

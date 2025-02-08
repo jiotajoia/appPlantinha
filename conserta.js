@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const distDir = path.join(__dirname, 'backend2', 'dist');
+const distDir = path.join(__dirname, 'backend', 'dist');
 
 // Função para corrigir os imports
 function fixImports(filePath) {
