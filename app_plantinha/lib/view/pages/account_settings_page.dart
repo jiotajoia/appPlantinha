@@ -1,5 +1,5 @@
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
-import 'package:app_plantinha/controllers/provider/nome.provider.dart';
+import 'package:app_plantinha/controllers/provider/credentials.provider.dart';
 import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
@@ -65,7 +65,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   try{
                     await auth.alterarNome(_valor.text);
                     // ignore: use_build_context_synchronously
-                    Provider.of<NomeState>(context,listen: false).setNome(_valor.text);
+                    Provider.of<CredentialsState>(context,listen: false).setNome(_valor.text);
                   }catch(e){
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(

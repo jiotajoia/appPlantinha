@@ -64,13 +64,13 @@ export class UserRepoFirebase implements UserGateway {
   }
 
   async updateUserName(dados: AlterarNomeUsuarioInputDto): Promise<AlterarNomeUsuarioOutputDto> {
+    
     await db.collection("users").doc(dados.id).update({
       nome: dados.novoNome,
     });
 
-    const userUpdated = (await db.collection("users").doc(dados.id).get()).data() as AlterarNomeUsuarioOutputDto;
-
-    return userUpdated;
+    const userUpdated = (await db.collection("users").doc(dados.id).get()).data();
+    return userUpdated as AlterarNomeUsuarioOutputDto;
   }
 
   async updateUserPassword(dados: AlterarSenhaUsuarioInputDto): Promise<AlterarSenhaUsuarioOutputDto> {

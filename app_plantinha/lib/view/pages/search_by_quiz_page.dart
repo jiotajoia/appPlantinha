@@ -141,7 +141,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                   }
 
                   if(counter == 3){
-                    Navigator.pushNamed(context, '/homePage/searchByQuizPage/ResultsPage');
+                    Navigator.pushNamed(context, '/homePage/searchByQuizPage/resultsPage');
                   }
                   
                 },

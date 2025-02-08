@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:app_plantinha/controllers/provider/nome.provider.dart';
+import 'package:app_plantinha/controllers/provider/credentials.provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -54,8 +54,11 @@ class AuthService {
       final Map<String, dynamic> usuario = data['data'];
       String nome = usuario['nome'];
 
+
       // ignore: use_build_context_synchronously
-      Provider.of<NomeState>(context, listen: false).setNome(nome);
+      Provider.of<CredentialsState>(context, listen: false).setNome(nome);
+      // ignore: use_build_context_synchronously
+      Provider.of<CredentialsState>(context, listen: false).setEmail(email);
       
     } on FirebaseAuthException catch (e) {
       // ignore: avoid_print
@@ -73,7 +76,9 @@ class AuthService {
       String idUser = user!.uid;
       if (newName.isNotEmpty) {
         await http.patch(Uri.parse('$backExterno/user/$idUser/alterarNome'),
-            body: {'novoNome': newName});
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({'novoNome': newName})
+            );
       } else {
         throw Exception("Nome não pode ser vazio.");
       }

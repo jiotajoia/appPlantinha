@@ -1,6 +1,6 @@
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
-import 'package:app_plantinha/controllers/provider/nome.provider.dart';
+import 'package:app_plantinha/controllers/provider/credentials.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,8 @@ class DrawerBase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String username = Provider.of<NomeState>(context).nome;
+    String username = Provider.of<CredentialsState>(context).nome;
+    String userEmail = Provider.of<CredentialsState>(context).email;
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
 
@@ -82,7 +83,7 @@ class DrawerBase extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'jiotajoia@joia.com',
+                            userEmail,
                             style: TextStyle(color: Colors.white, fontSize: Provider.of<FontSizeState>(context).fontSize - 3),
                           )
                         ],
@@ -122,7 +123,7 @@ class DrawerBase extends StatelessWidget {
                 Padding(padding: EdgeInsets.only(right: widthScreen * 0.072)),
                 Spacer(),
                 Text(
-                  '• Version 8.88.8',
+                  '• Version 1.0.1',
                   style: TextStyle(color: Colors.white, fontSize: Provider.of<FontSizeState>(context).fontSize + 1),
                 ),
               ],

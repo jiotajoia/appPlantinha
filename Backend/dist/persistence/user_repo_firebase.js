@@ -54,6 +54,7 @@ export class UserRepoFirebase {
             nome: dados.novoNome,
         });
         const userUpdated = (await db.collection("users").doc(dados.id).get()).data();
+        console.log(userUpdated);
         return userUpdated;
     }
     async updateUserPassword(dados) {

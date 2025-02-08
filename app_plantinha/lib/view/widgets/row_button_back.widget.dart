@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RowButtonBack extends StatelessWidget {
-  const RowButtonBack({super.key});  
-
+  const RowButtonBack({super.key, this.route});  
+  final String? route;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -12,7 +12,12 @@ class RowButtonBack extends StatelessWidget {
           padding: const EdgeInsets.only(left: 9),
           child: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              if(route != null){
+                Navigator.pushNamedAndRemoveUntil(context, route!, (Route<dynamic> routes) => false);
+              }else{
+                Navigator.pop(context);
+              }
+              
             },
             icon: Icon(
               Icons.arrow_back,

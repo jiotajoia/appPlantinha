@@ -1,5 +1,3 @@
-import { Usuario } from "../../domain/entities/usuario.entity";
-import { UserGateway } from "../../domain/gateways/user.gateway";
 import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 import { UseCase } from "../usecase";
 
@@ -9,26 +7,24 @@ export type AlterarNomeUsuarioInputDto = {
 }
 
 export type AlterarNomeUsuarioOutputDto = {
-    usuario: {
+    id: string;
+    nome: string;
+    email: string;
+    historico:{
         id: string;
-        nome: string;
-        email: string;
-        historico:{
+        dataBusca: string;
+        tipoBusca: string;
+        plantas:{
             id: string;
-            dataBusca: string;
-            tipoBusca: string;
-            plantas:{
-                id: string;
-                nome: string;
-                nomeCientifico: string;
-                imagem: string;
-                descricao: string;
-                nivelDeCuidado: string;
-                usoMedico: string;
-                luminosidade: string;
-            }[];
+            nome: string;
+            nomeCientifico: string;
+            imagem: string;
+            descricao: string;
+            nivelDeCuidado: string;
+            usoMedico: string;
+            luminosidade: string;
         }[];
-    };
+    }[] | null;
 };
 
 
