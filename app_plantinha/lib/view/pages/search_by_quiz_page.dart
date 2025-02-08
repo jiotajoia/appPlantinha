@@ -1,4 +1,3 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
@@ -6,7 +5,6 @@ import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SearchByQuizPage extends StatefulWidget {
@@ -51,7 +49,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
         child: Center(
           child: Column(
             children: [
-              RowButtonBack(lastRoute: '/homePage'),
+              RowButtonBack(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -143,8 +141,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                   }
 
                   if(counter == 3){
-                    AppConfigs.saveLastRoute('/homePage/searchByQuizPage/ResultsPage');
-                    context.push('/homePage/searchByQuizPage/ResultsPage');
+                    Navigator.pushNamed(context, '/homePage/searchByQuizPage/ResultsPage');
                   }
                   
                 },

@@ -1,10 +1,8 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
 import 'package:app_plantinha/controllers/provider/nome.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class DrawerBase extends StatelessWidget {
@@ -42,16 +40,14 @@ class DrawerBase extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: (){
-                          AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
-                          context.push('/settingsPage/appSettingsPage');
+                          Navigator.pushNamed(context, '/settingsPage/appSettingsPage');
                         },
                         icon: SvgPicture.asset(
                           'lib/icons/fonte.svg', 
                         )),
                     IconButton(
                         onPressed: (){
-                          AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
-                          context.push('/settingsPage/appSettingsPage');
+                          Navigator.pushNamed(context, '/settingsPage/appSettingsPage');
                         },
                         icon: Icon(Icons.bedtime_outlined, color: Colors.white,)
                     ),
@@ -119,8 +115,7 @@ class DrawerBase extends StatelessWidget {
                           Provider.of<LightDarkState>(context, listen: false).setTema('light');
                         }
                       }
-                      AppConfigs.saveLastRoute(data['route']);
-                      context.push(data['route']);
+                      Navigator.pushNamed(context, data['route']);
                     },
                   );
                 }),

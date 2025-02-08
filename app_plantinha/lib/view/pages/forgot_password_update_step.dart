@@ -5,7 +5,6 @@ import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPasswordUpdateStep extends StatefulWidget {
@@ -80,7 +79,7 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
                   await auth.redefinirSenha(Provider.of<ForgotPasswordState>(context).email,valuesItems[0]['valor'].text , valuesItems[1]['valor'].text);
                   stepForgotPasswordState.resetCurrentStep();
                   // ignore: use_build_context_synchronously
-                  context.go('/');
+                  Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
                 }catch(e){
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(

@@ -59,7 +59,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
           child: Center(
             child: Column(
               children: [
-                RowButtonBack(lastRoute: '/settingsPage'),
+                RowButtonBack(),
                 RowWithText(
                   textLabel: 'Configurações do Aplicativo',
                   fontWeight: FontWeight.bold,

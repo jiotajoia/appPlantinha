@@ -35,7 +35,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              RowButtonBack(lastRoute: '/settingsPage/accountSettingsPage'),
+              RowButtonBack(),
               RowWithText(
                 textLabel: 'Alterar Senha',
                 fontSize: Provider.of<FontSizeState>(context).fontSize + 5,

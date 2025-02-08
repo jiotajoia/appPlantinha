@@ -32,7 +32,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            RowButtonBack(lastRoute: '/homePage'),
+            RowButtonBack(),
             RowWithText(
               textLabel: 'Resultados',
               mainAxisAlignment: MainAxisAlignment.center,

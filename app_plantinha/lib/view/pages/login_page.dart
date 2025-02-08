@@ -1,9 +1,7 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
@@ -23,9 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> logarUser(String lastRoute, String email, String password) async {
     try {
       await auth.logarUsers(email, password,context);
-      AppConfigs.saveLastRoute(lastRoute);
       if (mounted) {
-        context.go(lastRoute);
+        Navigator.pushNamedAndRemoveUntil(context, lastRoute, (Route<dynamic> route) => false);
       }
     } catch (e) {
       if (mounted) {
@@ -34,11 +31,6 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     }
-  }
-
-  void navigateToPage(String lastRoute) {
-    AppConfigs.saveLastRoute(lastRoute);
-    context.go(lastRoute);
   }
 
   @override
@@ -104,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        navigateToPage('/forgotPasswordPage');
+                        Navigator.pushNamedAndRemoveUntil(context, '/forgotPasswordPage', (Route<dynamic> route) => false);
                       },
                       child: Text(
                         'Esqueceu a senha?',
@@ -132,8 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                       top: heightScreen * 0.09, bottom: heightScreen * 0.01),
                   child: InkWell(
                     onTap: () {
-                      AppConfigs.saveLastRoute('/signUpPage');
-                      context.push('/signUpPage');
+                      Navigator.pushNamed(context, '/signUpPage');
                     },
                     child: Text(
                       'Cadastre-se',

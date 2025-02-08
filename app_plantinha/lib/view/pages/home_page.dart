@@ -1,10 +1,8 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,10 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>{
   double width = 0, height = 0, sizeImage = 0;
 
-  void navigateToSearchPage(String lastRoute){
-    AppConfigs.saveLastRoute(lastRoute);
-    context.push(lastRoute);
-  }
 
   double getPropertyAdjusted(BuildContext context, double property, double valueBase, double valueAdjusted){
     setState(() {
@@ -73,7 +67,7 @@ class _HomePageState extends State<HomePage>{
                 icon: Icon(data['icon'], size: Provider.of<FontSizeState>(context).fontSize + 1,),
                 labelText: data['label'],
                 onPressed: (){
-                  navigateToSearchPage(data['lastRoute']);
+                  Navigator.pushNamed(context, (data['lastRoute']));
                 } ,
               );
             }),

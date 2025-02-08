@@ -1,10 +1,8 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -24,7 +22,7 @@ class SettingsPage extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                RowButtonBack(lastRoute: '/homePage'),
+                RowButtonBack(),
               ],
             ),
             Row(
@@ -33,8 +31,7 @@ class SettingsPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: widthScreen * 0.055, bottom: heightScreen * 0.013),
                   child: InkWell(
                     onTap: () {
-                      AppConfigs.saveLastRoute('/settingsPage/accountSettingsPage');
-                      context.push('/settingsPage/accountSettingsPage');
+                      Navigator.pushNamed(context, '/settingsPage/accountSettingsPage');
                     },
                     child: Text(
                       'Conta',
@@ -58,8 +55,7 @@ class SettingsPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: widthScreen * 0.055, bottom: heightScreen * 0.013),
                   child: InkWell(
                     onTap: () {
-                      AppConfigs.saveLastRoute('/settingsPage/appSettingsPage');
-                      context.push('/settingsPage/appSettingsPage');
+                      Navigator.pushNamed(context, '/settingsPage/appSettingsPage');
                     },
                     child: SizedBox(
                       width:  widthScreen - widthScreen * 0.055,

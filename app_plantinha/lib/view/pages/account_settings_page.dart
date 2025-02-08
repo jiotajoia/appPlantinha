@@ -1,4 +1,3 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/controllers/provider/nome.provider.dart';
 import 'package:app_plantinha/controllers/services/auth_service.model.dart';
@@ -8,7 +7,6 @@ import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class AccountSettingsPage extends StatefulWidget {
@@ -35,7 +33,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              RowButtonBack(lastRoute: '/settingsPage'),
+              RowButtonBack(),
               RowWithText(
                 textLabel: 'Conta',
                 fontWeight: FontWeight.bold,
@@ -93,9 +91,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        AppConfigs.saveLastRoute(
-                            '/settingsPage/accountSettingsPage/changePasswordPage');
-                        context.push(
+                        Navigator.pushNamed(context,
                             '/settingsPage/accountSettingsPage/changePasswordPage');
                       },
                       child: Flexible(
@@ -140,7 +136,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                             onPressed: () async{
                               await auth.deletarConta();
                               // ignore: use_build_context_synchronously
-                              context.go('/');
+                              Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
                             },
                             style: ButtonStyle(
                               backgroundColor: WidgetStateProperty.all(Colors.red)

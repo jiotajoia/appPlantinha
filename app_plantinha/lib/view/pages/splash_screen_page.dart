@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -18,7 +17,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     // Aguarda 3 segundos e navega para a próxima tela
     Future.delayed(Duration(seconds: 4, microseconds: 15), () {
       // ignore: use_build_context_synchronously
-      context.go('/');
+      Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
     });
   }
 

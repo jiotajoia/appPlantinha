@@ -4,7 +4,6 @@ import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SearchByImagePage extends StatefulWidget {
@@ -28,7 +27,7 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
         child: Center(
           child: Column(
             children: [
-              RowButtonBack(lastRoute: '/homePage'),
+              RowButtonBack(),
               Container(
                 margin: EdgeInsets.only(top: heightScreen * 0.176),
                 height: heightScreen * 0.543,
@@ -37,7 +36,7 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                   children: [
                     ContainerWithButton(
                       onPressed: () {
-                        context.go('/homePage/searchByImagePage/takePicture');
+                        Navigator.pushNamedAndRemoveUntil(context, '/homePage/searchByImagePage/takePicture', (Route<dynamic> route) => false);
                       },
                       rectangleRoundedBorder: true,
                       widthAdjusted: widthScreen * 0.716,

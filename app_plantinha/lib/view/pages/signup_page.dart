@@ -1,10 +1,8 @@
-import 'package:app_plantinha/configs/app.configs.dart';
 import 'package:app_plantinha/controllers/services/auth_service.model.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key, required this.title});
@@ -45,9 +43,8 @@ class _SignUpPageState extends State<SignUpPage> {
       // ignore: use_build_context_synchronously
       await auth.logarUsers(email, password, context);
 
-      AppConfigs.saveLastRoute('/homePage');
       if (mounted) {
-        context.go('/homePage');
+        Navigator.pushNamedAndRemoveUntil(context, '/homePage', (Route<dynamic> route) => false);
       }
     } catch (e) {
       if (mounted) {
@@ -77,8 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        AppConfigs.saveLastRoute('/');
-                        context.pop();
+                        Navigator.pop(context);
                       },
                       icon: const Icon(
                         Icons.arrow_back,
