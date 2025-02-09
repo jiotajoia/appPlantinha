@@ -30,6 +30,7 @@ new ResultadoRoutes(app);//verificado, funcionamento esperado. obs : lembrar de 
 new HistoricoRoutes(app);//verificado, funcionamento parcialmente esperado. obs: é necessario perceber como o firebase devolve os dados, pode ser que exista uma incongruencia.
 //new ImagemRoutes(app);
 
+/*
 app.get('/preencherPerguntas', async (req, res) => {
     let perguntas = [
         {
@@ -243,19 +244,22 @@ app.get('/preencherPerguntas', async (req, res) => {
             alternativas: ['Australia',null,null],
         },
     ];
-
-    for(let pergunta of perguntas){
+    try{
+        for(let pergunta of perguntas){
         await db.collection('perguntas').doc(pergunta.id).set({
             id : pergunta.id,
             indagacao : pergunta.indagacao,
             indicacao : pergunta.indicacao,
             filtro : pergunta.filtro,
             alternativas : pergunta.alternativas,
-        })
-    }
-    
+            })
+        }
     res.send('dados enviados!');
+    } catch(e){
+        res.send(`nao deu certo bobao kkkkkkk ${e}`);
+    }
 });
+*/
 
 app.listen(port, '0.0.0.0', () => {
     console.log(`Servidor rodando na porta ${port}`);

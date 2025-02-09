@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
   static final List<Map<String, dynamic>> valuesContainers = [
     {'icon': Icons.quiz, 'label': 'Quiz', 'lastRoute': '/homePage/searchByQuizPage'},
     {'icon': Icons.image, 'label': 'Imagem', 'lastRoute': '/homePage/searchByImagePage'},
+    {'icon': Icons.map, 'label': 'Mapa', 'lastRoute': '/homePage/searchByImagePage'},
   ];
 
   @override
