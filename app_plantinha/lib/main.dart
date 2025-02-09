@@ -9,11 +9,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
-
+  
   final firstCamera = cameras.first;
 
   Firebase.initializeApp(
@@ -21,10 +23,18 @@ void main() async {
   );
 
   runApp(MultiProvider(providers: [
+<<<<<<< Updated upstream
     ChangeNotifierProvider(create: (_) => CredentialsState()),
     ChangeNotifierProvider(create: (_) => ForgotPasswordState()),
     ChangeNotifierProvider(create: (_) => StepForgotPasswordState()),
     ChangeNotifierProvider(create: (_) => FontSizeState()),
     ChangeNotifierProvider(create: (_) => LightDarkState()),
+=======
+    ChangeNotifierProvider (create: (_) => NomeState()),
+    ChangeNotifierProvider (create: (_) => ForgotPasswordState()),
+    ChangeNotifierProvider (create: (_) => StepForgotPasswordState()),
+    ChangeNotifierProvider (create: (_) => FontSizeState()),
+    ChangeNotifierProvider (create: (_) => LightDarkState()),
+>>>>>>> Stashed changes
   ], child: AppPlantinha(camera: firstCamera)));
 }
