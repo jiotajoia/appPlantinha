@@ -17,7 +17,6 @@ class _ScaffoldBaseState extends State<ScaffoldBase> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text(widget.title ?? "AppPlantinha", style: TextStyle(fontSize: Provider.of<FontSizeState>(context).fontSize + 1),),
         actions: [
           if (widget.iconAppBar1 != null) widget.iconAppBar1!,

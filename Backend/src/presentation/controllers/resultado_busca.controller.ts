@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
 import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
 import { CriarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/criar_resultado.usecase";
+import { CriarResultadoMapaUseCase } from "../../aplication/useCasesResultadoBusca/criar_mapa_resultado.usecase";
 
 export class ResultadoBuscaController{
-    constructor( private criarResultadoUseCase: CriarResultadoUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
+    constructor( private criarResultadoUseCase: CriarResultadoUseCase, private criarResultadoMapaUseCase: CriarResultadoMapaUseCase, private obterResultadoUseCase: ObterResultadoUseCase, private deletarResultadoUseCase: DeletarResultadoUseCase){}
     
     public criarResultQuiz = async (req: Request, res: Response) => {
         try{
@@ -14,6 +15,18 @@ export class ResultadoBuscaController{
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao criar resultado quiz.",
+                error: error.message,
+            });
+        }
+    }
+
+    public criarResultMapa = async (req: Request, res: Response) => { //
+        try{
+            let pais = req.params.pais;
+            res.status(200).json(this.criarResultadoMapaUseCase.execute({pais}));
+        }catch(error: any){
+            res.status(500).json({
+                message: "Erro ao criar resultado mapa.",
                 error: error.message,
             });
         }
