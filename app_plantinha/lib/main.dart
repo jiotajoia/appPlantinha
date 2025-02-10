@@ -28,7 +28,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => StepForgotPasswordState()),
     ChangeNotifierProvider(create: (_) => FontSizeState()),
     ChangeNotifierProvider(create: (_) => LightDarkState()),
-    ChangeNotifierProvider (create: (_) => NomeState()),
+    ChangeNotifierProvider (create: (_) => CredentialsState()),
     ChangeNotifierProvider (create: (_) => ForgotPasswordState()),
     ChangeNotifierProvider (create: (_) => StepForgotPasswordState()),
     ChangeNotifierProvider (create: (_) => FontSizeState()),

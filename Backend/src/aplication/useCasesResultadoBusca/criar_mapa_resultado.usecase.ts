@@ -13,15 +13,15 @@ export type CriarResultadoMapaOutputDto = {
         dataBusca: string;
         tipoBusca: string;
         plantas: {
-            id: string;
-            nome: string;
-            nomeCientifico: string;
-            imagem: string;
-            descricao: string;
-            nivelDeCuidado: string;
-            usoMedico: string;
-            luminosidade: string;
-        }[];
+            id: string ;
+            nome: string | null;
+            nomeCientifico: string | null;
+            imagem: string | null;
+            descricao: string | null;
+            nivelDeCuidado: string | null;
+            usoMedico: string | null;
+            luminosidade: string | null;
+        }[] | null;
     };
 };
 
@@ -47,19 +47,31 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
         let contador = 0;
         let plantasProntas: Planta[] = [];
 
-        while (contador < 8){
-            nomePlantasSelecionadas.push(plantas_trefle[contador].scientific_name);
-            contador++;
+        for (let planta_trefle of plantas_trefle){
+            nomePlantasSelecionadas.push(planta_trefle.scientific_name);
         }
 
         for(let nome of nomePlantasSelecionadas){
 
+            if(contador > 3){
+                break;
+            }
+
             const url_perenual1 = `https://perenual.com/api/species-list?key=sk-g3X1678e55cae03338309&q=${nome}`;
-            let id_planta;
+
+            let id_planta: string | null = null;
             await axios.get(url_perenual1).then((response) =>{
                 console.log(response.data);
-                id_planta = response.data.data[0].id;
+
+                if (response.data.data[0].id != undefined){
+                   id_planta = response.data.data[0].id;
+                   contador++
+                }
             });
+
+            if(id_planta == null){
+                continue;
+            }
 
             const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-g3X1678e55cae03338309`;
     

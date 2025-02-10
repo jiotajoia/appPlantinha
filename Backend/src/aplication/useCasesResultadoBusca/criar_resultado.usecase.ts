@@ -16,14 +16,14 @@ export type CriarResultadoOutputDto = {
         tipoBusca: string;
         plantas: {
             id: string;
-            nome: string;
-            nomeCientifico: string;
-            imagem: string;
-            descricao: string;
-            nivelDeCuidado: string;
-            usoMedico: string;
-            luminosidade: string;
-        }[];
+            nome: string | null;
+            nomeCientifico: string | null;
+            imagem: string | null;
+            descricao: string | null;
+            nivelDeCuidado: string | null;
+            usoMedico: string | null;
+            luminosidade: string | null;
+        }[] | null;
     };
 };
 
@@ -39,14 +39,14 @@ export type CriarRepoResultadoOutputDto = {
         tipoBusca: string;
         plantas: {
             id: string;
-            nome: string;
-            nomeCientifico: string;
-            imagem: string;
-            descricao: string;
-            nivelDeCuidado: string;
-            usoMedico: string;
-            luminosidade: string;
-        }[];
+            nome: string | null;
+            nomeCientifico: string | null;
+            imagem: string | null;
+            descricao: string | null;
+            nivelDeCuidado: string | null;
+            usoMedico: string | null;
+            luminosidade: string | null;
+        }[] | null;
     };
 }
 
@@ -57,15 +57,15 @@ export type AdicionarResultadoInputDto = {
         dataBusca: string;
         tipoBusca: string;
         plantas: {
-            id: string;
-            nome: string;
-            nomeCientifico: string;
-            imagem: string;
-            descricao: string;
-            nivelDeCuidado: string;
-            usoMedico: string;
-            luminosidade: string;
-        }[];
+            id: string ;
+            nome: string | null;
+            nomeCientifico: string | null;
+            imagem: string | null;
+            descricao: string | null;
+            nivelDeCuidado: string | null;
+            usoMedico: string | null;
+            luminosidade: string | null;
+        }[] |  null;
     };
 }
 
@@ -162,6 +162,7 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
         }
         
         let resultado = this.resultRepoFirebase.criarResultado({plantas: plantasProntas, tipo: 'quiz'});
+
         await this.userRepoFirebase.adicionarResultado({idUser, resultado: resultado.resultado});
 
         return resultado;

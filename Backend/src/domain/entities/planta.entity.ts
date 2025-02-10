@@ -1,18 +1,18 @@
 export type PlantaProps = {
     id: string;
-    nome: string;
-    nomeCientifico: string;
-    imagem: string;
-    descricao: string;
-    nivelDeCuidado: string;
-    usoMedico: string;
-    luminosidade: string;
+    nome: string | null;
+    nomeCientifico: string | null;
+    imagem: string | null;
+    descricao: string | null;
+    nivelDeCuidado: string | null;
+    usoMedico: string | null;
+    luminosidade: string | null;
 }
 
 export class Planta{
     constructor(private props: PlantaProps){}
 
-    public static create(nome: string, nomeCientifico: string, imagem: string, descricao: string, nivelDeCuidado: string, usoMedico: string, luminosidade: string){
+    public static create(nome: string | null, nomeCientifico: string | null, imagem: string | null, descricao: string | null, nivelDeCuidado: string | null, usoMedico: string | null, luminosidade: string | null){
         return new Planta({
             id: crypto.randomUUID.toString(),
             nome, 
