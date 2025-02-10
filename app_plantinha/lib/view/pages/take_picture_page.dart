@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:app_plantinha/controllers/services/api_services.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -32,8 +33,8 @@ class TakePicturePageState extends State<TakePicturePage> {
 
       // Enviar a imagem para o OpenAI
       File? c_image = await compressImage(_image!);
-     String result = await sendImageToOpenAI(c_image);
-print("Nome da planta: $result");
+     List<String> result = await identifyPlant(c_image);
+      print("Nome da planta: $result");
     }
   }
 
