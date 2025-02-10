@@ -1,9 +1,11 @@
 export class ResultadoBuscaController {
     criarResultadoUseCase;
+    criarResultadoMapaUseCase;
     obterResultadoUseCase;
     deletarResultadoUseCase;
-    constructor(criarResultadoUseCase, obterResultadoUseCase, deletarResultadoUseCase) {
+    constructor(criarResultadoUseCase, criarResultadoMapaUseCase, obterResultadoUseCase, deletarResultadoUseCase) {
         this.criarResultadoUseCase = criarResultadoUseCase;
+        this.criarResultadoMapaUseCase = criarResultadoMapaUseCase;
         this.obterResultadoUseCase = obterResultadoUseCase;
         this.deletarResultadoUseCase = deletarResultadoUseCase;
     }
@@ -16,6 +18,18 @@ export class ResultadoBuscaController {
         catch (error) {
             res.status(500).json({
                 message: "Erro ao criar resultado quiz.",
+                error: error.message,
+            });
+        }
+    };
+    criarResultMapa = async (req, res) => {
+        try {
+            let pais = req.params.pais;
+            res.status(200).json(this.criarResultadoMapaUseCase.execute({ pais }));
+        }
+        catch (error) {
+            res.status(500).json({
+                message: "Erro ao criar resultado mapa.",
                 error: error.message,
             });
         }

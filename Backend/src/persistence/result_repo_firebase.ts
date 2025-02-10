@@ -27,7 +27,7 @@ export class ResultRepoFirebase implements ResultadoGateway{
             id: resultado.id,
             dataBusca: resultado.dataBusca,
             tipoBusca: resultado.tipoBusca,
-            plantas: resultado.plantas.map(planta => ({
+            plantas: resultado.plantas.map(planta => ({ 
                 id: planta.id,
                 nome: planta.nome,
                 nomeCientifico: planta.nomeCientifico,

@@ -1,4 +1,4 @@
-import 'package:app_plantinha/controllers/services/auth_service.model.dart';
+import 'package:app_plantinha/controllers/services/auth_service.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/container_with_form.widget.dart';
 import 'package:flutter/material.dart';

@@ -44,7 +44,7 @@ export class CriarResultadoUseCase {
         //sim =  true // direcionar para pergunta de qual parte é comestivel
         //não =  false
         //talvez = null() //direcionar para outra pergunta
-        axios.get(url).then((response) => {
+        await axios.get(url).then((response) => {
             plantas_trefle = (response.data.data);
         }).catch((error) => {
             throw new Error(error);
@@ -61,7 +61,7 @@ export class CriarResultadoUseCase {
             let response = await axios.get(url_perenual1);
             let id_planta = response.data.data[0].id;
             const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-g3X1678e55cae03338309`;
-            axios.get(url_perenual2).then((response) => {
+            await axios.get(url_perenual2).then((response) => {
                 let planta = Planta.create((response.data).common_name, (response.data).scientific_name[0], (response.data).default_image.original_url, (response.data).description, (response.data).care_level, (response.data).medicinal, (response.data).sunlight[0]);
                 plantasProntas.push(planta);
             }).catch((error) => {

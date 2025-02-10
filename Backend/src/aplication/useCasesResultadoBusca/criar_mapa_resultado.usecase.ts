@@ -33,35 +33,37 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
     }
 
     async execute({pais}: CriarResultadoMapaInputDto): Promise<CriarResultadoMapaOutputDto>{
-        let plantas_trefle: { common_name: string }[] = [];
+        let plantas_trefle: { scientific_name: string }[] = [];
 
         let url = `https://trefle.io/api/v1/species?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU&filter[distribution]=${pais}`;
         
-        axios.get(url).then((response) => {
+        await axios.get(url).then((response) => {
             plantas_trefle = (response.data.data);
             }).catch((error) => {
             throw new Error(error);
         });
 
-        let nomePlantasSelecionadas = [];
+        let nomePlantasSelecionadas: String[] = [];
         let contador = 0;
         let plantasProntas: Planta[] = [];
 
         while (contador < 8){
-            nomePlantasSelecionadas.push(plantas_trefle[contador].common_name);
+            nomePlantasSelecionadas.push(plantas_trefle[contador].scientific_name);
             contador++;
         }
 
         for(let nome of nomePlantasSelecionadas){
 
             const url_perenual1 = `https://perenual.com/api/species-list?key=sk-g3X1678e55cae03338309&q=${nome}`;
-        
-            let response = await axios.get(url_perenual1);
-            let id_planta = response.data.data[0].id;
+            let id_planta;
+            await axios.get(url_perenual1).then((response) =>{
+                console.log(response.data);
+                id_planta = response.data.data[0].id;
+            });
 
             const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-g3X1678e55cae03338309`;
     
-            axios.get(url_perenual2).then((response) => {
+            await axios.get(url_perenual2).then((response) => {
 
                 let planta:Planta = Planta.create(
                     (response.data).common_name,

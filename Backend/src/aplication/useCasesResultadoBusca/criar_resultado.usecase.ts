@@ -119,7 +119,7 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
         //não =  false
         //talvez = null() //direcionar para outra pergunta
   
-        axios.get(url).then((response) => {
+        await axios.get(url).then((response) => {
             plantas_trefle = (response.data.data);
             }).catch((error) => {
             throw new Error(error);
@@ -143,7 +143,7 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
 
             const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-g3X1678e55cae03338309`;
     
-            axios.get(url_perenual2).then((response) => {
+            await axios.get(url_perenual2).then((response) => {
 
                 let planta:Planta = Planta.create(
                     (response.data).common_name,

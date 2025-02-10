@@ -52,6 +52,8 @@ dependencies:
   dio: ^5.8.0+1
   flutter_image_compress: ^2.4.0
   permission_handler: ^10.0.0
+  google_maps_flutter: ^2.10.0
+  location: ^5.0.1 # Para obter permissões de localização
   
 
 dev_dependencies:

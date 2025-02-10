@@ -7,6 +7,7 @@ import 'package:app_plantinha/view/pages/history_page.dart';
 import 'package:app_plantinha/view/pages/home_page.dart';
 import 'package:app_plantinha/view/pages/results_screen.dart';
 import 'package:app_plantinha/view/pages/search_by_image_page.dart';
+import 'package:app_plantinha/view/pages/search_by_maps_page.dart';
 import 'package:app_plantinha/view/pages/search_by_quiz_page.dart';
 import 'package:app_plantinha/view/pages/signup_page.dart';
 import 'package:app_plantinha/view/pages/settings_page.dart';
@@ -35,9 +36,10 @@ class AppPlantinha extends StatelessWidget {
       '/': (context) => const LoginPage(title: 'Login Page'),
       '/homePage': (context) => const HomePage(title: 'Home Page'),
       '/homePage/searchByQuizPage': (context) => const SearchByQuizPage(title: 'Search By Quiz Page'),
-      '/homePage/searchByQuizPage/resultsPage': (context) => const ResultsScreen(title: 'Results Page'),
+      //'/homePage/searchByQuizPage/resultsPage': (context) => const ResultsScreen(title: 'Results Page'),
       '/homePage/searchByImagePage': (context) => const SearchByImagePage(title: 'Search By Image Page'),
       '/homePage/searchByImagePage/takePicture': (context) => TakePicturePage(camera: camera),
+      '/homePage/searchByMapsPage': (context) => const SearchByMapsPage(),
       '/forgotPasswordPage': (context) => const ForgotPasswordPage(title: 'Forgot Password Page'),
       '/signUpPage': (context) => const SignUpPage(title: 'SignUp Page'),
       '/settingsPage': (context) => const SettingsPage(title: 'Settings Page'),
