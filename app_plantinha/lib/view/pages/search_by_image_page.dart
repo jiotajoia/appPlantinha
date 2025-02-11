@@ -1,4 +1,6 @@
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
+import 'package:app_plantinha/controllers/services/results_service.dart';
+import 'package:app_plantinha/view/pages/results_screen.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
@@ -13,6 +15,7 @@ import 'package:app_plantinha/controllers/services/api_services.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class SearchByImagePage extends StatefulWidget {
+  
   const SearchByImagePage({
     super.key,
     required this.title,
@@ -27,6 +30,7 @@ class SearchByImagePage extends StatefulWidget {
 }
 
 class _SearchByImagePageState extends State<SearchByImagePage> {
+  final ResultsService resultsService = ResultsService();
   File? _image;
   final picker = ImagePicker();
 
@@ -41,9 +45,18 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
 
     File? c_image = await compressImage(_image!);
 
-    List<String> result = await identifyPlant(c_image);
+    List<String> nomePlantas = await identifyPlant(c_image);
+    try{
+      var resultado = await resultsService.obterResultadoImagem(nomePlantas);
 
-    print("Nome da planta: $result");
+      // ignore: use_build_context_synchronously
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao criar resultado: $e'),duration: Duration(seconds: 20),),
+      );
+    }
+    
   }
 
   Future<File> compressImage(File imageFile) async {
@@ -71,9 +84,19 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
       });
 
       File? c_image = await compressImage(_image!);
-      List<String> result = await identifyPlant(c_image);
-      
-      print("Nome da planta: $result");
+      List<String> nomePlantas= await identifyPlant(c_image);
+
+      try{
+        var resultado = await resultsService.obterResultadoImagem(nomePlantas);
+
+        // ignore: use_build_context_synchronously
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
+      }catch(e){
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao criar resultado: $e'),duration: Duration(seconds: 20),),
+        );
+      }
     }
   }
 
@@ -98,8 +121,8 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ContainerWithButton(
-                      onPressed: () {
-                        _captureImage();
+                      onPressed: () async {
+                        await _captureImage();
                       },
                       rectangleRoundedBorder: true,
                       widthAdjusted: widthScreen * 0.716,
@@ -116,8 +139,8 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                       fontWeight: FontWeight.bold,
                     ),
                     ContainerWithButton(
-                      onPressed: () {
-                        _pickImage(ImageSource.gallery);
+                      onPressed: () async {
+                        await _pickImage(ImageSource.gallery);
                       },
                       rectangleRoundedBorder: true,
                       width: widthScreen * 0.533,

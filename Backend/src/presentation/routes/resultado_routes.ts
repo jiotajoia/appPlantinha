@@ -10,7 +10,7 @@ import { CriarResultadoMapaUseCase } from "../../aplication/useCasesResultadoBus
 export class ResultadoRoutes{
     app: Application;
     rotaResultQuiz: string = `/user/:idUser/resultado-quiz`;
-    rotaResultMapa: string = `/user/resultado-mapa/:pais`;//
+    rotaResultMapa: string = `/user/resultado-mapa/:pais`;
     rotaUserResult: string = `/user/:idUser/resultado/:idResultado`;
     userRepoFirebase: UserRepoFirebase = new UserRepoFirebase();
     resultRepoFirebase: ResultRepoFirebase = new ResultRepoFirebase();
@@ -24,7 +24,7 @@ export class ResultadoRoutes{
         const controller = new ResultadoBuscaController(new CriarResultadoUseCase(this.userRepoFirebase, this.resultRepoFirebase), new CriarResultadoMapaUseCase(this.resultRepoFirebase), new ObterResultadoUseCase(this.resultRepoFirebase), new DeletarResultadoUseCase(this.resultRepoFirebase));
         
         this.app.route(this.rotaResultQuiz).post(controller.criarResultQuiz);
-        this.app.route(this.rotaResultMapa).post(controller.criarResultMapa);//
+        this.app.route(this.rotaResultMapa).post(controller.criarResultMapa);
 
         this.app.route(this.rotaUserResult).get(controller.obterResult).delete(controller.deletarResult);
 

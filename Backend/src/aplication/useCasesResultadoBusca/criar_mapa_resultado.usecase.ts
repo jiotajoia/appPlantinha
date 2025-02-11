@@ -66,6 +66,8 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
                    id_planta = response.data.data[0].id;
                    contador++
                 }
+            }).catch((error) => {
+                console.error('erro em criar resultado mapa: '+ error);
             });
 
             if(id_planta == null){

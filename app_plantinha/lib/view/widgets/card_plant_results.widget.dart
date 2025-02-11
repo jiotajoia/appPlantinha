@@ -6,7 +6,9 @@ import 'package:provider/provider.dart';
 
 class CardPlantResults extends StatelessWidget {
   const CardPlantResults({super.key, required this.cientificName, required this.image, required this.name, required this.ambient, required this.cares, required this.curiosities, required this.shadowOrLightType});
-  final String name, cientificName, image, shadowOrLightType, ambient, cares, curiosities;
+  // ignore: prefer_typing_uninitialized_variables
+  final name, cientificName, image, shadowOrLightType, ambient, cares, curiosities;
+   
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,12 @@ class CardPlantResults extends StatelessWidget {
       child: SizedBox(
         //width: fontSizeProvider>= 20 ? widthScreen * 0.98 : widthScreen * 0.9,
         width: widthScreen * 0.98,
-        height: fontSizeProvider >= 24 ? heightScreen * 0.5 : heightScreen * 0.25,
+        height: fontSizeProvider >= 24 ? heightScreen * 0.6 : heightScreen * 0.3,
         child: Padding(
           padding: EdgeInsets.all(8),
           child: Row(
             children: [
-              Image.asset(image, width: 147, height: 147,),
+              Image.network(image, width: 147, height: 147,),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

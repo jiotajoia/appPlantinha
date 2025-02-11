@@ -25,6 +25,20 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
     mapController = controller;
   }
 
+  _toResultScreen(String nomePais) async {
+    try {
+      var resultado = await resultsService.obterResultadoMapa(nomePais);
+      // ignore: use_build_context_synchronously
+      Navigator.push(context,MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao criar resultado: $e'),duration: Duration(seconds: 20),),
+      );
+    }
+  }
+
+
   carregarMarcadores() async {
     String baseSnipet = 'clique para ver plantas encontradas neste pais';
     Set<Marker> marcadorLocal = {};
@@ -50,30 +64,7 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
           title: pais['nome'],
           snippet: baseSnipet,
           onTap: () async {
-            try {
-              var resultado = await resultsService.obterResultadoMapa(pais['nome']);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('resultado é $resultado'),
-                  duration: Duration(seconds: 20),
-                ),
-              );
-              // ignore: use_build_context_synchronously
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ResultsScreen(
-                    title: 'Results Page',
-                    resultado: resultado,
-                  ),
-                ),
-              );
-            } catch (e) {
-              // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Erro ao criar resultado: $e')),
-              );
-            }
+            await _toResultScreen(pais['nome']);
           },
         ),
       );

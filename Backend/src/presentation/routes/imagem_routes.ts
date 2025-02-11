@@ -1,15 +1,15 @@
 import { Application } from "express";
 import { ImagemController } from "../controllers/imagem.controller";
-import { UserGateway } from "../../domain/gateways/user.gateway";
-import { ResultadoGateway } from "../../domain/gateways/resultado.gateway";
 import { ReconhecimentoUseCase } from "../../aplication/useCasesImagem/reconhecimento.usecase";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
+import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 
 export class ImagemRoutes{
     app: Application;
     rotaImagem: string = '/user/:id/imagem';
 
-    userGateway!: UserGateway;
-    resultGateway!: ResultadoGateway;
+    userGateway: UserRepoFirebase = new UserRepoFirebase();
+    resultGateway: ResultRepoFirebase = new ResultRepoFirebase();
 
     constructor(app: Application){
         this.app = app;
@@ -20,6 +20,6 @@ export class ImagemRoutes{
         const controller: ImagemController = new ImagemController(new ReconhecimentoUseCase(this.resultGateway, this.userGateway));
         this.app.route(this.rotaImagem).post(controller.reconhecimento);
         
-        return this.app
+        return this.app;
     }
 }

@@ -10,9 +10,10 @@ class ResultsService {
     try {
       var response = await http.post(
         Uri.parse('$backExterno/user/resultado-mapa/$pais'),
+        headers: {'Content-Type': 'application/json'},
       );
 
-      return jsonDecode(response.body).resultado;
+      return jsonDecode(response.body)['resultado'];
     } catch (e) {
       rethrow;
     }
@@ -22,11 +23,16 @@ class ResultsService {
     try {
       User? user = _auth.currentUser;
       String idUser = user!.uid;
+      
       var response = await http.post(
         Uri.parse('$backExterno/user/$idUser/imagem'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'nomePlantas': nomePlantas,
+        }),
       );
 
-      return jsonDecode(response.body).resultado;
+      return jsonDecode(response.body);
     } catch (e) {
       rethrow;
     }

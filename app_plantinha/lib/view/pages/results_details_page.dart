@@ -16,7 +16,8 @@ class ResultsDetailsPage extends StatelessWidget {
       required this.name,
       required this.shadowOrLightType,
       required this.image});
-  final String name,
+  // ignore: prefer_typing_uninitialized_variables
+  final name,
       cientificName,
       shadowOrLightType,
       ambient,
@@ -79,7 +80,7 @@ class ResultsDetailsPage extends StatelessWidget {
                   textDecoration: TextDecoration.underline,
                   marginBottom: 30,
                   textColor: colorText),
-              Image.asset(
+              Image.network(
                 image,
                 width: 200,
                 height: 200,
@@ -96,12 +97,12 @@ class ResultsDetailsPage extends StatelessWidget {
                 marginLeft: 30,
               ),
               RowWithText(
-                textLabel: '•   Sombra/Luz $shadowOrLightType',
+                textLabel: '•   Sombra/Luz: $shadowOrLightType',
                 fontSize: fontSizeProvider + 4,
                 marginLeft: 30,
                 marginBottom: 30,
               ),
-              getParagraph('Ambiente', ambient, fontSizeProvider + 1, colorText,
+              getParagraph('Uso medico', '$ambient', fontSizeProvider + 1, colorText,
                   widthScreen * 0.747, 15),
               getParagraph('Cuidados', cares, fontSizeProvider + 1, colorText,
                   widthScreen * 0.747, 15),

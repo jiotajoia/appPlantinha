@@ -6,9 +6,8 @@ import { PasswordRoutes } from './presentation/routes/password_routes';
 import { UserRoutes } from './presentation/routes/user_routes';
 import { PerguntaRoutes } from './presentation/routes/pergunta_routes';
 import { ResultadoRoutes } from './presentation/routes/resultado_routes';
-//import { ImagemRoutes } from "./presentation/routes/imagem_routes";
+import { ImagemRoutes } from "./presentation/routes/imagem_routes";
 import { HistoricoRoutes } from "./presentation/routes/historico_routes";
-import { db } from './persistence/firebase_config/firebase';
 
 const port = 3000;
 const perenual = process.env.API_KEY_PERENUAL;
@@ -28,7 +27,7 @@ new UserRoutes(app); //verificado, funcionamento esperado.
 new PerguntaRoutes(app);//verificado, funcionamento esperado. obs: falta Adicionar perguntas no bando de dados
 new ResultadoRoutes(app);//verificado, funcionamento esperado. obs : lembrar de esconder as chave de api na implementaçao
 new HistoricoRoutes(app);//verificado, funcionamento parcialmente esperado. obs: é necessario perceber como o firebase devolve os dados, pode ser que exista uma incongruencia.
-//new ImagemRoutes(app);
+new ImagemRoutes(app);
 
 /*
 app.get('/preencherPerguntas', async (req, res) => {
