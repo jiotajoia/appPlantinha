@@ -57,13 +57,12 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
                 break;
             }
 
-            const url_perenual1 = `https://perenual.com/api/species-list?key=sk-g3X1678e55cae03338309&q=${nome}`;
+            const url_perenual1 = `https://perenual.com/api/species-list?key=sk-keQt67aa93d93caa98593&q=${nome}`;
 
             let id_planta: string | null = null;
             await axios.get(url_perenual1).then((response) =>{
-                console.log(response.data);
 
-                if (response.data.data[0].id != undefined){
+                if (response.data.data[0] && response.data.data[0].cycle != `Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry`){
                    id_planta = response.data.data[0].id;
                    contador++
                 }
@@ -72,11 +71,14 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
             if(id_planta == null){
                 continue;
             }
+            //chave1:sk-oUZj67aa964e242d68309
+            //chave2:sk-keQt67aa93d93caa98593
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-g3X1678e55cae03338309`;
+            const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-keQt67aa93d93caa98593`;
     
             await axios.get(url_perenual2).then((response) => {
-
+                console.log(response.data);
                 let planta:Planta = Planta.create(
                     (response.data).common_name,
                     (response.data).scientific_name[0],
@@ -91,6 +93,8 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
             }).catch((error) => {
                 throw new Error(error);
             });
+
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         }
         
         return this.resultRepoFirebase.criarResultado({plantas: plantasProntas, tipo: 'mapa'});

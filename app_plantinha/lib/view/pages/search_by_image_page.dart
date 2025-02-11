@@ -5,15 +5,78 @@ import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:camera/camera.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:app_plantinha/controllers/services/api_services.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class SearchByImagePage extends StatefulWidget {
-  const SearchByImagePage({super.key, required this.title});
+  const SearchByImagePage({
+    super.key,
+    required this.title,
+    required this.camera,
+  });
+
   final String title;
+  final CameraDescription camera;
+
   @override
   State<SearchByImagePage> createState() => _SearchByImagePageState();
 }
 
 class _SearchByImagePageState extends State<SearchByImagePage> {
+  File? _image;
+  final picker = ImagePicker();
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: source, imageQuality: 50);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+
+    File? c_image = await compressImage(_image!);
+
+    List<String> result = await identifyPlant(c_image);
+
+    print("Nome da planta: $result");
+  }
+
+  Future<File> compressImage(File imageFile) async {
+    // Compactar a imagem
+    final result = await FlutterImageCompress.compressWithFile(
+      imageFile.absolute.path,
+      minWidth: 800,
+      minHeight: 800,
+      quality: 80,
+      rotate: 0,
+    );
+
+    final newFile = File('${imageFile.path}_compressed.jpg')
+      ..writeAsBytesSync(result!);
+
+    return newFile;
+  }
+
+  Future<void> _captureImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+
+      File? c_image = await compressImage(_image!);
+      List<String> result = await identifyPlant(c_image);
+      
+      print("Nome da planta: $result");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
@@ -36,7 +99,7 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                   children: [
                     ContainerWithButton(
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(context, '/homePage/searchByImagePage/takePicture', (Route<dynamic> route) => false);
+                        _captureImage();
                       },
                       rectangleRoundedBorder: true,
                       widthAdjusted: widthScreen * 0.716,
@@ -53,7 +116,9 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
                       fontWeight: FontWeight.bold,
                     ),
                     ContainerWithButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _pickImage(ImageSource.gallery);
+                      },
                       rectangleRoundedBorder: true,
                       width: widthScreen * 0.533,
                       height: heightScreen * 0.171,

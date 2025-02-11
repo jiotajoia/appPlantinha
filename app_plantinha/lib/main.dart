@@ -23,11 +23,6 @@ void main() async {
   );
 
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => CredentialsState()),
-    ChangeNotifierProvider(create: (_) => ForgotPasswordState()),
-    ChangeNotifierProvider(create: (_) => StepForgotPasswordState()),
-    ChangeNotifierProvider(create: (_) => FontSizeState()),
-    ChangeNotifierProvider(create: (_) => LightDarkState()),
     ChangeNotifierProvider (create: (_) => CredentialsState()),
     ChangeNotifierProvider (create: (_) => ForgotPasswordState()),
     ChangeNotifierProvider (create: (_) => StepForgotPasswordState()),

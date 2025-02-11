@@ -52,11 +52,23 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
           onTap: () async {
             try {
               var resultado = await resultsService.obterResultadoMapa(pais['nome']);
-            
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('resultado é $resultado'),
+                  duration: Duration(seconds: 20),
+                ),
+              );
               // ignore: use_build_context_synchronously
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsScreen(
+                    title: 'Results Page',
+                    resultado: resultado,
+                  ),
+                ),
+              );
             } catch (e) {
-            
               // ignore: use_build_context_synchronously
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Erro ao criar resultado: $e')),
@@ -65,7 +77,7 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
           },
         ),
       );
-    
+
       marcadorLocal.add(marcador);
     }
 
@@ -74,8 +86,7 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
     });
   }
 
-  checkPermission() async{
-    
+  checkPermission() async {
     final permissionStatus = await _location.requestPermission();
     final serviceEnabled = await _location.serviceEnabled();
 
@@ -95,7 +106,6 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
     setState(() {
       localizacao = LatLng(local.latitude!, local.longitude!);
     });
-
   }
 
   @override
@@ -109,18 +119,18 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
   Widget build(BuildContext context) {
     return ScaffoldBase(
       body: GoogleMap(
-          myLocationEnabled: true,
-          mapType: MapType.normal,
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: localizacao ?? _center,
-            zoom: 1.0,
-          ),
-          markers: marcadores,
-          zoomControlsEnabled: false,
-          zoomGesturesEnabled: false,
-          myLocationButtonEnabled: false,
+        myLocationEnabled: true,
+        mapType: MapType.normal,
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: localizacao ?? _center,
+          zoom: 1.0,
         ),
+        markers: marcadores,
+        zoomControlsEnabled: false,
+        zoomGesturesEnabled: false,
+        myLocationButtonEnabled: false,
+      ),
     );
   }
 }

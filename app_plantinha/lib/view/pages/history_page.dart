@@ -15,10 +15,7 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    DateTime dataAtual = DateTime.now();
-
     List<Map<String, dynamic>> resultsValues = [
       {'data': '2025-02-03'},
       {'data': '2025-08-03'},
@@ -26,13 +23,17 @@ class _HistoryPageState extends State<HistoryPage> {
       {'data': '2025-01-01'},
     ];
 
+    bool isHoje(DateTime data) {
+      DateTime agora = DateTime.now();
+      return agora == data;
+    }
+
     bool isDiaAnterior(DateTime data) {
-      DateTime atual = DateTime.now();
+      DateTime agora = DateTime.now();
+      DateTime ontem = agora.subtract(Duration(days: 1));
+      DateTime seisDiasAtras = agora.subtract(Duration(days: 6));
 
-      DateTime umDiasAtras = atual.subtract(Duration(days: 1));
-      DateTime seisDiasAtras = atual.subtract(Duration(days: 6));
-
-      return data.isBefore(umDiasAtras) && data.isBefore(seisDiasAtras);
+      return data.isBefore(ontem) && data.isAfter(seisDiasAtras);
     }
 
     bool isSemanaAnterior(DateTime data) {
@@ -45,32 +46,52 @@ class _HistoryPageState extends State<HistoryPage> {
 
     bool isMesAnterior(DateTime data) {
       DateTime agora = DateTime.now();
-      DateTime mesAtras = agora.subtract(Duration(days: 32));
+      DateTime maisDeUmMesAtras = agora.subtract(Duration(days: 31));
 
-      return data.isBefore(mesAtras);
+      return data.isBefore(maisDeUmMesAtras);
     }
 
-    dynamic createCardHistory(BuildContext context) {
-      
-      for (var result in resultsValues) {
+    Widget createCardHistory(BuildContext context) {
+      List<Map<String, dynamic>> hojeList = [];
+      List<Map<String, dynamic>> diasList = [];
+      List<Map<String, dynamic>> semanasList = [];
+      List<Map<String, dynamic>> mesesList = [];
+
+      for (var i = 0; i < resultsValues.length; i++) {
+        var result = resultsValues[i];
         DateTime data = DateTime.parse(result['data']);
-        if (data == dataAtual) {}
-
-        if (isDiaAnterior(data)) {}
-
-        if (isSemanaAnterior(data)) {}
-
-        if (isMesAnterior(data)) {}
+        if (isHoje(data)) {
+          hojeList.add({'index': i + 1, 'data': result['data']});
+        } else if (isDiaAnterior(data)) {
+          diasList.add({'index': i + 1, 'data': result['data']});
+        } else if (isSemanaAnterior(data)) {
+          semanasList.add({'index': i + 1, 'data': result['data']});
+        } else if (isMesAnterior(data)) {
+          mesesList.add({'index': i + 1, 'data': result['data']});
+        }
       }
 
-      CardHistoryPage(
-        text: 'Quiz Sobre planta ${1}',
-      );
+      List<Widget> buildSection(
+          String title, List<Map<String, dynamic>> dataList) {
+        if (dataList.isEmpty) return [];
 
-      Divider(
-        color: Colors.transparent,
-        thickness: 0,
-        height: 10.0,
+        return [
+          RowWithText(textLabel: title),
+          ...dataList.map((data) => CardHistoryPage(
+                text: 'Quiz sobre planta - ${data['index']}',
+              )),
+          Divider(color: Colors.transparent, thickness: 0, height: 10.0),
+        ];
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...buildSection("Hoje", hojeList),
+          ...buildSection("Há dias atrás", diasList),
+          ...buildSection("Há semanas atrás", semanasList),
+          ...buildSection("Há meses atrás", mesesList),
+        ],
       );
     }
 
@@ -107,9 +128,8 @@ class _HistoryPageState extends State<HistoryPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              RowButtonBack(), 
-
-              
+              RowButtonBack(),
+              createCardHistory(context),
             ],
           ),
         ),

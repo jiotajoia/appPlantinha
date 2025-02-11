@@ -68,11 +68,16 @@ export class UserRepoFirebase {
             dataBusca: resultado.dataBusca,
             tipoBusca: resultado.tipoBusca
         });
-        resultado.plantas.forEach((planta) => {
-            const plantaRef = db.collection('users').doc(idUser).collection('historico').doc(resultado.id).collection('plantas').doc(planta.id);
-            db.batch().set(plantaRef, planta);
-        });
-        await db.batch().commit();
+        if (resultado.plantas) {
+            resultado.plantas.forEach((planta) => {
+                const plantaRef = db.collection('users').doc(idUser).collection('historico').doc(resultado.id).collection('plantas').doc(planta.id);
+                db.batch().set(plantaRef, planta);
+            });
+            await db.batch().commit();
+        }
+        else {
+            db.collection('users').doc(idUser).collection('historico').doc(resultado.id).collection('plantas').doc();
+        }
     }
     async obterHistorico(dados) {
         const { idUser } = dados;

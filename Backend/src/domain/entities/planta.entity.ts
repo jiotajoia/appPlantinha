@@ -9,6 +9,7 @@ export type PlantaProps = {
     luminosidade: string | null;
 }
 
+
 export class Planta{
     constructor(private props: PlantaProps){}
 

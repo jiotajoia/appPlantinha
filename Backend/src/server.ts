@@ -149,21 +149,21 @@ app.get('/preencherPerguntas', async (req, res) => {
             id: '17',
             indagacao: 'A planta é de sol?',
             indicacao: ['24','18','18'],
-            filtro: 'light',
+            filtro: 'sunlight',
             alternativas: ['full_sun',null,null],
         },
         {
             id: '18',
             indagacao: 'A planta é de sombra?',
             indicacao: ['24','19','19'],
-            filtro: 'light',
+            filtro: 'sunlight',
             alternativas: ['shade',null,null],
         },
         {
             id: '19',
             indagacao: 'A planta é relativamente de sol e sombra?',
             indicacao: ['24','24','24'],
-            filtro: 'light',
+            filtro: 'sunlight',
             alternativas: ['partial_shade',null,null],
         },
         {
@@ -259,6 +259,30 @@ app.get('/preencherPerguntas', async (req, res) => {
         res.send(`nao deu certo bobao kkkkkkk ${e}`);
     }
 });
+
+type PlantaBanco = {
+    id: string;
+    nome: string;
+    nomeCientifico: string;
+    imagem: string;
+    cuidados: string;
+    curiosidade: string;
+    nivelDeCuidado: string;
+    medicinal: string;
+    sunlight: string;
+    ediable: string;
+    growth_form: string;
+    distribution: string;
+    toxicity: string;
+    cycle: string;
+    habitat: string;
+    flower_color: string;
+    maximum_height: string;
+    growth_rate: string;
+    conservation_status : string;
+    flowering: string;
+    drought_tolerance: string;
+}
 */
 
 app.listen(port, '0.0.0.0', () => {
