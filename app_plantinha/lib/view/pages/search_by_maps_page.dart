@@ -25,22 +25,36 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
     mapController = controller;
   }
 
-  _toResultScreen(String nomePais) async {
-    try {
-      var resultado = await resultsService.obterResultadoMapa(nomePais);
-      // ignore: use_build_context_synchronously
-      Navigator.push(context,MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
-    } catch (e) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao criar resultado: $e'),duration: Duration(seconds: 20),),
-      );
-    }
+  Future<void> _toResultScreen(String nomePais) async {
+  // Exibe um indicador de loading
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => const Center(child: CircularProgressIndicator()),
+  );
+  
+  try {
+    var resultado = await resultsService.obterResultadoMapa(nomePais);
+    // Verifica se o widget ainda está montado para evitar problemas com o context
+    if (!mounted) return;
+    
+    Navigator.pop(context); // Fecha o loading
+    Navigator.push(context,MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
+  } catch (e) {
+    if (!mounted) return;
+    Navigator.pop(context); // Fecha o loading
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Erro ao criar resultado: $e'),
+        duration: const Duration(seconds: 20),
+      ),
+    );
+  }
   }
 
 
-  carregarMarcadores() async {
-    String baseSnipet = 'clique para ver plantas encontradas neste pais';
+  carregarMarcadores(){
+    String baseSnipet = 'clique para selecionar este pais';
     Set<Marker> marcadorLocal = {};
 
     List<Map<String, dynamic>> paises = [
@@ -63,7 +77,7 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
         infoWindow: InfoWindow(
           title: pais['nome'],
           snippet: baseSnipet,
-          onTap: () async {
+          onTap: () async{
             await _toResultScreen(pais['nome']);
           },
         ),
@@ -100,7 +114,7 @@ class _SearchByMapsPageState extends State<SearchByMapsPage> {
   }
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     carregarMarcadores();
     checkPermission();

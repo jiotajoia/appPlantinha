@@ -23,7 +23,7 @@ class _ScaffoldBaseState extends State<ScaffoldBase> {
         ],
       ),
       drawer: DrawerBase(),
-      body: widget.body
+      body: widget.body,
     );
   }
 }

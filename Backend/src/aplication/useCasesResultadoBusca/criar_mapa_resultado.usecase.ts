@@ -8,21 +8,19 @@ export type CriarResultadoMapaInputDto = {
 }
 
 export type CriarResultadoMapaOutputDto = {
-    resultado: {
-        id: string;
-        dataBusca: string;
-        tipoBusca: string;
-        plantas: {
-            id: string ;
-            nome: string | null;
-            nomeCientifico: string | null;
-            imagem: string | null;
-            descricao: string | null;
-            nivelDeCuidado: string | null;
-            usoMedico: string | null;
-            luminosidade: string | null;
-        }[] | null;
-    };
+    id: string;
+    dataBusca: string;
+    tipoBusca: string;
+    plantas: {
+        id: string ;
+        nome: string | null;
+        nomeCientifico: string | null;
+        imagem: string | null;
+        descricao: string | null;
+        nivelDeCuidado: string | null;
+        usoMedico: string | null;
+        luminosidade: string | null;
+    }[] | null;
 };
 
 export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInputDto, CriarResultadoMapaOutputDto>{
@@ -99,6 +97,6 @@ export class CriarResultadoMapaUseCase implements UseCase<CriarResultadoMapaInpu
             await new Promise((resolve) => setTimeout(resolve, 1000));
         }
         
-        return this.resultRepoFirebase.criarResultado({plantas: plantasProntas, tipo: 'mapa'});
+        return this.resultRepoFirebase.criarResultado({plantas: plantasProntas, tipo: 'mapa'}).resultado;
     }
 }

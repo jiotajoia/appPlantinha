@@ -52,6 +52,6 @@ export class CriarResultadoMapaUseCase {
             });
             await new Promise((resolve) => setTimeout(resolve, 1000));
         }
-        return this.resultRepoFirebase.criarResultado({ plantas: plantasProntas, tipo: 'mapa' });
+        return this.resultRepoFirebase.criarResultado({ plantas: plantasProntas, tipo: 'mapa' }).resultado;
     }
 }

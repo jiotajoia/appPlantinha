@@ -43,9 +43,9 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
       });
     }
 
-    File? c_image = await compressImage(_image!);
+    File? cImage = await compressImage(_image!);
 
-    List<String> nomePlantas = await identifyPlant(c_image);
+    List<String> nomePlantas = await identifyPlant(cImage);
     try{
       var resultado = await resultsService.obterResultadoImagem(nomePlantas);
 
@@ -83,8 +83,8 @@ class _SearchByImagePageState extends State<SearchByImagePage> {
         _image = File(pickedFile.path);
       });
 
-      File? c_image = await compressImage(_image!);
-      List<String> nomePlantas= await identifyPlant(c_image);
+      File? cImage = await compressImage(_image!);
+      List<String> nomePlantas= await identifyPlant(cImage);
 
       try{
         var resultado = await resultsService.obterResultadoImagem(nomePlantas);

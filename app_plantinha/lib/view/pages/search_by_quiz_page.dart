@@ -6,6 +6,7 @@ import 'package:app_plantinha/view/widgets/row_with_text.dart';
 import 'package:app_plantinha/view/widgets/scaffold_base.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:app_plantinha/controllers/services/quiz_service.dart';
 
 class SearchByQuizPage extends StatefulWidget {
   const SearchByQuizPage({super.key, required this.title});
@@ -16,15 +17,21 @@ class SearchByQuizPage extends StatefulWidget {
 }
 
 class _SearchByQuizPageState extends State<SearchByQuizPage> {
+  final QuizService quizService = QuizService();
+  
+  Map<String, dynamic> perguntaAtual = {};
+
   List<Map<String, dynamic>> answers = [
     {
       "isChecked": false,
-      "answer": "simosdfvewrvwemkrgpwk4toigj3poitjbgpoi53jtbpoi35juibdig"
+      "answer": "sim"
     },
-    {"isChecked": false, "answer": "sim"},
-    {"isChecked": false, "answer": "sim"},
-    {"isChecked": false, "answer": "não"}
+    {"isChecked": false, "answer": "não"},
+    {"isChecked": false, "answer": "talvez"},
   ];
+
+  Map<String, dynamic> respostasQuiz = {};
+
   int counter = 1;
 
   void incrementCounter() {
@@ -33,9 +40,24 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
     });
   }
 
+  atualizaAnswers(){
+
+    setState(() {
+        answers = [];
+    });
+  }
+
+  obterPergunta(String id) async{
+    setState(() async {
+      perguntaAtual = await quizService.obterPergunta(id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
     bool goToNextQuestion = false;
+
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
     double fontSizeProvider = Provider.of<FontSizeState>(context).fontSize;
@@ -140,7 +162,8 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                     });
                   }
 
-                  if(counter == 3){
+                  if(counter == 6){
+                    //criar_result_quiz
                     //Navigator.pushNamed(context, '/homePage/searchByQuizPage/resultsPage');
                   }
                   

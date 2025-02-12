@@ -24,7 +24,7 @@ export class ResultadoRoutes{
         const controller = new ResultadoBuscaController(new CriarResultadoUseCase(this.userRepoFirebase, this.resultRepoFirebase), new CriarResultadoMapaUseCase(this.resultRepoFirebase), new ObterResultadoUseCase(this.resultRepoFirebase), new DeletarResultadoUseCase(this.resultRepoFirebase));
         
         this.app.route(this.rotaResultQuiz).post(controller.criarResultQuiz);
-        this.app.route(this.rotaResultMapa).post(controller.criarResultMapa);
+        this.app.route(this.rotaResultMapa).get(controller.criarResultMapa);
 
         this.app.route(this.rotaUserResult).get(controller.obterResult).delete(controller.deletarResult);
 

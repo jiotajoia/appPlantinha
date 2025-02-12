@@ -3,17 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 class ResultsService {
-  final String backExterno = "http://192.168.1.4:3000";
+  final String backExterno = "http://192.168.156.154:3000";
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   obterResultadoMapa(String pais) async {
     try {
-      var response = await http.post(
+      var response = await http.get(
         Uri.parse('$backExterno/user/resultado-mapa/$pais'),
-        headers: {'Content-Type': 'application/json'},
       );
+      
+      if (response.statusCode != 200) {
+        throw Exception(jsonDecode(response.body).error);
+      }
 
-      return jsonDecode(response.body)['resultado'];
+      return jsonDecode(response.body);
     } catch (e) {
       rethrow;
     }

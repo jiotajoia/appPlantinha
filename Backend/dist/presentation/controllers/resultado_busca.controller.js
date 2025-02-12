@@ -13,7 +13,7 @@ export class ResultadoBuscaController {
         try {
             let idUser = req.params.idUser;
             let respostas = req.body;
-            res.status(200).json(this.criarResultadoUseCase.execute({ idUser, respostas }));
+            res.status(200).json(await this.criarResultadoUseCase.execute({ idUser, respostas }));
         }
         catch (error) {
             res.status(500).json({
@@ -25,7 +25,7 @@ export class ResultadoBuscaController {
     criarResultMapa = async (req, res) => {
         try {
             let pais = req.params.pais;
-            res.status(200).json(this.criarResultadoMapaUseCase.execute({ pais }));
+            res.status(200).json(await this.criarResultadoMapaUseCase.execute({ pais }));
         }
         catch (error) {
             res.status(500).json({
@@ -51,7 +51,7 @@ export class ResultadoBuscaController {
         try {
             let idUser = req.params.idUser;
             let idResultado = req.params.idResultado;
-            res.status(200).json(this.deletarResultadoUseCase.execute({ idUser, idResultado }));
+            res.status(200).json(await this.deletarResultadoUseCase.execute({ idUser, idResultado }));
         }
         catch (error) {
             res.status(500).json({

@@ -7,7 +7,7 @@ export class PerguntaController{
     public obterPergunta = async (req: Request, res: Response) => {
         const id = req.params.id;
         try{
-            res.status(200).json(this.ObterPerguntaUseCase.execute({id}));
+            res.status(200).json(await this.ObterPerguntaUseCase.execute({id}));
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter pergunta.",

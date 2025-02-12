@@ -11,7 +11,7 @@ export class ResultadoBuscaController{
         try{
             let idUser = req.params.idUser;
             let respostas = req.body;
-            res.status(200).json(this.criarResultadoUseCase.execute({idUser, respostas}));
+            res.status(200).json(await this.criarResultadoUseCase.execute({idUser, respostas}));
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao criar resultado quiz.",
@@ -23,7 +23,7 @@ export class ResultadoBuscaController{
     public criarResultMapa = async (req: Request, res: Response) => { //
         try{
             let pais = req.params.pais;
-            res.status(200).json(this.criarResultadoMapaUseCase.execute({pais}));
+            res.status(200).json(await this.criarResultadoMapaUseCase.execute({pais}));
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao criar resultado mapa.",
@@ -49,7 +49,7 @@ export class ResultadoBuscaController{
         try{
             let idUser = req.params.idUser;
             let idResultado = req.params.idResultado
-            res.status(200).json(this.deletarResultadoUseCase.execute({idUser, idResultado}));
+            res.status(200).json(await this.deletarResultadoUseCase.execute({idUser, idResultado}));
         }catch(error: any){
             res.status(500).json({
                 message: "Erro ao deletar resultado.",

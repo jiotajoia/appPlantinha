@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(context, '/forgotPasswordPage', (Route<dynamic> route) => false);
+                        Navigator.pushNamed(context, '/forgotPasswordPage');
                       },
                       child: Text(
                         'Esqueceu a senha?',
