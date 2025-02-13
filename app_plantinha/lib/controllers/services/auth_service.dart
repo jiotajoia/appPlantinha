@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  //final String backExterno = "https://appplantinha.onrender.com";
-  final String backExterno = "http://192.168.1.4:3000";
+  final String backExterno = "https://appplantinha.onrender.com";
+  //final String backExterno = "http://192.168.1.4:3000";
 
   Future<void> cadastrarUsers(String nome, String email, String password, String confirmPassword) async {
     try {
