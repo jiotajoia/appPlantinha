@@ -12,7 +12,8 @@ export class ResultadoBuscaController {
     criarResultQuiz = async (req, res) => {
         try {
             let idUser = req.params.idUser;
-            let respostas = req.body;
+            let { respostas } = req.body;
+            console.log('chegou no controler');
             res.status(200).json(await this.criarResultadoUseCase.execute({ idUser, respostas }));
         }
         catch (error) {
@@ -38,7 +39,7 @@ export class ResultadoBuscaController {
         try {
             let idUser = req.params.idUser;
             let idResultado = req.params.idResultado;
-            res.status(200).json(this.obterResultadoUseCase.execute({ idUser, idResultado }));
+            res.status(200).json(await this.obterResultadoUseCase.execute({ idUser, idResultado }));
         }
         catch (error) {
             res.status(404).json({

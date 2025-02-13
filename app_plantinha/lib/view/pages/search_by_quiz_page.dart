@@ -1,5 +1,7 @@
 import 'package:app_plantinha/controllers/provider/font_size.provider.dart';
 import 'package:app_plantinha/controllers/provider/light_dark.provider.dart';
+import 'package:app_plantinha/controllers/services/results_service.dart';
+import 'package:app_plantinha/view/pages/results_screen.dart';
 import 'package:app_plantinha/view/widgets/container_with_button.widget.dart';
 import 'package:app_plantinha/view/widgets/row_button_back.widget.dart';
 import 'package:app_plantinha/view/widgets/row_with_text.dart';
@@ -18,8 +20,10 @@ class SearchByQuizPage extends StatefulWidget {
 
 class _SearchByQuizPageState extends State<SearchByQuizPage> {
   final QuizService quizService = QuizService();
+  final ResultsService resultsService = ResultsService();
   
   Map<String, dynamic> perguntaAtual = {};
+  Map<String, dynamic> respostasQuiz = {};
 
   List<Map<String, dynamic>> answers = [
     {
@@ -30,8 +34,6 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
     {"isChecked": false, "answer": "talvez"},
   ];
 
-  Map<String, dynamic> respostasQuiz = {};
-
   int counter = 1;
 
   void incrementCounter() {
@@ -40,22 +42,20 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
     });
   }
 
-  atualizaAnswers(){
-
-    setState(() {
-        answers = [];
-    });
+  obterPergunta(String id) async{
+      perguntaAtual = await quizService.obterPergunta(id);
+      setState((){
+      });
   }
 
-  obterPergunta(String id) async{
-    setState(() async {
-      perguntaAtual = await quizService.obterPergunta(id);
-    });
+  @override
+  void initState() {
+    super.initState();
+    obterPergunta('01');
   }
 
   @override
   Widget build(BuildContext context) {
-
     bool goToNextQuestion = false;
 
     double heightScreen = MediaQuery.of(context).size.height;
@@ -82,7 +82,7 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
               RowWithText(
                 marginTop: heightScreen * 0.067,
                 marginBottom: heightScreen * 0.040,
-                textLabel: '$counter. É uma planta?',
+                textLabel: '$counter. ${perguntaAtual['indagacao']}',
                 mainAxisAlignment: MainAxisAlignment.center,
                 fontWeight: FontWeight.bold,
                 fontSize: fontSizeProvider + 5,
@@ -144,27 +144,54 @@ class _SearchByQuizPageState extends State<SearchByQuizPage> {
                   ),
                 );
               }),
+
               ContainerWithButton(
-                onPressed: () {
+                onPressed: () async {
+                  int indexAlternativa = 0;
                   for (var answer in answers) {
                     if(answer["isChecked"] == true){
                       goToNextQuestion = true;
+                      respostasQuiz['${perguntaAtual['filtro']}'] = '${perguntaAtual['alternativas'][indexAlternativa]}';
+                      print(respostasQuiz);
+                      break; 
+                    }else{
+                      indexAlternativa++;
                     }
                   }
 
                   if(goToNextQuestion == true){
                     incrementCounter();
+                    obterPergunta(perguntaAtual['indicacao'][indexAlternativa]);
                     setState(() {
                       for (var answer in answers) {
                         answer["isChecked"] = false;
                       }
                       goToNextQuestion = false;
+                      
                     });
                   }
 
-                  if(counter == 6){
-                    //criar_result_quiz
-                    //Navigator.pushNamed(context, '/homePage/searchByQuizPage/resultsPage');
+                  if(counter > 6){
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => const Center(child: CircularProgressIndicator()),
+                        );
+                      try{
+                        var resultado = await resultsService.obterResultadoQuiz(respostasQuiz);
+                    // ignore: use_build_context_synchronously
+                         Navigator.pop(context);
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => ResultsScreen(title: 'Results Page',resultado: resultado,),),);
+                      }catch(e){
+                        Navigator.pop(context); // Fecha o loading
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Erro ao criar resultado: $e'),
+                            duration: const Duration(seconds: 20),
+                          ),
+                        );
+                      }
+                    
                   }
                   
                 },

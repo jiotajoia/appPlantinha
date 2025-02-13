@@ -104,9 +104,9 @@ class ResultsDetailsPage extends StatelessWidget {
               ),
               getParagraph('Uso medico', '$ambient', fontSizeProvider + 1, colorText,
                   widthScreen * 0.747, 15),
-              getParagraph('Cuidados', cares, fontSizeProvider + 1, colorText,
+              getParagraph('Cuidados', '$cares', fontSizeProvider + 1, colorText,
                   widthScreen * 0.747, 15),
-              getParagraph('Curiosidades', curiosities, fontSizeProvider + 1,
+              getParagraph('Curiosidades', '$curiosities', fontSizeProvider + 1,
                   colorText, widthScreen * 0.747, 45)
             ],
           ),

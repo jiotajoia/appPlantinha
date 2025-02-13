@@ -33,7 +33,6 @@ class AppPlantinha extends StatelessWidget {
         '/homePage': (context) => const HomePage(title: 'Home Page'),
         '/homePage/searchByQuizPage': (context) =>
             const SearchByQuizPage(title: 'Search By Quiz Page'),
-        //'/homePage/searchByQuizPage/resultsPage': (context) => const ResultsScreen(title: 'Results Page'),
         '/homePage/searchByImagePage': (context) =>
             SearchByImagePage(title: 'Search By Image Page', camera: camera),
         '/homePage/searchByMapsPage': (context) => const SearchByMapsPage(),

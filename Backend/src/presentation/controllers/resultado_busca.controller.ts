@@ -10,7 +10,7 @@ export class ResultadoBuscaController{
     public criarResultQuiz = async (req: Request, res: Response) => {
         try{
             let idUser = req.params.idUser;
-            let respostas = req.body;
+            let {respostas} = req.body;
             res.status(200).json(await this.criarResultadoUseCase.execute({idUser, respostas}));
         }catch(error: any){
             res.status(500).json({
@@ -36,7 +36,7 @@ export class ResultadoBuscaController{
         try{
             let idUser = req.params.idUser;
             let idResultado = req.params.idResultado
-            res.status(200).json(this.obterResultadoUseCase.execute({idUser, idResultado}));
+            res.status(200).json(await this.obterResultadoUseCase.execute({idUser, idResultado}));
         }catch(error: any){
             res.status(404).json({
                 message: "Erro ao obter resultado.",

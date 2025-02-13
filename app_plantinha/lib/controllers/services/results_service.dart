@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 class ResultsService {
-  final String backExterno = "http://192.168.156.154:3000";
+  //final String backExterno = "https://appplantinha.onrender.com";
+  final String backExterno = "http://192.168.1.4:3000";
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   obterResultadoMapa(String pais) async {
@@ -33,6 +34,26 @@ class ResultsService {
         body: jsonEncode({
           'nomePlantas': nomePlantas,
         }),
+      );
+
+      return jsonDecode(response.body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  obterResultadoQuiz(Map<String, dynamic> respostas) async {
+    try {
+      
+      User? user = _auth.currentUser;
+      String idUser = user!.uid;
+      
+      var response = await http.post(
+        Uri.parse('$backExterno/user/$idUser/resultado-quiz'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'respostas' : respostas,
+          }),
       );
 
       return jsonDecode(response.body);

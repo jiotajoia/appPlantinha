@@ -6,25 +6,23 @@ import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 
 export type CriarResultadoInputDto = {
     idUser: string;
-    respostas: JSON;
+    respostas: any;
 }
 
 export type CriarResultadoOutputDto = {
-    resultado: {
+    id: string;
+    dataBusca: string;
+    tipoBusca: string;
+    plantas: {
         id: string;
-        dataBusca: string;
-        tipoBusca: string;
-        plantas: {
-            id: string;
-            nome: string | null;
-            nomeCientifico: string | null;
-            imagem: string | null;
-            descricao: string | null;
-            nivelDeCuidado: string | null;
-            usoMedico: string | null;
-            luminosidade: string | null;
-        }[] | null;
-    };
+        nome: string | null;
+        nomeCientifico: string | null;
+        imagem: string | null;
+        descricao: string | null;
+        nivelDeCuidado: string | null;
+        usoMedico: string | null;
+        luminosidade: string | null;
+    }[] | null;
 };
 
 export type CriarRepoResultadoInputDto = {
@@ -79,48 +77,20 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
     }
 
     async execute({idUser, respostas}: CriarResultadoInputDto): Promise<CriarResultadoOutputDto>{ //esconder chaves de api
-        let plantas_trefle: { common_name: string }[] = [];
-
-        /*
-        let perguntas: Pergunta[] = [
-            Pergunta.create('A planta é uma árvore?', ['01', '02', '03'], 'filtro_A',['true','false',null]),
-        ];
-        */
+        let plantas_trefle: { scientific_name: string }[] = [];
 
         let url = 'https://trefle.io/api/v1/species?token=YJ3VsoaJ5n-NkSRbrHCLzcCn1XLQkYN52iRbc3EFScU';
-        //fazer filtragem , imagino que poderia ser feito com as respostas sendo um json e e cada campo com valor de filtro
-
-        /*
-        let respostas1 = {
-            avarage_heigh : '3m',
-            ediale: 'false',
-            flower: 'true',
-        }
-        */
 
         Object.entries(respostas).forEach(([chave, valor]) => {
-            if(valor != null){
+            if(valor != 'null'){
                 url += `&filter[${chave}]=${valor}`;
             }
         });
 
-        //Pergunta: A planta é uma arvore?
-        //Pergunta: A planta é encontrada no Brazil?
-        //Pergunta: A planta é toxica?
-        //Pergunta: A planta é medicinal?
-        //Pergunta: As folhas da planta caem no outono?
-        //Pergunta: A flores são vermelhas/azuis/brancas/roxas/rosas/amarelas?
-        //Pergunta: A planta é comumente encontrada em florestas/areas umidas/campo aberto/ deserto?
-        //Pergunta: A planta é de sol/sombra/ equilibrado?
-        //Pergunta: A planta é muito/pouco/medio tolerante seca?
-        
-        //Pergunta: A planta é comestivel?
-        //sim =  true // direcionar para pergunta de qual parte é comestivel
-        //não =  false
-        //talvez = null() //direcionar para outra pergunta
-  
+        console.log(url);
         await axios.get(url).then((response) => {
             plantas_trefle = (response.data.data);
+            console.log('TREFLE: ' + response.data.data);
             }).catch((error) => {
             throw new Error(error);
         });
@@ -129,22 +99,38 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
         let contador = 0;
         let plantasProntas: Planta[] = [];
 
-        while (contador < 5){
-            nomePlantasSelecionadas.push(plantas_trefle[contador].common_name);
-            contador++;
+        for (let plantaTrefle of plantas_trefle){
+            nomePlantasSelecionadas.push(plantaTrefle.scientific_name);
         }
 
         for(let nome of nomePlantasSelecionadas){ //pode-se futuramente modularizar isso em função para ser usado aqui e no reconhecimento
+            if(contador > 4){
+                break;
+            }
+            const url_perenual1 = `https://perenual.com/api/species-list?key=sk-keQt67aa93d93caa98593&q=${nome}`;
 
-            const url_perenual1 = `https://perenual.com/api/species-list?key=sk-g3X1678e55cae03338309&q=${nome}`;
-        
-            let response = await axios.get(url_perenual1);
-            let id_planta = response.data.data[0].id;
+            let id_planta: string | null = null;
+            await axios.get(url_perenual1).then((response) =>{
 
-            const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-g3X1678e55cae03338309`;
+                if (response.data.data[0] && response.data.data[0].cycle != `Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry`){
+                   id_planta = response.data.data[0].id;
+                   contador++
+                }
+            }).catch((error) => {
+                console.error('erro em criar resultado mapa: '+ error);
+            });
+
+            if(id_planta == null){
+                continue;
+            }
+            //chave1:sk-oUZj67aa964e242d68309
+            //chave2:sk-keQt67aa93d93caa98593
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            const url_perenual2 = `https://perenual.com/api/species/details/${id_planta}?key=sk-keQt67aa93d93caa98593`;
     
             await axios.get(url_perenual2).then((response) => {
-
+                console.log(response.data);
                 let planta:Planta = Planta.create(
                     (response.data).common_name,
                     (response.data).scientific_name[0],
@@ -159,12 +145,14 @@ export class CriarResultadoUseCase implements UseCase<CriarResultadoInputDto, Cr
             }).catch((error) => {
                 throw new Error(error);
             });
+
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         }
         
         let resultado = this.resultRepoFirebase.criarResultado({plantas: plantasProntas, tipo: 'quiz'});
 
         await this.userRepoFirebase.adicionarResultado({idUser, resultado: resultado.resultado});
 
-        return resultado;
+        return resultado.resultado;
     }
 }
