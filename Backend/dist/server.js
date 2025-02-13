@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
-import { PasswordRoutes } from './presentation/routes/password_routes.js';
-import { UserRoutes } from './presentation/routes/user_routes.js';
-import { PerguntaRoutes } from './presentation/routes/pergunta_routes.js';
-import { ResultadoRoutes } from './presentation/routes/resultado_routes.js';
-import { ImagemRoutes } from "./presentation/routes/imagem_routes.js";
-import { HistoricoRoutes } from "./presentation/routes/historico_routes.js";
+import { PasswordRoutes } from './presentation/routes/password_routes';
+import { UserRoutes } from './presentation/routes/user_routes';
+import { PerguntaRoutes } from './presentation/routes/pergunta_routes';
+import { ResultadoRoutes } from './presentation/routes/resultado_routes';
+import { ImagemRoutes } from "./presentation/routes/imagem_routes";
+import { HistoricoRoutes } from "./presentation/routes/historico_routes";
 const port = 3000;
 const perenual = process.env.API_KEY_PERENUAL;
 if (!perenual) {

@@ -1,4 +1,4 @@
-import { db } from "./firebase_config/firebase.js";
+import { db } from "./firebase_config/firebase";
 export class PerguntaRepoFirebase {
     async obterPergunta(dados) {
         try {

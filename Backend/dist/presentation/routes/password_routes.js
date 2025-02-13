@@ -1,7 +1,7 @@
-import { PasswordController } from "../controllers/password.controllers.js";
-import { EditarSenhaUseCase } from "../../aplication/useCasesPassword/editar_senha.usecase.js";
-import { VerifyCodeUseCase } from "../../aplication/useCasesPassword/verify_code.usecase.js";
-import { SendCodeUseCase } from "../../aplication/useCasesPassword/send_code.usecase.js";
+import { PasswordController } from "../controllers/password.controllers";
+import { EditarSenhaUseCase } from "../../aplication/useCasesPassword/editar_senha.usecase";
+import { VerifyCodeUseCase } from "../../aplication/useCasesPassword/verify_code.usecase";
+import { SendCodeUseCase } from "../../aplication/useCasesPassword/send_code.usecase";
 export class PasswordRoutes {
     app;
     rotaReset = '/reset-password';

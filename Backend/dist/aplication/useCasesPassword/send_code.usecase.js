@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 import * as nodemailer from "nodemailer";
-import { db } from "../../persistence/firebase_config/firebase.js";
+import { db } from "../../persistence/firebase_config/firebase";
 import { FieldValue } from "firebase-admin/firestore";
 export class SendCodeUseCase {
     constructor() { }

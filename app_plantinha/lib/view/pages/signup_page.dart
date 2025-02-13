@@ -121,6 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         marginBottom: 14,
                         fontSizeForm: 16,
                         fontSizeHint: 12,
+                        obscureTextForm: false,
                       ),
                     ],
                   );

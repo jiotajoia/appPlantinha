@@ -63,6 +63,7 @@ class _ForgotPassowordEmailStepPageState extends State<ForgotPassowordEmailStepP
           marginBottom: heightScreen * 0.03,
           fontSizeForm: 16,
           fontSizeHint: 12,
+          obscureTextForm: false,
         ),
         Row(
           children: [

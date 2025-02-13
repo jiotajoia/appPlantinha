@@ -1,6 +1,6 @@
-import { PerguntaController } from "../controllers/pergunta.controller.js";
-import { ObterPerguntaUseCase } from "../../aplication/useCasesPergunta/obter_pergunta.usecase.js";
-import { PerguntaRepoFirebase } from "../../persistence/pergunta_repo.js";
+import { PerguntaController } from "../controllers/pergunta.controller";
+import { ObterPerguntaUseCase } from "../../aplication/useCasesPergunta/obter_pergunta.usecase";
+import { PerguntaRepoFirebase } from "../../persistence/pergunta_repo";
 export class PerguntaRoutes {
     app;
     rotaPergunta = '/pergunta/:id';

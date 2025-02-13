@@ -21,10 +21,13 @@ class ContainerWithForm extends StatefulWidget {
       required this.heightAdjusted,
       required this.widthAdjusted,
       this.fontSizeForm,
-      this.fontSizeHint});
+      this.fontSizeHint,
+      required this.obscureTextForm
+      });
   final TextEditingController controllerForm;
   final GlobalKey<FormState> keyForm;
   final String? textHintForm;
+  final bool  obscureTextForm;
   final double? fontSizeForm,
       fontSizeHint,
       width,
@@ -39,6 +42,7 @@ class ContainerWithForm extends StatefulWidget {
       paddingBottom,
       paddingLeft,
       paddingRight;
+      
 
   @override
   State<ContainerWithForm> createState() => _ContainerWithFormState();
@@ -89,6 +93,7 @@ class _ContainerWithFormState extends State<ContainerWithForm> {
                 border: InputBorder.none,
                 isDense: true,
                 contentPadding: EdgeInsets.zero),
+                obscureText: widget.obscureTextForm,
           ),
         ),
       ),

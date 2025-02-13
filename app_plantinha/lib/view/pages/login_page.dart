@@ -69,11 +69,13 @@ class _LoginPageState extends State<LoginPage> {
                   textHintForm: '',
                   marginTop: heightScreen * 0.01,
                   marginBottom: heightScreen * 0.01,
+                  obscureTextForm: false,
                 ),
                 Text(
                   'Senha',
                   style: TextStyle(
                     fontSize: 16,
+
                   ),
                 ),
                 ContainerWithForm(
@@ -88,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   textHintForm: '',
                   marginTop: heightScreen * 0.01,
                   marginBottom: heightScreen * 0.01,
+                  obscureTextForm: true,
                 ),
                 Row(
                   children: [
@@ -117,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                   marginBottom: heightScreen * 0.04,
                   onPressed: () async {
                     await logarUser('/homePage', _valor.text, _valor1.text);
+                    //Navigator.pushNamed(context,'/homePage');
                   },
                 ),
                 Container(

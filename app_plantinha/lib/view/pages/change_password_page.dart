@@ -54,7 +54,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 marginTop: heightScreen * 0.02,
                 textHintForm: 'Digite nova senha...',
                 controllerForm: newPasswordController, 
-                keyForm: _form
+                keyForm: _form,
+                obscureTextForm: false,
               ),
               ContainerWithForm(
                 fontSizeForm: Provider.of<FontSizeState>(context).fontSize,
@@ -68,7 +69,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 marginTop: heightScreen * 0.004,
                 textHintForm: 'Confirme nova senha...',
                 controllerForm: confirmPasswordController, 
-                keyForm: _form1
+                keyForm: _form1,
+                obscureTextForm: false,
               ),
               ContainerWithButton(
                 widthAdjusted: widthScreen * 0.315,

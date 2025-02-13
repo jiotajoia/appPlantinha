@@ -57,7 +57,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   paddingLeft: widthScreen * 0.036,
                   textHintForm: 'Digite o novo nome...',
                   controllerForm: _valor,
-                  keyForm: _form),
+                  keyForm: _form,
+                  obscureTextForm: false,),
               ContainerWithButton(
                 widthAdjusted: widthScreen * 0.291, 
                 heightAdjusted: heightScreen * 0.061,

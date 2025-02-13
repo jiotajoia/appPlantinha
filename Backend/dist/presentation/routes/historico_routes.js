@@ -1,7 +1,7 @@
-import { HistoricoController } from "../controllers/historico.controller.js";
-import { LimparHistoricoUseCase } from "../../aplication/useCasesHistorico/limpar_historico.usecase.js";
-import { ObterHistoricoUseCase } from "../../aplication/useCasesHistorico/obter_historico.usecase.js";
-import { UserRepoFirebase } from "../../persistence/user_repo_firebase.js";
+import { HistoricoController } from "../controllers/historico.controller";
+import { LimparHistoricoUseCase } from "../../aplication/useCasesHistorico/limpar_historico.usecase";
+import { ObterHistoricoUseCase } from "../../aplication/useCasesHistorico/obter_historico.usecase";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
 export class HistoricoRoutes {
     app;
     rotaHistorico = '/user/:id/historico';

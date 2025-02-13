@@ -1,5 +1,5 @@
-import { ResultadoBusca } from "../domain/entities/resultado_busca.entity.js";
-import { db } from "./firebase_config/firebase.js";
+import { ResultadoBusca } from "../domain/entities/resultado_busca.entity";
+import { db } from "./firebase_config/firebase";
 export class ResultRepoFirebase {
     async obterResultado(dados) {
         const { idUser, idResultado } = dados;

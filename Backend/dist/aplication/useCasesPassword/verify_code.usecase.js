@@ -1,4 +1,4 @@
-import { db } from "../../persistence/firebase_config/firebase.js";
+import { db } from "../../persistence/firebase_config/firebase";
 export class VerifyCodeUseCase {
     constructor() { }
     create() {

@@ -1,4 +1,4 @@
-import { auth, db } from "./firebase_config/firebase.js";
+import { auth, db } from "./firebase_config/firebase";
 export class UserRepoFirebase {
     async criarUser(dados) {
         try {

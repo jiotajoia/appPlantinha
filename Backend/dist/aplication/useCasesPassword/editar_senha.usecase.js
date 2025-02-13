@@ -1,4 +1,4 @@
-import { auth } from "../../persistence/firebase_config/firebase.js";
+import { auth } from "../../persistence/firebase_config/firebase";
 export class EditarSenhaUseCase {
     constructor() { }
     create() {

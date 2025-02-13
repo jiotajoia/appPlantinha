@@ -65,6 +65,7 @@ class _ForgotPasswordUpdateStepState extends State<ForgotPasswordUpdateStep> {
                     height: heightScreen * 0.064,
                     paddingLeft: widthScreen * 0.036,
                     marginBottom: heightScreen * 0.034,
+                    obscureTextForm: false,
                   ),
                 ],
               ),

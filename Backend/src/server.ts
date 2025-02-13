@@ -12,7 +12,7 @@ import { HistoricoRoutes } from "./presentation/routes/historico_routes";
 const port = 3000;
 const perenual = process.env.API_KEY_PERENUAL;
 
-if (!perenual) {
+if (!perenual) { 
     console.log('Variável não carregada!');
 }
 console.log('perenual: ', perenual);

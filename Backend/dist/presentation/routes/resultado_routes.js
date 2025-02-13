@@ -1,10 +1,10 @@
-import { ResultadoBuscaController } from "../controllers/resultado_busca.controller.js";
-import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase.js";
-import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase.js";
-import { UserRepoFirebase } from "../../persistence/user_repo_firebase.js";
-import { ResultRepoFirebase } from "../../persistence/result_repo_firebase.js";
-import { CriarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/criar_resultado.usecase.js";
-import { CriarResultadoMapaUseCase } from "../../aplication/useCasesResultadoBusca/criar_mapa_resultado.usecase.js";
+import { ResultadoBuscaController } from "../controllers/resultado_busca.controller";
+import { ObterResultadoUseCase } from "../../aplication/useCasesResultadoBusca/obter_resultado.usecase";
+import { DeletarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/deletar_resultado.usecase";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
+import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
+import { CriarResultadoUseCase } from "../../aplication/useCasesResultadoBusca/criar_resultado.usecase";
+import { CriarResultadoMapaUseCase } from "../../aplication/useCasesResultadoBusca/criar_mapa_resultado.usecase";
 export class ResultadoRoutes {
     app;
     rotaResultQuiz = `/user/:idUser/resultado-quiz`;

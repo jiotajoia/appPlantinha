@@ -81,6 +81,7 @@ class _ForgotPasswordVerificationCodeStepPageState extends State<ForgotPasswordV
           marginBottom: heightScreen * 0.03,
           fontSizeForm: 16,
           fontSizeHint: 12,
+          obscureTextForm: false,
         ),
         Row(
           children: [

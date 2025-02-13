@@ -1,10 +1,10 @@
-import { UsuarioController } from "../controllers/usuario.controller.js";
-import { CriarUsuarioUseCase } from "../../aplication/useCasesUsuario/criar_usuario.usecase.js";
-import { ObterUsuarioUseCase } from "../../aplication/useCasesUsuario/obter_usuario.usecase.js";
-import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.usecase.js";
-import { UserRepoFirebase } from "../../persistence/user_repo_firebase.js";
-import { AlterarNomeUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_nome_usuario.usecase.js";
-import { AlterarSenhaUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_senha_usuario.usecase.js";
+import { UsuarioController } from "../controllers/usuario.controller";
+import { CriarUsuarioUseCase } from "../../aplication/useCasesUsuario/criar_usuario.usecase";
+import { ObterUsuarioUseCase } from "../../aplication/useCasesUsuario/obter_usuario.usecase";
+import { DeletarUsuarioUseCase } from "../../aplication/useCasesUsuario/deletar_usuario.usecase";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
+import { AlterarNomeUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_nome_usuario.usecase";
+import { AlterarSenhaUsuarioUseCase } from "../../aplication/useCasesUsuario/alterar_senha_usuario.usecase";
 export class UserRoutes {
     app;
     rota = '/user';

@@ -1,7 +1,7 @@
-import { ImagemController } from "../controllers/imagem.controller.js";
-import { ReconhecimentoUseCase } from "../../aplication/useCasesImagem/reconhecimento.usecase.js";
-import { UserRepoFirebase } from "../../persistence/user_repo_firebase.js";
-import { ResultRepoFirebase } from "../../persistence/result_repo_firebase.js";
+import { ImagemController } from "../controllers/imagem.controller";
+import { ReconhecimentoUseCase } from "../../aplication/useCasesImagem/reconhecimento.usecase";
+import { UserRepoFirebase } from "../../persistence/user_repo_firebase";
+import { ResultRepoFirebase } from "../../persistence/result_repo_firebase";
 export class ImagemRoutes {
     app;
     rotaImagem = '/user/:id/imagem';

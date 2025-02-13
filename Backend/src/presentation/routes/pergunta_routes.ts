@@ -10,7 +10,7 @@ export class PerguntaRoutes{
 
     constructor(app: Application){
         this.app = app;
-        this.iniciarRotas();
+        this.iniciarRotas(); 
     }
 
     iniciarRotas(): Application{

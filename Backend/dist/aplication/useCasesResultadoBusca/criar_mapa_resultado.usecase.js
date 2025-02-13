@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Planta } from "../../domain/entities/planta.entity.js";
+import { Planta } from "../../domain/entities/planta.entity";
 export class CriarResultadoMapaUseCase {
     resultRepoFirebase;
     constructor(resultRepoFirebase) {
